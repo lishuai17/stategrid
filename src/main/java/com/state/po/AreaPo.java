@@ -1,7 +1,9 @@
 package com.state.po;
 
 public class AreaPo {
+	//
 	private String area;
+	//
 	private String dcode;
 	private String dtype;
 	private String descr;
