@@ -1,6 +1,6 @@
 package com.state.po;
 
-public class LineLimitPo {
+public class LineLimitPo extends BasePo {
 	// 通道名
 	private String mpath;
 	// 日期

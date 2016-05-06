@@ -6,7 +6,7 @@ package com.state.po;
  * @author jh
  *
  */
-public class LineDefinePo {
+public class LineDefinePo extends BasePo {
 	// 联络线名
 	private String mcorhr;
 	// 首端
