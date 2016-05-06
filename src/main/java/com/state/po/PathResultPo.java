@@ -1,8 +1,12 @@
 package com.state.po;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 通道结果表
  */
+@SuppressWarnings("serial")
+@Alias("PathResultPo")
 public class PathResultPo extends BasePo {
 	/**
 	 * 日期

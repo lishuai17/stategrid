@@ -5,8 +5,6 @@
      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<!-- application info properties -->
-	<util:properties id="context" location="classpath:spring-context.properties" />
 	<bean id="config"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -15,7 +13,13 @@
 			</list>
 		</property>
 	</bean>
+	
 	<import resource="classpath:applicationContext_quartz.xml" />
+	<import resource="data-source.xml" />
+	
+    <!--<task:annotation-driven/>
+    <context:annotation-config/>
+        <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean>-->
 
     <!--文件上传-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>

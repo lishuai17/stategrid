@@ -1,8 +1,12 @@
 package com.state.po;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 成交结果表
  */
+@SuppressWarnings("serial")
+@Alias("ResultPo")
 public class ResultPo extends BasePo {
 	/**
 	 * 日期

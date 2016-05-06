@@ -1,8 +1,12 @@
 package com.state.po;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 权限控制表
  */
+@SuppressWarnings("serial")
+@Alias("PurviewPo")
 public class PurviewPo extends BasePo {
 	/**
 	 * 功能名称

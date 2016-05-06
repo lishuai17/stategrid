@@ -1,11 +1,15 @@
 package com.state.po;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 联络线定义表
  * 
  * @author jh
  *
  */
+@SuppressWarnings("serial")
+@Alias("LineDefinePo")
 public class LineDefinePo extends BasePo {
 	// 联络线名
 	private String mcorhr;

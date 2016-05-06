@@ -1,8 +1,12 @@
 package com.state.po;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 通道定义表
  */
+@SuppressWarnings("serial")
+@Alias("PathDefinePo")
 public class PathDefinePo extends BasePo {
 	/**
 	 * 通道名

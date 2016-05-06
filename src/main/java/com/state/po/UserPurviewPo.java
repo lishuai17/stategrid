@@ -1,8 +1,12 @@
 package com.state.po;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 用户权限控制表
  */
+@SuppressWarnings("serial")
+@Alias("UserPurviewPo")
 public class UserPurviewPo extends BasePo {
 	/**
 	 * 用户名

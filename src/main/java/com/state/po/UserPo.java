@@ -1,8 +1,12 @@
 package com.state.po;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 用户表
  */
+@SuppressWarnings("serial")
+@Alias("UserPo")
 public class UserPo extends BasePo {
 	/**
 	 * 用户名

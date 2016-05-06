@@ -1,8 +1,12 @@
 package com.state.po;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 时段类型表
  */
+@SuppressWarnings("serial")
+@Alias("TypePo")
 public class TypePo extends BasePo {
 	/**
 	 * 名称

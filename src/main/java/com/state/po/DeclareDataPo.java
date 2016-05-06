@@ -2,16 +2,24 @@ package com.state.po;
 
 import org.apache.ibatis.type.Alias;
 
+/**
+ * 申报数据
+ * @author 帅
+ *
+ */
 @SuppressWarnings("serial")
-@Alias("LineLimitPo")
-public class LineLimitPo extends BasePo {
-	// 通道名
-	private String mpath;
-	// 日期
-	private String mdate;
-	// 类型
+@Alias("DeclareDataPo")
+public class DeclareDataPo extends BasePo {
+	
+	private int sheetId;
+
+	// 申报类型
 	private String dtype;
-	// 正向为正，反向为负
+	// 总电量
+	private double sumQ;
+	// 平均电力
+	private double aveP;
+	// 时段1电力或者电价
 	private double h01;
 	//
 	private double h02;
@@ -201,21 +209,13 @@ public class LineLimitPo extends BasePo {
 	private double h95;
 	//
 	private double h96;
-
-	public String getMpath() {
-		return mpath;
+	
+	public int getSheetId() {
+		return sheetId;
 	}
 
-	public void setMpath(String mpath) {
-		this.mpath = mpath;
-	}
-
-	public String getMdate() {
-		return mdate;
-	}
-
-	public void setMdate(String mdate) {
-		this.mdate = mdate;
+	public void setSheetId(int sheetId) {
+		this.sheetId = sheetId;
 	}
 
 	public String getDtype() {
@@ -224,6 +224,22 @@ public class LineLimitPo extends BasePo {
 
 	public void setDtype(String dtype) {
 		this.dtype = dtype;
+	}
+
+	public double getSumQ() {
+		return sumQ;
+	}
+
+	public void setSumQ(double sumQ) {
+		this.sumQ = sumQ;
+	}
+
+	public double getAveP() {
+		return aveP;
+	}
+
+	public void setAveP(double aveP) {
+		this.aveP = aveP;
 	}
 
 	public double getH01() {

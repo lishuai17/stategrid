@@ -1,11 +1,14 @@
 package com.state.po;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 地区表
  * 
  * @author jh
  *
  */
+@Alias("AreaPo")
 public class AreaPo extends BasePo {
 	private static final long serialVersionUID = 1L;
 	// 地区
