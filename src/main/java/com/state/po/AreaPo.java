@@ -1,5 +1,10 @@
 package com.state.po;
 
+/**
+ * 地区表
+ * @author jh
+ *
+ */
 public class AreaPo {
 	//
 	private String area;
