@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.state.po.UserPo;
+
 public class CheckLoginFilter  implements Filter {
 	protected FilterConfig filterConfig = null;
 
@@ -23,7 +25,6 @@ public class CheckLoginFilter  implements Filter {
 
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
-		HttpSession session = request.getSession();
 		String url = request.getServletPath();
 		String requestType = request.getHeader("X-Requested-With");
 		String contextPath = request.getContextPath();
@@ -44,15 +45,12 @@ public class CheckLoginFilter  implements Filter {
 		 */
 		if (url.startsWith("/") ) {// 若访问后台资源
 
-			Object userInfo = session.getAttribute("userInfo");
+			UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
 
-			if (userInfo == null && "XMLHttpRequest".equals(requestType)
-					&& url.startsWith("/java/dayFeedback")) {
-				//TODO
-			} else if (userInfo == null) {
-				//TODO
-			}
-			
+			if (user == null && !url.startsWith("/login") && !url.startsWith("/register")) {
+				response.sendRedirect("/login");
+				return;
+			} 
 		}
 			
 
