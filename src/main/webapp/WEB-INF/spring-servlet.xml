@@ -19,28 +19,11 @@
     <!--spring mvc 使用注解@ResponseBody返回信息默认的编码为iso-8859-1，会导致乱码
     	如果是springmvc3.1版本以上，在@RequestMapping注解中使用produces={"application/json;charset=UTF-8"}可解决
     -->
-	
 	<bean id="annotationMethodHandlerAdapter"
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>
-				<bean
-					class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-					<constructor-arg>
-						<bean class="org.springframework.oxm.xstream.XStreamMarshaller">
-							<property name="streamDriver">
-								<bean class="com.thoughtworks.xstream.io.xml.DomDriver" />
-							</property>
-							<property name="autodetectAnnotations" value="true" />
-						</bean>
-					</constructor-arg>
-				</bean>
 				<ref bean="mappingJacksonHttpMessageConverter"/>
-				<ref bean="byteArrayHttpMessageConverter"/>
-				<ref bean="stringHttpMessageConverter"/>
-				<ref bean="sourceHttpMessageConverter"/>
-				<ref bean="xmlAwareFormHttpMessageConverter"/>
-				<ref bean="utf8StringHttpMessageConverter"/>
 			</list>
 		</property>
 	</bean>
@@ -54,8 +37,7 @@
 	</bean>
 	<bean id="sourceHttpMessageConverter" class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
 	<bean id="xmlAwareFormHttpMessageConverter" class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />    
-	<bean id="utf8StringHttpMessageConverter" class="com.state.util.UTF8StringHttpMessageConverter" />
-	
+
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="defaultContentType" value="text/html" />

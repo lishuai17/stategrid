@@ -9,8 +9,8 @@
 	<!-- 数据源配置 -->
 	<!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
 
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-		init-method="init" destroy-method="close">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		 destroy-method="close">
 		<!-- 基本属性 url、user、password -->
 		<property name="url" value="${com.state.druid.url}" />
 		<property name="username" value="${com.state.druid.username}" />
@@ -33,10 +33,9 @@
 		<property name="testOnReturn" value="${com.state.druid.testOnReturn}" />
 		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。 -->
 		<property name="poolPreparedStatements" value="${com.state.druid.poolPreparedStatements}" />
-		<property name="maxPoolPreparedStatementPerConnectionSize"
-			value="${com.state.druid.maxPoolPreparedStatementPerConnectionSize}" />
-		<!-- 配置监控统计拦截的filters -->
-		<property name="filters" value="${com.state.druid.filters}" />
+		<property name="maxOpenPreparedStatements"
+			value="${com.state.druid.maxOpenPreparedStatements}" />
+		
 
 	</bean>
 
@@ -45,7 +44,6 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:myibatis/myibatis-config.xml" />
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:sqlmap/com/state/log/*.xml" />
 	</bean>
 		
 	<!-- 扫描接口包 -->

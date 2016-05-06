@@ -15,43 +15,11 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="classCountryTrigger" />
-				<ref bean="usageTrigger" />
-                <ref bean="insertUsageTrigger"/>
+				
 			</list>
 		</property>
         <property name="autoStartup" value="true"></property>
 		<property name="taskExecutor" ref="executor" />
 	</bean>
-	<bean id="classCountryQuartz" class="com.xdf.vps.core.schedule.ClassCountryStatisticQuartz" />
-	<bean id="classCountryJobDetail"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="classCountryQuartz" />
-		<property name="targetMethod" value="classStuCountry" />
-		<property name="concurrent" value="false" /> <!--将并发设置为false -->
-	</bean>
-	<bean id="classCountryTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="classCountryJobDetail" />
-		<property name="startDelay" value="60000" /> <!-- 延迟1分钟启动 -->
-		<!-- <property name="cronExpression" value="0/30 * * * * ?" /> 30秒 -->
-		<!-- <property name="cronExpression" value="0 0/5 * * * ?" /> -->
-
-		<property name="cronExpression" value="0 0 2 * * ?" />
-	</bean>
-    <!-- 使用统计任务调度 -->
-    <bean id="usageInfoQuartz" class="com.xdf.vps.core.schedule.UsageInfoQuartz" ></bean>
-
-	<bean id="usageJobDetail"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="usageInfoQuartz" />
-		<property name="targetMethod" value="getVPSusageInfo" />
-		<property name="concurrent" value="false" /> <!--将并发设置为false -->
-	</bean>
-    <bean id="insertUsageJobDetail"
-          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="usageInfoQuartz" />
-        <property name="targetMethod" value="insertInToUsage" />
-        <property name="concurrent" value="false" /> <!--将并发设置为false -->
-    </bean>
 	
 </beans>

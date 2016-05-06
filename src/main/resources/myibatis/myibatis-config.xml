@@ -13,14 +13,9 @@
 		<setting name="defaultStatementTimeout" value="25000" />
 	</settings>
 	<typeAliases>
-		<typeAlias alias="MessageTemplateDefault" type="com.xdf.vps.biz.model.MessageTemplateDefault" />
 		
-		<package name="com.xdf.vps.po" />
 	</typeAliases>
 	<mappers>
-		<mapper resource="myibatis/public_sql.xml" />
-		
-		<mapper resource="sqlmap/base/data_input_ddl.xml" />
 		
 	</mappers>
 
