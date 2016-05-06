@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+				http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd 
+				http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+				http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+
+	<context:component-scan base-package="com.state.*">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+    
+    <!--spring mvc 使用注解@ResponseBody返回信息默认的编码为iso-8859-1，会导致乱码
+    	如果是springmvc3.1版本以上，在@RequestMapping注解中使用produces={"application/json;charset=UTF-8"}可解决
+    -->
+	
+	<bean id="annotationMethodHandlerAdapter"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+					<constructor-arg>
+						<bean class="org.springframework.oxm.xstream.XStreamMarshaller">
+							<property name="streamDriver">
+								<bean class="com.thoughtworks.xstream.io.xml.DomDriver" />
+							</property>
+							<property name="autodetectAnnotations" value="true" />
+						</bean>
+					</constructor-arg>
+				</bean>
+				<ref bean="mappingJacksonHttpMessageConverter"/>
+				<ref bean="byteArrayHttpMessageConverter"/>
+				<ref bean="stringHttpMessageConverter"/>
+				<ref bean="sourceHttpMessageConverter"/>
+				<ref bean="xmlAwareFormHttpMessageConverter"/>
+				<ref bean="utf8StringHttpMessageConverter"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+	<bean id="byteArrayHttpMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+	<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter" >
+		<property name="writeAcceptCharset" value="false"/>
+	</bean>
+	<bean id="sourceHttpMessageConverter" class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+	<bean id="xmlAwareFormHttpMessageConverter" class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />    
+	<bean id="utf8StringHttpMessageConverter" class="com.state.util.UTF8StringHttpMessageConverter" />
+	
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="defaultContentType" value="text/html" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+			</map>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean class="com.state.view.CustomMappingJacksonJsonView">
+				</bean>
+				<bean id="marshallingView" class="com.state.view.CustomerMappingMarshallingView">
+					<property name="marshaller">
+						<bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+							<property name="autodetectAnnotations" value="true" />
+						</bean>
+					</property>
+					<property name="contentType" value="application/xml" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- 默认使用 JSP View -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="1" />
+		<property name="prefix" value="/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸为1MB <property name="maxUploadSize"> <value>1048576</value> 
+			</property> -->
+	</bean>
+	
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	    <property name="interceptors">
+	        <list>
+	           
+	        </list>
+	    </property>
+	</bean>
+</beans>
