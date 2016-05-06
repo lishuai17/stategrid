@@ -7,11 +7,14 @@ package com.state.po;
  *
  */
 public class AreaPo extends BasePo {
-	//
+	private static final long serialVersionUID = 1L;
+	// 地区
 	private String area;
-	//
+	// 简称
 	private String dcode;
+	// 类型
 	private String dtype;
+	// 备注
 	private String descr;
 
 	public String getArea() {
