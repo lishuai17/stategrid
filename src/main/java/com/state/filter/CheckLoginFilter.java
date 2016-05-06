@@ -48,7 +48,7 @@ public class CheckLoginFilter  implements Filter {
 			UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
 
 			if (user == null && !url.startsWith("/login") && !url.startsWith("/register")) {
-				response.sendRedirect("/login");
+				response.sendRedirect("/market/login");
 				return;
 			} 
 		}
