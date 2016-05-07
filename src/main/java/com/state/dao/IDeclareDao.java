@@ -12,7 +12,7 @@ public interface IDeclareDao {
 	 * 根据ID删除申报主表
 	 * @param id
 	 */
-	public void deleteDeclare(long id);
+	public void deleteDeclare(Long id);
 
 	/**
 	 * 插入申报主表  
@@ -26,7 +26,7 @@ public interface IDeclareDao {
 	 * @param id
 	 * @return
 	 */
-	public int countDeclareById(long id);
+	public int countDeclareById(Long id);
 	
 	/**
 	 * 更新申报主表

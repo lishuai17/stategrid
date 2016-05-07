@@ -11,7 +11,7 @@ public interface IDeclareDataDao {
 	 * 根据申报主表ID删除申报子表数据
 	 * @param declareId
 	 */
-	public void deleteDeclareData(Integer declareId);
+	public void deleteDeclareData(Long declareId);
 	
 	/**
 	 * 增加申请子表
@@ -31,6 +31,6 @@ public interface IDeclareDataDao {
 	 * @param dtype 申报子表类型
 	 * @return 申报子表列表
 	 */
-	public List<DeclareDataPo> getDeclDataById(@Param("id")long id,@Param("dtype")String dtype);
+	public List<DeclareDataPo> getDeclDataById(@Param("id")Long id,@Param("dtype")String dtype);
 	
 }

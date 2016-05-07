@@ -40,13 +40,13 @@ public interface IDeclareService {
 	 * @param id
 	 * @return
 	 */
-	public boolean existsDeclare(Integer id);
+	public boolean existsDeclare(Long id);
 	
 	/**
 	 * 删除申报单
 	 * @param id
 	 */
-	public void deleteDeclare(Integer id);
+	public void deleteDeclare(Long id);
 	
 	/**
 	 * 更新申报主表

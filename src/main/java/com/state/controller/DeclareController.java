@@ -99,7 +99,7 @@ public class DeclareController {
 	 * @return
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String deleteDeclare(Integer id) {
+	public String deleteDeclare(Long id) {
 		if(!declareService.existsDeclare(id)){
 			return "申报单不存在";
 		}

@@ -35,12 +35,12 @@ public class DeclareServiceImpl implements IDeclareService{
 		}
 	}
 
-	public boolean existsDeclare(Integer id) {
+	public boolean existsDeclare(Long id) {
 
 		return declareDao.countDeclareById(id) > 0;
 	}
 
-	public void deleteDeclare(Integer id) {
+	public void deleteDeclare(Long id) {
 		
 		declareDataDao.deleteDeclareData(id);
 		

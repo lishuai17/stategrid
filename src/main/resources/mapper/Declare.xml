@@ -5,7 +5,7 @@
 		id,sheet_name as sheetName,descr,mdate,area,dtime,mname,drloe
 	</sql>
 	
-	<delete id="deleteDeclare" parameterType="long">
+	<delete id="deleteDeclare" parameterType="Long">
 		delete from CBPM_SHEET_DECL where id=#{id}
 	</delete>
 	
@@ -35,7 +35,7 @@
 		where id=#{id}
 	</update>
 	
-	<select id="countDeclareById" parameterType="long" resultType="int">
+	<select id="countDeclareById" parameterType="Long" resultType="int">
 		select count(1) from CBPM_SHEET_DECL  where id=#{id}
 	</select>
 	
