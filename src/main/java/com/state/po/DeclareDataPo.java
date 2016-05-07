@@ -221,10 +221,6 @@ public class DeclareDataPo extends BasePo {
 		this.id = id;
 	}
 
-	public void setDtype(DeclareType dtype) {
-		this.dtype = dtype;
-	}
-
 	public DeclareType getDtype() {
 		return dtype;
 	}
