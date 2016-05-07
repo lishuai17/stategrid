@@ -11,6 +11,8 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		 destroy-method="close">
+		 
+		<property name="driverClassName" value="${com.state.driverClass}" />
 		<!-- 基本属性 url、user、password -->
 		<property name="url" value="${com.state.druid.url}" />
 		<property name="username" value="${com.state.druid.username}" />
@@ -35,6 +37,7 @@
 		<property name="poolPreparedStatements" value="${com.state.druid.poolPreparedStatements}" />
 		<property name="maxOpenPreparedStatements"
 			value="${com.state.druid.maxOpenPreparedStatements}" />
+		
 		
 
 	</bean>
