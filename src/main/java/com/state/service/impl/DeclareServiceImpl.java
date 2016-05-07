@@ -36,23 +36,23 @@ public class DeclareServiceImpl implements IDeclareService{
 		declare.setSheetName("未命名");
 		declare.setMdate(DateUtil.format(today, "yyyyMMdd"));
 		declare.setArea(user.getArea());
-		declare.setDtime(DateUtil.format(today, "YYYY-MM-DD HH:MM:SS"));
+		declare.setDtime(DateUtil.format(today, "yyyy-MM-dd HH:mm:ss"));
 		declare.setMname(user.getMname());
 		declare.setDrloe(user.getDrole());
 		declareDao.insertDeclare(declare);
 		
 		DeclareDataPo data1a=new DeclareDataPo();
-		data1a.setSheetId(declare.getId());
+		data1a.setId(declare.getId());
 		data1a.setDtype("1a");
 		declareDataDao.insertDeclData(data1a);
 		
 		DeclareDataPo data2a=new DeclareDataPo();
-		data2a.setSheetId(declare.getId());
+		data2a.setId(declare.getId());
 		data2a.setDtype("2a");
 		declareDataDao.insertDeclData(data2a);
 		
 		DeclareDataPo data3a=new DeclareDataPo();
-		data3a.setSheetId(declare.getId());
+		data3a.setId(declare.getId());
 		data3a.setDtype("3a");
 		declareDataDao.insertDeclData(data1a);
 	}

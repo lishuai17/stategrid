@@ -4,14 +4,15 @@ import org.apache.ibatis.type.Alias;
 
 /**
  * 申报数据
+ * 
  * @author 帅
  *
  */
 @SuppressWarnings("serial")
 @Alias("DeclareDataPo")
 public class DeclareDataPo extends BasePo {
-	
-	private long sheetId;
+
+	private long id;
 
 	// 申报类型
 	private DeclareType dtype;
@@ -31,6 +32,8 @@ public class DeclareDataPo extends BasePo {
 	private double h05;
 	//
 	private double h06;
+	//
+	private double h07;
 	//
 	private double h08;
 	//
@@ -209,21 +212,25 @@ public class DeclareDataPo extends BasePo {
 	private double h95;
 	//
 	private double h96;
-	
-	public long getSheetId() {
-		return sheetId;
+
+	public long getId() {
+		return id;
 	}
 
-	public void setSheetId(long sheetId) {
-		this.sheetId = sheetId;
+	public void setId(long id) {
+		this.id = id;
 	}
-	
+
+	public void setDtype(DeclareType dtype) {
+		this.dtype = dtype;
+	}
+
 	public DeclareType getDtype() {
 		return dtype;
 	}
 
 	public void setDtype(String dtype) {
-		
+
 		this.dtype = DeclareType.parseByCode(dtype);
 	}
 
@@ -1001,6 +1008,14 @@ public class DeclareDataPo extends BasePo {
 
 	public void setH96(double h96) {
 		this.h96 = h96;
+	}
+
+	public double getH07() {
+		return h07;
+	}
+
+	public void setH07(double h07) {
+		this.h07 = h07;
 	}
 
 }
