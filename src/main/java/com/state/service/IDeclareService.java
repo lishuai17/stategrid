@@ -19,7 +19,7 @@ public interface IDeclareService {
 	 * @param area
 	 * @return
 	 */
-	public List<DeclarePo> getDeclares(String area);
+	public List<DeclarePo> getDeclares(String area,String date);
 	
 	/**
 	 * 查询申报数据

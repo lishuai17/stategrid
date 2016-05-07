@@ -11,7 +11,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("DeclareDataPo")
 public class DeclareDataPo extends BasePo {
 	
-	private int sheetId;
+	private long sheetId;
 
 	// 申报类型
 	private DeclareType dtype;
@@ -210,11 +210,11 @@ public class DeclareDataPo extends BasePo {
 	//
 	private double h96;
 	
-	public int getSheetId() {
+	public long getSheetId() {
 		return sheetId;
 	}
 
-	public void setSheetId(int sheetId) {
+	public void setSheetId(long sheetId) {
 		this.sheetId = sheetId;
 	}
 	

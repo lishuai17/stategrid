@@ -1,7 +1,8 @@
 package com.state.dao;
 
 import java.util.List;
-import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.state.po.DeclarePo;
 
@@ -31,5 +32,6 @@ public interface IDeclareDao {
 	 * @param param
 	 * @return
 	 */
-	public List<DeclarePo> selectDeclareByParam(Map<String,String> param);
+	public List<DeclarePo> selectDeclareByParam(@Param("area")String area,@Param("mdate")String mdate
+			,@Param("mname")String mname);
 }
