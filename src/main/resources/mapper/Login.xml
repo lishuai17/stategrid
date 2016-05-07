@@ -3,6 +3,15 @@
 <mapper namespace="com.state.dao.ILoginDao">
 
 	<select id="judgeUser" resultType="UserPo">
-		select u.*,u.is_login islogin from CBPM_USER u  where mname=#{user} and mkey=#{password}
+		select u.*,u.is_login islogin from CBPM_USER u where mname=#{user} and mkey=#{password}
 	</select>
+
+	<select id="containUser" resultType="UserPo">
+		select u.*,u.is_login islogin from CBPM_USER u where mname=#{user}
+	</select>
+	
+	<insert id="saveUser">
+		insert into CBPM_USER (mname,area,mkey,dtype,is_login) values
+		(#{user},#{area},#{password},'省','0')
+	</insert>
 </mapper>

@@ -145,7 +145,6 @@ html {
 
 
 </state:override>
-<state:override name="header"><div></div></state:override>
 <state:override name="content">
 	<div class="wrapper">
 		<form id="form111"
@@ -180,4 +179,4 @@ html {
 
 </state:override>
 
-<%@ include file="/common/block/block.jsp" %>
+<%@ include file="/common/block/block_none.jsp" %>
