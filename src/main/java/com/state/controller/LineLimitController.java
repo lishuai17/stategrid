@@ -36,9 +36,9 @@ public class LineLimitController {
 	 */
 	@RequestMapping(value = "/init")
 	public String init(HttpServletRequest request,HttpServletResponse response) {
-		log.info("@ init declare ");
+		log.info("@ init limitLine ");
 		
-		return "declare";
+		return "limitLine";
 	}
 
 	/**
