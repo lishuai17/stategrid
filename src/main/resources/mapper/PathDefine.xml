@@ -5,10 +5,9 @@
 		mpath,morder,start_area as startArea,end_area as endArea,mnum,mdirection,corhr1,corhr2,corhr3,corhr4,corhr5,corhr6,corhr7,corhr8,corhr9,corhr10
 	</sql>
 	
-	<update id="updateDeclare" parameterType="DeclarePo">
+	<update id="updatePathDefine" parameterType="PathDefinePo">
 		update CBPM_PATH_DEFINE
 		<set> 
-			mpath=#{mpath},
 			morder=#{morder},
 			start_area=#{startArea},
 			end_area=#{endArea},
@@ -25,14 +24,10 @@
 			corhr9=#{corhr9},
 			corhr10=#{corhr10}
 		</set> 
-		where id=#{id}
+		where mpath=#{mpath}
 	</update>
 	
-	<select id="countDeclareById" parameterType="long" resultType="int">
-		select count(1) from CBPM_PATH_DEFINE  where id=#{id}
-	</select>
-	
-	<select id="selectDeclareByParam" resultType="DeclarePo">
+	<select id="selectPathALL" resultType="PathDefinePo">
 		select <include refid="pathDefineInfo" /> from CBPM_PATH_DEFINE
 	</select>
 </mapper>
