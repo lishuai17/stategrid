@@ -16,7 +16,11 @@
 		 (#{id},#{sheetName},#{descr},#{mdate},#{area},#{dtime},#{mname},#{drloe})
 	</insert>
 	
-	<select id="selectDeclareByParam">
+	<select id="countDeclareById" parameterType="long" resultType="int">
+		select count(1) from CBPM_SHEET_DECL  where id=#{id}
+	</select>
+	
+	<select id="selectDeclareByParam" parameterType="map" resultType="DeclarePo">
 		select <include refid="daclareInfo" />
 			from CBPM_SHEET_DECL 
 			where 1=1
