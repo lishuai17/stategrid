@@ -14,7 +14,7 @@ public class DeclareDataPo extends BasePo {
 	private int sheetId;
 
 	// 申报类型
-	private String dtype;
+	private DeclareType dtype;
 	// 总电量
 	private double sumQ;
 	// 平均电力
@@ -217,13 +217,14 @@ public class DeclareDataPo extends BasePo {
 	public void setSheetId(int sheetId) {
 		this.sheetId = sheetId;
 	}
-
-	public String getDtype() {
+	
+	public DeclareType getDtype() {
 		return dtype;
 	}
 
 	public void setDtype(String dtype) {
-		this.dtype = dtype;
+		
+		this.dtype = DeclareType.parseByCode(dtype);
 	}
 
 	public double getSumQ() {
