@@ -9,14 +9,6 @@ import com.state.po.ResultPo;
 
 public interface IssueDao {
 
-//	/**
-//	 * 根据ID查找结果数据是否存在
-//	 * @param id
-//	 * @return
-//	 */
-//	public int countResultById(long id);
-	
-	
 	/**
 	 * 插入结果数据  
 	 * @param ResultPo
@@ -24,18 +16,26 @@ public interface IssueDao {
 	 */
 	public long insertResult(ResultPo resultPo);
 	
+	/**
+	 * 删除指定日期的所有结果数据  
+	 * @param 日期
+	 * @return 影响行数
+	 */
+	public long deleteResultByDate(@Param("mdate")String mdate);
+	
 	
 	/**
 	 * 按地区查询结果中的所有单号
 	 * @param param
-	 * @return
+	 * @return 所有单子名称
 	 */
-	public List<ResultPo> selectSheetOfResultByArea(@Param("area")String area,@Param("mdate")String mdate);
+	public List<String> selectSheetOfResultByArea(@Param("area")String area,@Param("mdate")String mdate);
 	
 	/**
 	 * 根据参数查询结果数据
 	 * @param param
 	 * @return
 	 */
-	public List<ResultPo> selectResultByParam(@Param("area")String area,@Param("mdate")String mdate,@Param("mname")String mname);
+	public List<ResultPo> selectResultByParam(@Param("area")String area,@Param("mdate")String mdate,
+			@Param("mname")String mname, @Param("dtype")String dtype);
 }
