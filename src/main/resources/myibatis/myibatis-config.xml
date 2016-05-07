@@ -13,7 +13,7 @@
 		<setting name="defaultStatementTimeout" value="25000" />
 	</settings>
 	<typeAliases>
-		
+		<package name="com.state.po"/>
 	</typeAliases>
 	<mappers>
 		
