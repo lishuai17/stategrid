@@ -53,4 +53,34 @@ public class LoginController {
 			return "fail";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/containUser",method=RequestMethod.POST)
+	public String containUser(String user) {
+		log.info("注册时检查是否存在用户");
+		//注册检查用户
+		UserPo pd=loginService.containUser(user);
+		if(pd!=null){
+			if("0".equals(pd.getIslogin())){
+				//未审批
+				return "noapprove";
+			}else{
+				return "fail";//用户已存在
+			}
+		}
+		return "success";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/registerUser",method=RequestMethod.POST)
+	public String registerUser(String user,String password,String area) {
+		log.info("注册用户");
+		try{
+			loginService.saveUser(user, password, area);
+		}catch (Exception e) {
+			log.error("注册失败",e);
+			return "fail";
+		}
+		return "success";
+	}
 }

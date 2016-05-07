@@ -14,5 +14,17 @@ public interface ILoginService {
 	 */
 	public UserPo judgeUser(String user,String password);
 	
+	/**
+	 * 注册检查
+	 * @param user
+	 * @return
+	 */
+	public UserPo containUser(String user);
+	
+	/**
+	 * 注册用户
+	 * @param user,password,area
+	 */
+	public void saveUser(String user,String password,String area);
 
 }
