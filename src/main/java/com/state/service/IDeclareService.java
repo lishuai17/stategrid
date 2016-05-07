@@ -1,10 +1,33 @@
 package com.state.service;
 
+import java.util.List;
+
+import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
 
 
 
+/**
+ * 申报service
+ * @author 帅
+ *
+ */
 public interface IDeclareService {
+	
+	/**
+	 * 查询所有单子
+	 * @param area
+	 * @return
+	 */
+	public List<DeclarePo> getDeclares(String area);
+	
+	/**
+	 * 查询申报数据
+	 * @param id
+	 * @param dtype
+	 * @return
+	 */
+	public DeclareDataPo getDeclareData(Integer id,String dtype);
 	
 	/**
 	 * 保存申报单及数据
