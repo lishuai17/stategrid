@@ -54,7 +54,7 @@ public class DeclareServiceImpl implements IDeclareService{
 		DeclareDataPo data3a=new DeclareDataPo();
 		data3a.setId(declare.getId());
 		data3a.setDtype("3a");
-		declareDataDao.insertDeclData(data1a);
+		declareDataDao.insertDeclData(data3a);
 	}
 
 	public boolean existsDeclare(Long id) {
