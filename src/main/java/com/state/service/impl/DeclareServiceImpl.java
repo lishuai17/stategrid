@@ -62,5 +62,15 @@ public class DeclareServiceImpl implements IDeclareService{
 		}
 		return null;
 	}
+	
+	public void updateDeclare(DeclarePo declarePo) {
+		
+		declareDao.updateDeclare(declarePo);
+		
+		List<DeclareDataPo> declareDatas = declarePo.getDeclareDatas();
+		for (DeclareDataPo declareDataPo : declareDatas) {
+			declareDataDao.updateDeclData(declareDataPo);
+		}
+	}
 
 }

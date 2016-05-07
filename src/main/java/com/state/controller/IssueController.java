@@ -38,7 +38,7 @@ public class IssueController {
 	public String init(HttpServletRequest request,HttpServletResponse response) {
 		log.info("@ init declare ");
 		
-		return "declare";
+		return "issue";
 	}
 
 	/**
@@ -51,78 +51,8 @@ public class IssueController {
 	public List<DeclarePo> getDeclare(HttpServletRequest request,HttpServletResponse response,String date){
 		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
 		
-		return issueService.getDeclares(user.getArea(),(StringUtils.hasText(date) ? date : null));
+		return issueService.selectDeclareByParam(user.getArea(),(StringUtils.hasText(date) ? date : null),null);
 	}
 	
-	/**
-	 * 获取申报数据
-	 * @param request
-	 * @param response
-	 * @param id 单子id
-	 * @param type 申报类型 全天，高峰，低谷
-	 * @return
-	 */
-	@RequestMapping(value = "/getDeclareData", method = RequestMethod.POST)
-	public DeclareDataPo getDeclareData(HttpServletRequest request,HttpServletResponse response,Integer id,String type){
-		
-		
-		return issueService.getDeclareData(id, type);
-	}
 	
-	/**
-	 * 增加申报
-	 * @param declare
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addDeclare( DeclarePo declare) {
-		log.info("@ add declare ");
-		if(null == declare){
-			return "申报单为空";
-		}
-		try {
-			issueService.saveDeclare(declare);
-		} catch (Exception e) {
-			log.error("add declare fail !",e);
-			return "fail";
-		}
-		return "success";
-	}
-	
-	/**
-	 * 删除申报
-	 * @param classCode
-	 * @param model
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String deleteDeclare(Integer id) {
-		if(!issueService.existsDeclare(id)){
-			return "申报单不存在";
-		}
-		try {
-			issueService.deleteDeclare(id);
-		} catch (Exception e) {
-			log.error("delete declare fail !",e);
-			return "fail";
-		}
-		return "success";
-	}
-	
-	/**
-	 * 更改申报
-	 * @param classCode
-	 * @param model
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateDeclare(String classCode, Model model, HttpServletRequest request,
-			HttpServletResponse response) {
-		return "";
-	}
 }
