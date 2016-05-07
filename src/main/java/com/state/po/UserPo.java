@@ -42,6 +42,11 @@ public class UserPo extends BasePo {
 	 * 登出时间
 	 */
 	private String outtime;
+	
+	/**
+	 * 是否允许登录
+	 */
+	private String islogin;
 
 	public String getMname() {
 		return mname;
@@ -98,5 +103,15 @@ public class UserPo extends BasePo {
 	public void setOuttime(String outtime) {
 		this.outtime = outtime;
 	}
+
+	public String getIslogin() {
+		return islogin;
+	}
+
+	public void setIslogin(String islogin) {
+		this.islogin = islogin;
+	}
+	
+	
 
 }
