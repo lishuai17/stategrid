@@ -145,7 +145,7 @@ html {
 
 
 </state:override>
-
+<state:override name="header"></state:override>
 <state:override name="content">
 	<div class="wrapper">
 		<form id="form111"
