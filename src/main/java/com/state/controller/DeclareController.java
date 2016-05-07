@@ -63,7 +63,7 @@ public class DeclareController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getDeclareData", method = RequestMethod.POST)
-	public DeclareDataPo getDeclareData(HttpServletRequest request,HttpServletResponse response,Integer id,String type){
+	public DeclareDataPo getDeclareData(HttpServletRequest request,HttpServletResponse response,Long id,String type){
 		
 		
 		return declareService.getDeclareData(id, type);

@@ -55,9 +55,11 @@ public class DeclareServiceImpl implements IDeclareService{
 		return declareDao.selectDeclareByParam(area, date, null);
 	}
 
-	public DeclareDataPo getDeclareData(Integer id, String dtype) {
-		// TODO Auto-generated method stub
-//		declareDataDao.getDeclDataById(param)
+	public DeclareDataPo getDeclareData(Long id, String dtype) {
+		List<DeclareDataPo> list=declareDataDao.getDeclDataById(id,dtype);
+		if(list!=null&&list.size()>0){
+			return list.get(0);
+		}
 		return null;
 	}
 

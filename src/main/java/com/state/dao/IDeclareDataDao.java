@@ -31,6 +31,6 @@ public interface IDeclareDataDao {
 	 * @param dtype 申报子表类型
 	 * @return 申报子表列表
 	 */
-	public List<DeclareDataPo> getDeclDataById(@Param("id")String id,@Param("dtype")String dtype);
+	public List<DeclareDataPo> getDeclDataById(@Param("id")long id,@Param("dtype")String dtype);
 	
 }

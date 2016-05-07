@@ -5,7 +5,7 @@
 		id,sheet_name as sheetName,descr,mdate,area,dtime,mname,drloe
 	</sql>
 	
-	<delete id="deleteDeclare" parameterType="String">
+	<delete id="deleteDeclare" parameterType="long">
 		delete from CBPM_SHEET_DECL where id=#{id}
 	</delete>
 	

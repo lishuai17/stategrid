@@ -12,7 +12,7 @@ public interface IDeclareDao {
 	 * 根据ID删除申报主表
 	 * @param id
 	 */
-	public void deleteDeclare(Integer id);
+	public void deleteDeclare(long id);
 
 	/**
 	 * 插入申报主表  

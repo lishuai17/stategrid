@@ -27,7 +27,7 @@ public interface IDeclareService {
 	 * @param dtype
 	 * @return
 	 */
-	public DeclareDataPo getDeclareData(Integer id,String dtype);
+	public DeclareDataPo getDeclareData(Long id,String dtype);
 	
 	/**
 	 * 保存申报单及数据
