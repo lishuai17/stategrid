@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.state.dao.IDeclareDao">
-
+	<sql id="daclareInfo">
+		id,sheet_name as sheetName,descr,mdate,area,dtime,mname,drloe
+	</sql>
+	
+	<delete id="deleteDeclare" parameterType="String">
+		delete from CBPM_SHEET_DECL where id=#{id}
+	</delete>
+	
+	<insert id="insertDeclare" parameterType="map">
+		insert into CBPM_SHEET_DECL
+		 (id,sheet_name,descr,mdate,area,dtime,mname,drloe)
+		 values
+		 (#{id},#{sheetName},#{descr},#{mdate},#{area},#{dtime},#{mname},#{drloe})
+	</insert>
+	
+	<select id="selectDeclareByParam">
+		select <include refid="daclareInfo" />
+			from CBPM_SHEET_DECL 
+			where 1=1
+		<if test="mdate!=null and mdate!='' ">
+			 and mdate=#{mdate}
+		 </if>
+		 <if test="area!=null and area!='' ">
+			 and area=#{area}
+		 </if>
+		  <if test="mname!=null and mname!='' ">
+			 and mname=#{mname}
+		 </if>
+	</select>
 </mapper>
