@@ -18,5 +18,13 @@ public class LoginServiceImpl implements ILoginService{
 	public UserPo judgeUser(String user,String password) {
 		return loginDao.judgeUser(user, password);
 	}
+	
+	public UserPo containUser(String user){
+		return loginDao.containUser(user);
+	}
+	
+	public void saveUser(String user,String password,String area){
+		loginDao.saveUser(user, password, area); 
+	}
 
 }
