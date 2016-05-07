@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html >
 <head>
-	<script src="${pageContext.request.contextPath }/js/jquery-1.8.3.min.js" type="text/javascript" ></script>
-	<script src="${pageContext.request.contextPath }/js/jquery.form.js" type="text/javascript" ></script>
-	<script src="${pageContext.request.contextPath }/js/jquery.json.min.js" type="text/javascript" ></script>
+	<script src="${pageContext.request.contextPath }/js/jquery/jquery-1.8.3.min.js" type="text/javascript" ></script>
+	<script src="${pageContext.request.contextPath }/js/jquery/jquery.form.js" type="text/javascript" ></script>
+	<script src="${pageContext.request.contextPath }/js/jquery/jquery.json.min.js" type="text/javascript" ></script>
 	<state:block name="head"></state:block>
 </head>
 <body>

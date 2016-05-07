@@ -49,7 +49,8 @@ public class DeclareServiceImpl implements IDeclareService{
 
 	public List<DeclarePo> getDeclares(String area,String date) {
 		if(null == date){
-			date = DateUtil.format(new Date(), "yyyyMMdd");
+			Date today = new Date();
+			date = DateUtil.format(new Date(today.getTime()+1000*60*60*24), "yyyyMMdd");
 		}
 		return declareDao.selectDeclareByParam(area, date, null);
 	}

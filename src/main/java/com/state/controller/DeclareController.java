@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,12 +48,10 @@ public class DeclareController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getDeclareList", method = RequestMethod.POST)
-	public List<DeclarePo> getDeclare(HttpServletRequest request,HttpServletResponse response){
+	public List<DeclarePo> getDeclare(HttpServletRequest request,HttpServletResponse response,String date){
 		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
-//		Date date=new Date();
 		
-		
-		return null; //declareService.getDeclare(declare);
+		return declareService.getDeclares(user.getArea(),(StringUtils.hasText(date) ? date : null));
 	}
 	
 	/**
@@ -66,10 +65,8 @@ public class DeclareController {
 	@RequestMapping(value = "/getDeclareData", method = RequestMethod.POST)
 	public DeclareDataPo getDeclareData(HttpServletRequest request,HttpServletResponse response,Integer id,String type){
 		
-//		Date date=new Date();
 		
-		
-		return null; //declareService.getDeclare(declare);
+		return declareService.getDeclareData(id, type);
 	}
 	
 	/**
