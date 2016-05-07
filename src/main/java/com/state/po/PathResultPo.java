@@ -17,6 +17,11 @@ public class PathResultPo extends BasePo {
 	 * 通道名
 	 */
 	private String mpath;
+	
+	/**
+	 * 通道类型
+	 */
+	private String dtype;
 
 	private Double h01;
 
@@ -982,6 +987,14 @@ public class PathResultPo extends BasePo {
 
 	public void setH96(Double h96) {
 		this.h96 = h96;
+	}
+
+	public String getDtype() {
+		return dtype;
+	}
+
+	public void setDtype(String dtype) {
+		this.dtype = dtype;
 	}
 
 }
