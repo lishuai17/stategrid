@@ -1,0 +1,40 @@
+ul,
+li,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.ttbg {
+	background: #06938e;
+	height: 88px;
+}
+
+.mid {
+	margin: auto;
+	width: 1200px;
+	text-align: center;
+}
+
+.pdt10 {
+	padding-top: 10px;
+}
+
+.fl {
+	float: left;
+}
+.menu {
+	float: left;
+}
+
+.menu li {
+	padding: 36px 20px 0 20px;
+	list-style: none;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: bold;
+}
+.menu a{
+text-decoration: none;	
+color: #ffffff;
+}

@@ -1,0 +1,106 @@
+ul,
+li,
+img,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.rl {
+	float: right;
+}
+
+.cl {
+	clear: both;
+}
+
+.ureg {
+	color: #ffffff;
+	padding-top: 40px;
+}
+
+.btn1{
+	border-radius: 3px;
+	background-color: #F77E39;
+	padding: 2px 10px 2px 10px;
+}
+.btn2{
+	border-radius: 15px;
+	background-color: #06938E;
+	color: #fff;
+	padding: 2px 10px 2px 10px;
+}
+a{
+text-decoration: none;
+color: #ffffff;	
+}
+
+/*  content */
+
+.contop {
+	padding: 20px 10px;
+}
+.contop span{
+	padding-left: 10px;
+	padding-right: 10px;
+	
+}
+.xmenu {
+	color: #c19d30;
+	font-size: 22px;
+	font-weight: bold;
+	margin-right: 20px;
+}
+
+.count {
+	background-color: #f77e39;
+	padding: 1px 5px;
+	color: #ffffff;
+}
+
+.lmenu {
+	float: left;
+	width: 200px;
+	border: solid 1px #dcdcdb;
+	font-size: 14px;
+}
+
+.lmenu li {
+	list-style: none;
+	text-align: left;
+	border: solid 1px #dcdcdb;
+	padding: 10px 10px 10px 10px;
+}
+
+.bgy {
+	padding-left: 28px;
+	height: 27px;
+	background-image: url(../img/micon.png);
+	background-repeat: no-repeat;
+}
+.bgi {
+	padding-left: 28px;
+	height: 27px;
+	background-image: url(../img/miion.png);
+	background-repeat: no-repeat;
+}
+.conrightt1 {
+	border: solid 1px #dcdcdb;
+	height: 20px;
+	padding-left: 10px;
+}
+
+.conrightt2 {
+	border: solid 1px #dcdcdb;
+}
+
+table tr td {
+	margin: 0;
+	padding: 0;
+}
+
+.cchart {
+	height: 200px;
+	width: 900px;
+	border: solid 1px #dcdcdb;
+}
