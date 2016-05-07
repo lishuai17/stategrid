@@ -38,12 +38,7 @@
 		<property name="poolPreparedStatements" value="${com.state.druid.poolPreparedStatements}" />
 		<property name="maxOpenPreparedStatements"
 			value="${com.state.druid.maxOpenPreparedStatements}" />
-		
-		
-
 	</bean>
-
-
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:myibatis/myibatis-config.xml" />
@@ -61,8 +56,10 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>				

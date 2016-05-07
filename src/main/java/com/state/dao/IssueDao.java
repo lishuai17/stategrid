@@ -9,18 +9,6 @@ import com.state.po.DeclarePo;
 public interface IssueDao {
 
 	/**
-	 * 根据ID删除申报主表
-	 * @param id
-	 */
-	public void deleteDeclare(Integer id);
-
-	/**
-	 * 插入申报主表
-	 * @param declarePo
-	 */
-	public void insertDeclare(DeclarePo declarePo);
-	
-	/**
 	 * 根据ID查找申报主表是否存在
 	 * @param id
 	 * @return
