@@ -14,7 +14,7 @@ public interface IPathResultDao {
 	 * @param mpath 通道名称
 	 * @return 通道结果列表
 	 */
-	public List<PathResultPo> getPathResultList(@Param("mdate")long mdate,@Param("mpath")String mpath);
+	public List<PathResultPo> getPathResultList(@Param("mdate")String mdate,@Param("mpath")String mpath);
 	
 	/**
 	 * 根据参数查询通道结果
@@ -23,7 +23,7 @@ public interface IPathResultDao {
 	 * @param dtype 通道结果类型
 	 * @return 通道结果
 	 */
-	public PathResultPo getPathResult(@Param("mdate")long mdate,@Param("mpath")String mpath,@Param("dtype")String dtype);
+	public PathResultPo getPathResult(@Param("mdate")String mdate,@Param("mpath")String mpath,@Param("dtype")String dtype);
 	
 	/**
 	 * 插入通道结果
