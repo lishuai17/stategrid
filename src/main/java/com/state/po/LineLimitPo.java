@@ -23,6 +23,8 @@ public class LineLimitPo extends BasePo {
 	private double h05;
 	//
 	private double h06;
+	
+	private double h07;
 	//
 	private double h08;
 	//
@@ -272,6 +274,14 @@ public class LineLimitPo extends BasePo {
 
 	public void setH06(double h06) {
 		this.h06 = h06;
+	}
+	
+	public double getH07() {
+		return h07;
+	}
+
+	public void setH07(double h07) {
+		this.h07 = h07;
 	}
 
 	public double getH08() {

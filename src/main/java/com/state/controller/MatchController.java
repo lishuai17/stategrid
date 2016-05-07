@@ -17,16 +17,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
 import com.state.po.UserPo;
-import com.state.service.LineLimitService;
+import com.state.service.MatchService;
 
+/**
+ * 撮合
+ * @author 帅
+ *
+ */
 @Controller
-@RequestMapping("/lineLimit")
-public class LineLimitController {
+@RequestMapping("/match")
+public class MatchController {
 	private static final transient Logger log = Logger
-			.getLogger(LineLimitController.class);
+			.getLogger(MatchController.class);
 
 	@Autowired
-	private LineLimitService lineLimitService;
+	private MatchService matchService;
 	
 	/**
 	 * 跳转申报页面
@@ -36,9 +41,9 @@ public class LineLimitController {
 	 */
 	@RequestMapping(value = "/init")
 	public String init(HttpServletRequest request,HttpServletResponse response) {
-		log.info("@ init limitLine ");
+		log.info("@ init declare ");
 		
-		return "limitLine";
+		return "declare";
 	}
 
 	/**
@@ -51,7 +56,7 @@ public class LineLimitController {
 	public List<DeclarePo> getDeclare(HttpServletRequest request,HttpServletResponse response,String date){
 		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
 		
-		return lineLimitService.getDeclares(user.getArea(),(StringUtils.hasText(date) ? date : null));
+		return matchService.getDeclares(user.getArea(),(StringUtils.hasText(date) ? date : null));
 	}
 	
 	/**
@@ -66,7 +71,7 @@ public class LineLimitController {
 	public DeclareDataPo getDeclareData(HttpServletRequest request,HttpServletResponse response,Integer id,String type){
 		
 		
-		return lineLimitService.getDeclareData(id, type);
+		return matchService.getDeclareData(id, type);
 	}
 	
 	/**
@@ -82,7 +87,7 @@ public class LineLimitController {
 			return "申报单为空";
 		}
 		try {
-			lineLimitService.saveDeclare(declare);
+			matchService.saveDeclare(declare);
 		} catch (Exception e) {
 			log.error("add declare fail !",e);
 			return "fail";
@@ -100,11 +105,11 @@ public class LineLimitController {
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deleteDeclare(Integer id) {
-		if(!lineLimitService.existsDeclare(id)){
+		if(!matchService.existsDeclare(id)){
 			return "申报单不存在";
 		}
 		try {
-			lineLimitService.deleteDeclare(id);
+			matchService.deleteDeclare(id);
 		} catch (Exception e) {
 			log.error("delete declare fail !",e);
 			return "fail";
