@@ -12,6 +12,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		 destroy-method="close">
 		<!-- 基本属性 url、user、password -->
+		<property name="driverClassName" value="${com.state.driverClass}" />
 		<property name="url" value="${com.state.druid.url}" />
 		<property name="username" value="${com.state.druid.username}" />
 		<property name="password" value="${com.state.druid.password}" />
