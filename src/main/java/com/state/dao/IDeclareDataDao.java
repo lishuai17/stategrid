@@ -1,5 +1,6 @@
 package com.state.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import com.state.po.DeclareDataPo;
@@ -15,13 +16,13 @@ public interface IDeclareDataDao {
 	 * 增加申请主表
 	 * @param declareDataDao
 	 */
-	public void insertDeclData(DeclareDataPo declareDataPo);
+	public void insertDeclData(DeclareDataPo declareData);
 	
 	
 	/**
-	 * 根据参数查找申请主表
+	 * 根据参数查找申请子表
 	 * @param declareDataDao
 	 */
-	public DeclareDataPo getDeclDataById(Map<String,String> param);
+	public List<DeclareDataPo> getDeclDataById(Map<String,String> param);
 	
 }
