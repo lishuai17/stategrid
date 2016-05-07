@@ -121,7 +121,8 @@ public class DeclareController {
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updateDeclare(String classCode, Model model, HttpServletRequest request,
-			HttpServletResponse response) {
-		return "";
+			HttpServletResponse response,DeclarePo declarePo) {
+		declareService.updateDeclare(declarePo);
+		return "success";
 	}
 }
