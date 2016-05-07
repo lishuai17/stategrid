@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"
 	contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://www.state.com/state" prefix="state"%>
+<script type="text/javascript" src="js/jquery/jquery-1.8.3.min.js"></script>
 
 <state:override name="head">
 	<title>登录</title>
@@ -99,31 +100,39 @@ html {
 </style>
 
 <script type="text/javascript">
+	//注册按钮事件
 	$(function() {
-
+		$("#register").click(function() {
+			window.location.href = "${pageContext.request.contextPath }/login/register";
+		});
+	
+	});
+	//登录按钮事件
+	$(function() {
 		$("#loginBtn").click(function() {
-			var email = $("#email").val();
+			var user = $("#user").val();
 			var password = $("#password").val();
-			validLogin(email, password);
+			validLogin(user, password);
 		});
 
 	});
 	//如果在方法中使用ajax的返回值作为方法的返回值一定要把ajax变成同步的	
-	function validLogin(email, password) {
-		var result = "no";
+	function validLogin(user, password) {
 		var option = {
 			url : "${pageContext.request.contextPath }/login/validLogin",
 			type : "post",
 			data : {
-				email : email,
+				user : user,
 				password : password
 			},
 			dataType : "json",
-			success : function(responseText) {
-				if ("success" == responseText) {
-					window.location.href = "${pageContext.request.contextPath }/index/frame/index";
-				} else {
-					alert("用户名密码错误");
+			success : function(response) {
+				if ("success" == response) {
+					window.location.href = "${pageContext.request.contextPath }/declare/init";
+				}else if("sucnoauthor" == response) {
+					alert("此用户无权限，请联系管理员！");
+				}else {
+					alert("用户名或密码错误");
 				}
 			},
 			error : function() {
@@ -136,7 +145,7 @@ html {
 
 
 </state:override>
-
+<state:override name="header"></state:override>
 <state:override name="content">
 	<div class="wrapper">
 		<form id="form111"
@@ -144,18 +153,16 @@ html {
 			method="post">
 			<div class="loginBox">
 				<div class="loginBoxCenter">
-					<input type="hidden" name="state" value="${state}" /> <input
-						type="hidden" name="response_type" value="${code }" />
 					<p>
 						<label for="username">账号：</label>
 					</p>
 					<p>
-						<input type="text" id="email" name="email" class="loginInput"
+						<input type="text" id="user" name="user" class="loginInput"
 							autofocus="autofocus" required="required" autocomplete="off"
-							placeholder="请输入电子邮箱" value="" />
+							placeholder="请输入帐号" value="" />
 					</p>
 					<p>
-						<label for="password">密码：</label><a class="forgetLink" href="#">忘记密码?</a>
+						<label for="password">密码：</label>
 					</p>
 					<p>
 						<input type="password" id="password" name="password"
@@ -164,9 +171,8 @@ html {
 					</p>
 				</div>
 				<div class="loginBoxButtons">
-					<input id="remember" type="checkbox" name="remember" /> <input
-						type="button" class="loginBtn" id="loginBtn" value="登录" />
-
+					<input type="button" class="loginBtn" id="register" value="注册" />
+					<input type="button" class="loginBtn" id="loginBtn" value="登录" />
 				</div>
 			</div>
 		</form>
