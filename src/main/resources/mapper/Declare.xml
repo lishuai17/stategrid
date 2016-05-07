@@ -9,7 +9,7 @@
 		delete from CBPM_SHEET_DECL where id=#{id}
 	</delete>
 	
-	<insert id="insertDeclare" parameterType="map">
+	<insert id="insertDeclare" parameterType="map" useGeneratedKeys="true" keyProperty="id" >
 		insert into CBPM_SHEET_DECL
 		 (id,sheet_name,descr,mdate,area,dtime,mname,drloe)
 		 values
@@ -23,14 +23,8 @@
 	<select id="selectDeclareByParam" parameterType="map" resultType="DeclarePo">
 		select <include refid="daclareInfo" />
 			from CBPM_SHEET_DECL 
-			where 1=1
-		<if test="mdate!=null and mdate!='' ">
-			 and mdate=#{mdate}
-		 </if>
-		 <if test="area!=null and area!='' ">
-			 and area=#{area}
-		 </if>
-		  <if test="mname!=null and mname!='' ">
+			where area=#{area} and mdate=#{mdate}
+		 <if test="mname!=null and mname!='' ">
 			 and mname=#{mname}
 		 </if>
 	</select>
