@@ -14,6 +14,7 @@
 		 
 		<property name="driverClassName" value="${com.state.driverClass}" />
 		<!-- 基本属性 url、user、password -->
+		<property name="driverClassName" value="${com.state.driverClass}" />
 		<property name="url" value="${com.state.druid.url}" />
 		<property name="username" value="${com.state.druid.username}" />
 		<property name="password" value="${com.state.druid.password}" />
