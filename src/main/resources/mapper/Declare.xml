@@ -11,9 +11,9 @@
 	
 	<insert id="insertDeclare" parameterType="map" useGeneratedKeys="true" keyProperty="id" >
 		insert into CBPM_SHEET_DECL
-		 (id,sheet_name,descr,mdate,area,dtime,mname,drloe)
+		 (sheet_name,descr,mdate,area,dtime,mname,drloe)
 		 values
-		 (#{id},#{sheetName},#{descr},#{mdate},#{area},#{dtime},#{mname},#{drloe})
+		 (#{sheetName},#{descr},#{mdate},#{area},#{dtime},#{mname},#{drloe})
 	</insert>
 	
 	<select id="countDeclareById" parameterType="long" resultType="int">
