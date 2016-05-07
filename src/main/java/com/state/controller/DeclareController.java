@@ -27,8 +27,13 @@ public class DeclareController {
 	@Autowired
 	private IDeclareService declareService;
 	
-	//跳转申报页面
-	@RequestMapping(value = "/init", method = RequestMethod.POST)
+	/**
+	 * 跳转申报页面
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/init")
 	public String init(HttpServletRequest request,HttpServletResponse response) {
 		log.info("@ init declare ");
 		
@@ -36,11 +41,12 @@ public class DeclareController {
 	}
 
 	/**
-	 * 获取所有单子
+	 * 获取申报单子列表
 	 * @param request
 	 * @param response
 	 * @return
 	 */
+	@RequestMapping(value = "/getDeclareList", method = RequestMethod.POST)
 	public List<DeclarePo> getDeclare(HttpServletRequest request,HttpServletResponse response){
 		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
 //		Date date=new Date();
@@ -57,6 +63,7 @@ public class DeclareController {
 	 * @param type 申报类型 全天，高峰，低谷
 	 * @return
 	 */
+	@RequestMapping(value = "/getDeclareData", method = RequestMethod.POST)
 	public DeclareDataPo getDeclareData(HttpServletRequest request,HttpServletResponse response,Integer id,String type){
 		
 //		Date date=new Date();
@@ -65,7 +72,11 @@ public class DeclareController {
 		return null; //declareService.getDeclare(declare);
 	}
 	
-	//增加申报
+	/**
+	 * 增加申报
+	 * @param declare
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addDeclare( DeclarePo declare) {
