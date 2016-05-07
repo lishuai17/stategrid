@@ -14,7 +14,7 @@ import org.apache.ibatis.type.Alias;
 public class DeclarePo extends BasePo {
 	
 	//唯一值
-	private int id;
+	private long id;
 	// 日期
 	private double mdate;
 	// 地区
@@ -31,10 +31,10 @@ public class DeclarePo extends BasePo {
 	//申报数据
 	private List<DeclareDataPo> declareDatas;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public double getMdate() {
