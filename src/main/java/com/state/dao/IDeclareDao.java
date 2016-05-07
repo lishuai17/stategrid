@@ -15,10 +15,11 @@ public interface IDeclareDao {
 	public void deleteDeclare(Integer id);
 
 	/**
-	 * 插入申报主表
+	 * 插入申报主表  
 	 * @param declarePo
+	 * @return 影响行数，取ID使用declarePo.getId()方法
 	 */
-	public void insertDeclare(DeclarePo declarePo);
+	public long insertDeclare(DeclarePo declarePo);
 	
 	/**
 	 * 根据ID查找申报主表是否存在
@@ -26,6 +27,13 @@ public interface IDeclareDao {
 	 * @return
 	 */
 	public int countDeclareById(long id);
+	
+	/**
+	 * 更新申报主表
+	 * @param id
+	 * @return
+	 */
+	public void updateDeclare (DeclarePo declarePo);
 	
 	/**
 	 * 根据参数查询申报主表

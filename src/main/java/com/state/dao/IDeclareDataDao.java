@@ -1,7 +1,8 @@
 package com.state.dao;
 
 import java.util.List;
-import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.state.po.DeclareDataPo;
 
@@ -13,16 +14,23 @@ public interface IDeclareDataDao {
 	public void deleteDeclareData(Integer declareId);
 	
 	/**
-	 * 增加申请主表
+	 * 增加申请子表
 	 * @param declareDataDao
 	 */
 	public void insertDeclData(DeclareDataPo declareData);
 	
+	/**
+	 * 更新申请子表
+	 * @param declareDataDao
+	 */
+	public void updateDeclData(DeclareDataPo declareData);
 	
 	/**
 	 * 根据参数查找申请子表
-	 * @param declareDataDao
+	 * @param id 申报主表ID
+	 * @param dtype 申报子表类型
+	 * @return 申报子表列表
 	 */
-	public List<DeclareDataPo> getDeclDataById(Map<String,String> param);
+	public List<DeclareDataPo> getDeclDataById(@Param("id")String id,@Param("dtype")String dtype);
 	
 }
