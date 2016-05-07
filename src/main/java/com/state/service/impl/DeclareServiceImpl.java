@@ -32,11 +32,12 @@ public class DeclareServiceImpl implements IDeclareService{
 	 */
 	public void createNewDeclare(UserPo user){
 		Date today = new Date();
+		Date tomorrow=new Date(today.getTime()+1000*60*60*24);
 		DeclarePo declare=new DeclarePo();
 		declare.setSheetName("未命名");
-		declare.setMdate(DateUtil.format(today, "yyyyMMdd"));
+		declare.setMdate(DateUtil.format(tomorrow, "yyyyMMdd"));
 		declare.setArea(user.getArea());
-		declare.setDtime(DateUtil.format(today, "yyyy-MM-dd HH:mm:ss"));
+		declare.setDtime(DateUtil.format(tomorrow, "yyyy-MM-dd HH:mm:ss"));
 		declare.setMname(user.getMname());
 		declare.setDrloe(user.getDrole());
 		declareDao.insertDeclare(declare);
