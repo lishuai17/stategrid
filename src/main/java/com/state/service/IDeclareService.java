@@ -47,5 +47,12 @@ public interface IDeclareService {
 	 * @param id
 	 */
 	public void deleteDeclare(Integer id);
+	
+	/**
+	 * 更新申报主表
+	 * @param id
+	 * @return
+	 */
+	public void updateDeclare (DeclarePo declarePo);
 
 }
