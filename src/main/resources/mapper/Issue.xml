@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.state.dao.IssueDao">
+	<sql id="daclareInfo">
+		id,sheet_name as sheetName,descr,mdate,area,dtime,mname,drloe
+	</sql>
+	
+	<delete id="deleteDeclare" parameterType="String">
+		delete from CBPM_SHEET_DECL where id=#{id}
+	</delete>
+	
+	<insert id="insertDeclare" parameterType="map" useGeneratedKeys="true" keyProperty="id" >
+		insert into CBPM_SHEET_DECL
+		 (sheet_name,descr,mdate,area,dtime,mname,drloe)
+		 values
+		 (#{sheetName},#{descr},#{mdate},#{area},#{dtime},#{mname},#{drloe})
+	</insert>
+	
+	<select id="countDeclareById" parameterType="long" resultType="int">
+		select count(1) from CBPM_SHEET_DECL  where id=#{id}
+	</select>
+	
+	<select id="selectDeclareByParam" parameterType="map" resultType="DeclarePo">
+		select <include refid="daclareInfo" />
+			from CBPM_SHEET_DECL 
+			where area=#{area} and mdate=#{mdate}
+		 <if test="mname!=null and mname!='' ">
+			 and mname=#{mname}
+		 </if>
+	</select>
+</mapper>
