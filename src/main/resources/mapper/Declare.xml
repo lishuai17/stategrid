@@ -9,18 +9,37 @@
 		delete from CBPM_SHEET_DECL where id=#{id}
 	</delete>
 	
-	<insert id="insertDeclare" parameterType="map" useGeneratedKeys="true" keyProperty="id" >
+	<insert id="insertDeclare" parameterType="DeclarePo" >
+		<selectKey resultType="long" keyProperty="id" order="AFTER" >
+	    SELECT @@IDENTITY
+	  </selectKey>
+
 		insert into CBPM_SHEET_DECL
 		 (sheet_name,descr,mdate,area,dtime,mname,drloe)
 		 values
 		 (#{sheetName},#{descr},#{mdate},#{area},#{dtime},#{mname},#{drloe})
+		 
 	</insert>
+	
+	<update id="updateDeclare" parameterType="DeclarePo">
+		update CBPM_SHEET_DECL
+		<set> 
+			sheet_name=#{sheetName},
+			descr=#{descr},
+			mdate=#{mdate},
+			area=#{area},
+			dtime=#{dtime},
+			mname=#{mname},
+			drloe=#{drloe}
+		</set> 
+		where id=#{id}
+	</update>
 	
 	<select id="countDeclareById" parameterType="long" resultType="int">
 		select count(1) from CBPM_SHEET_DECL  where id=#{id}
 	</select>
 	
-	<select id="selectDeclareByParam" parameterType="map" resultType="DeclarePo">
+	<select id="selectDeclareByParam" resultType="DeclarePo">
 		select <include refid="daclareInfo" />
 			from CBPM_SHEET_DECL 
 			where area=#{area} and mdate=#{mdate}
