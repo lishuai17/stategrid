@@ -34,7 +34,7 @@
 		where id=#{id} and dtype=#{dtype}
 	</update>
 	
-	<select id="getDeclDataById" parameterType="map" resultType="DeclareDataPo">
+	<select id="getDeclDataById" resultType="DeclareDataPo">
 		select <include refid='declareDataInfo' />
 		 from CBPM_DECL 
 		 where id=#{id}

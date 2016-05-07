@@ -5,8 +5,8 @@ import org.apache.ibatis.type.Alias;
 @SuppressWarnings("serial")
 @Alias("LineLimitPo")
 public class LineLimitPo extends BasePo {
-	// 通道名
-	private String mpath;
+	// 联络线名
+	private String mcorhr;
 	// 日期
 	private String mdate;
 	// 类型
@@ -202,12 +202,12 @@ public class LineLimitPo extends BasePo {
 	//
 	private double h96;
 
-	public String getMpath() {
-		return mpath;
+	public String getMcorhr() {
+		return mcorhr;
 	}
 
-	public void setMpath(String mpath) {
-		this.mpath = mpath;
+	public void setMcorhr(String mcorhr) {
+		this.mcorhr = mcorhr;
 	}
 
 	public String getMdate() {

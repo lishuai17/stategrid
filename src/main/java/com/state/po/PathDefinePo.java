@@ -21,12 +21,12 @@ public class PathDefinePo extends BasePo {
 	/**
 	 * 首端
 	 */
-	private String mstart;
+	private String startArea;
 
 	/**
 	 * 末端
 	 */
-	private String mend;
+	private String endArea;
 
 	/**
 	 * 成员个数
@@ -104,20 +104,21 @@ public class PathDefinePo extends BasePo {
 		this.morder = morder;
 	}
 
-	public String getMstart() {
-		return mstart;
+	
+	public String getStartArea() {
+		return startArea;
 	}
 
-	public void setMstart(String mstart) {
-		this.mstart = mstart;
+	public void setStartArea(String startArea) {
+		this.startArea = startArea;
 	}
 
-	public String getMend() {
-		return mend;
+	public String getEndArea() {
+		return endArea;
 	}
 
-	public void setMend(String mend) {
-		this.mend = mend;
+	public void setEndArea(String endArea) {
+		this.endArea = endArea;
 	}
 
 	public Integer getMnum() {

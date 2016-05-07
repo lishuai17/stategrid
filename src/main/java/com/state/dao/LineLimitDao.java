@@ -4,34 +4,39 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.state.po.DeclarePo;
+import com.state.po.LineLimitPo;
 
 public interface LineLimitDao {
 
 	/**
-	 * 根据ID删除申报主表
-	 * @param id
+	 * 增加联络线限额
+	 * @param lineLimitPo
 	 */
-	public void deleteDeclare(Integer id);
+	public void insertLineLimit(LineLimitPo lineLimitPo);
 
 	/**
-	 * 插入申报主表
-	 * @param declarePo
+	 * 更新联络线限额
+	 * @param lineLimitPo 
 	 */
-	public void insertDeclare(DeclarePo declarePo);
+	public void updateLineLimit(LineLimitPo lineLimitPo);
 	
 	/**
-	 * 根据ID查找申报主表是否存在
-	 * @param id
-	 * @return
+	 * 根据参数查找联络线限额
+	 * @param mcorhr
+	 * @param mdate
+	 * @param dtype
+	 * @return 联络线限额
 	 */
-	public int countDeclareById(long id);
+	public LineLimitPo getLineLimit(@Param("mcorhr")String mcorhr,
+			@Param("mdate")String mdate,@Param("dtype")String dtype);
 	
 	/**
-	 * 根据参数查询申报主表
-	 * @param param
-	 * @return
+	 * 根据参数查找联络线限额列表
+	 * @param mcorhr
+	 * @param mdate
+	 * @return 联络线限额列表
 	 */
-	public List<DeclarePo> selectDeclareByParam(@Param("area")String area,@Param("mdate")String mdate
-			,@Param("mname")String mname);
+	public List<LineLimitPo> selectLineLimitList(@Param("mcorhr")String mcorhr,@Param("mdate")String mdate);
+	
+	
 }

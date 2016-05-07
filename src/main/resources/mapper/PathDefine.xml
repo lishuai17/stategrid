@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.state.dao.IPathDefineDao">
+	<sql id="pathDefineInfo">
+		mpath,morder,start_area as startArea,end_area as endArea,mnum,mdirection,corhr1,corhr2,corhr3,corhr4,corhr5,corhr6,corhr7,corhr8,corhr9,corhr10
+	</sql>
+	
+	<update id="updateDeclare" parameterType="DeclarePo">
+		update CBPM_PATH_DEFINE
+		<set> 
+			mpath=#{mpath},
+			morder=#{morder},
+			start_area=#{startArea},
+			end_area=#{endArea},
+			mnum=#{mnum},
+			mdirection=#{mdirection},
+			corhr1=#{corhr1},
+			corhr2=#{corhr2},
+			corhr3=#{corhr3},
+			corhr4=#{corhr4},
+			corhr5=#{corhr5},
+			corhr6=#{corhr6},
+			corhr7=#{corhr7},
+			corhr8=#{corhr8},
+			corhr9=#{corhr9},
+			corhr10=#{corhr10}
+		</set> 
+		where id=#{id}
+	</update>
+	
+	<select id="countDeclareById" parameterType="long" resultType="int">
+		select count(1) from CBPM_PATH_DEFINE  where id=#{id}
+	</select>
+	
+	<select id="selectDeclareByParam" resultType="DeclarePo">
+		select <include refid="pathDefineInfo" /> from CBPM_PATH_DEFINE
+	</select>
+</mapper>
