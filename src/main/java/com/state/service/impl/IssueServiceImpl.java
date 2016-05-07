@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.state.dao.IssueDao;
-import com.state.po.DeclarePo;
+import com.state.po.ResultPo;
 import com.state.service.IssueService;
 
 @Service
@@ -17,15 +17,37 @@ public class IssueServiceImpl implements IssueService{
 	@Autowired
 	private IssueDao issueDao;
 
-	public int countDeclareById(long id) {
-		// TODO Auto-generated method stub
-		return issueDao.countDeclareById(id);
-	}
 
-	public List<DeclarePo> selectDeclareByParam(String area, String mdate,
+	public List<ResultPo> selectDeclareByParam(String area, String mdate,
 			String mname) {
 		// TODO Auto-generated method stub
-		return issueDao.selectDeclareByParam(area, mdate, mname);
+		String dtype = null;
+		return issueDao.selectResultByParam(area, mdate, mname,dtype);
+	}
+
+
+	public long insertResult(ResultPo resultPo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public long deleteResultByDate(String mdate) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	public List<String> selectSheetOfResultByArea(String area, String mdate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public List<ResultPo> selectResultByParam(String area, String mdate,
+			String mname, String dtype) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

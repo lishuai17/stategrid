@@ -28,11 +28,11 @@ public class MatchServiceImpl implements MatchService{
 		
 		matchDao.insertDeclare(declare);
 		
-		List<DeclareDataPo> declareDatas = declare.getDeclareDatas();
-		for (DeclareDataPo declareDataPo : declareDatas) {
-			declareDataPo.setSheetId(declare.getId());
-			declareDataDao.insertDeclData(declareDataPo);
-		}
+//		List<DeclareDataPo> declareDatas = declare.getDeclareDatas();
+//		for (DeclareDataPo declareDataPo : declareDatas) {
+//			declareDataPo.set(declare.getId());
+//			declareDataDao.insertDeclData(declareDataPo);
+//		}
 	}
 
 	public boolean existsDeclare(Integer id) {
@@ -42,7 +42,7 @@ public class MatchServiceImpl implements MatchService{
 
 	public void deleteDeclare(Integer id) {
 		
-		declareDataDao.deleteDeclareData(id);
+//		declareDataDao.deleteDeclareData(id);
 		
 		matchDao.deleteDeclare(id);
 	}

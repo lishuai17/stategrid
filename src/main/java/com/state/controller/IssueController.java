@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
+import com.state.po.ResultPo;
 import com.state.po.UserPo;
 import com.state.service.IssueService;
 
@@ -48,10 +49,10 @@ public class IssueController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getDeclareList", method = RequestMethod.POST)
-	public List<DeclarePo> getDeclare(HttpServletRequest request,HttpServletResponse response,String date){
+	public List<ResultPo> getDeclare(HttpServletRequest request,HttpServletResponse response,String date){
 		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
 		
-		return issueService.selectDeclareByParam(user.getArea(),(StringUtils.hasText(date) ? date : null),null);
+		return issueService.selectResultByParam(user.getArea(),(StringUtils.hasText(date) ? date : null),null,null);
 	}
 	
 	
