@@ -3,6 +3,7 @@ package com.state.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.aspectj.weaver.patterns.Declare;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import com.state.dao.IDeclareDao;
 import com.state.dao.IDeclareDataDao;
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
+import com.state.po.UserPo;
 import com.state.service.IDeclareService;
 import com.state.util.DateUtil;
 
@@ -23,16 +25,36 @@ public class DeclareServiceImpl implements IDeclareService{
 	
 	@Autowired
 	private IDeclareDataDao declareDataDao;
-
-	public void saveDeclare(DeclarePo declare) {
-		
+	
+	/**
+	 * 新增申报单及数据
+	 * @param user 用户
+	 */
+	public void createNewDeclare(UserPo user){
+		Date today = new Date();
+		DeclarePo declare=new DeclarePo();
+		declare.setSheetName("未命名");
+		declare.setMdate(DateUtil.format(today, "yyyyMMdd"));
+		declare.setArea(user.getArea());
+		declare.setDtime(DateUtil.format(today, "YYYY-MM-DD HH:MM:SS"));
+		declare.setMname(user.getMname());
+		declare.setDrloe(user.getDrole());
 		declareDao.insertDeclare(declare);
 		
-		List<DeclareDataPo> declareDatas = declare.getDeclareDatas();
-		for (DeclareDataPo declareDataPo : declareDatas) {
-			declareDataPo.setSheetId(declare.getId());
-			declareDataDao.insertDeclData(declareDataPo);
-		}
+		DeclareDataPo data1a=new DeclareDataPo();
+		data1a.setSheetId(declare.getId());
+		data1a.setDtype("1a");
+		declareDataDao.insertDeclData(data1a);
+		
+		DeclareDataPo data2a=new DeclareDataPo();
+		data2a.setSheetId(declare.getId());
+		data2a.setDtype("2a");
+		declareDataDao.insertDeclData(data2a);
+		
+		DeclareDataPo data3a=new DeclareDataPo();
+		data3a.setSheetId(declare.getId());
+		data3a.setDtype("3a");
+		declareDataDao.insertDeclData(data1a);
 	}
 
 	public boolean existsDeclare(Long id) {

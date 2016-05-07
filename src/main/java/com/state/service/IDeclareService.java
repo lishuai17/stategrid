@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
+import com.state.po.UserPo;
 
 
 
@@ -30,10 +31,10 @@ public interface IDeclareService {
 	public DeclareDataPo getDeclareData(Long id,String dtype);
 	
 	/**
-	 * 保存申报单及数据
-	 * @param declare
+	 * 新增申报单及数据
+	 * @param user 用户
 	 */
-	public void saveDeclare(DeclarePo declare);
+	public void createNewDeclare(UserPo user);
 	
 	/**
 	 * 是否存在申报单

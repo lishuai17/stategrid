@@ -19,7 +19,7 @@ public class DeclareDaoTest extends BaseSpringContextTest{
 	
 	@Test
 	public void testCountDeclareById(){
-		int id = 1;
+		Long id = 1l;
 		int countDeclareById = declareDao.countDeclareById(id);
 		System.out.println(countDeclareById);
 	}

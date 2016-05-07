@@ -25,4 +25,16 @@ public interface IPathDefineDao {
 	 */
 	public void updatePathDefine(PathDefinePo pathDefinePo);
 	
+	/**
+	 * 删除通道定义
+	 * @param mpath
+	 */
+	public void deletePathDefine(String mpath);
+	
+	/**
+	 * 插入通道定义
+	 * @param pathDefinePo
+	 */
+	public void insertPathDefine(PathDefinePo pathDefinePo);
+	
 }

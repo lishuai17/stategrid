@@ -76,13 +76,12 @@ public class DeclareController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addDeclare( DeclarePo declare) {
+	public String addDeclare(HttpServletRequest request,HttpServletResponse response) {
 		log.info("@ add declare ");
-		if(null == declare){
-			return "申报单为空";
-		}
+		
 		try {
-			declareService.saveDeclare(declare);
+			UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
+			declareService.createNewDeclare(user);
 		} catch (Exception e) {
 			log.error("add declare fail !",e);
 			return "fail";

@@ -27,6 +27,17 @@
 		where mpath=#{mpath}
 	</update>
 	
+	<delete id="deletePathDefine" parameterType="String">
+		delte from CBPM_PATH_DEFINE where mpath=#{mpath}
+	</delete>
+	
+	<insert id ="insertPathDefine" parameterType="PathDefinePo">
+		insert into CBPM_PATH_DEFINE
+			(mpath,morder,start_ares,end_area,mnum,mdirection,corhr1,corhr2,corhr3,corhr4,corhr5,corhr6,corhr7,corhr8,corhr9,corhr10)
+		values
+			(#{mpath},#{morder},#{startAres},#{endArea},#{mnum},#{mdirection},#{corhr1},#{corhr2},#{corhr3},#{corhr4},#{corhr5},#{corhr6},#{corhr7},#{corhr8},#{corhr9},#{corhr10})
+	</insert>
+	
 	<select id="selectPathALL" resultType="PathDefinePo">
 		select <include refid="pathDefineInfo" /> from CBPM_PATH_DEFINE
 	</select>

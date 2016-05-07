@@ -37,4 +37,17 @@ public interface IPathResultDao {
 	 */
 	public void updatePathResult(PathResultPo pathResultPo);
 	
+	/**
+	 * 根据通道名称删除通道所有相关结果
+	 * @param String 
+	 */
+	//public void deletePathResultByName(String  mpath);
+	
+	/**
+	 * 删除通道结果
+	 * @param String 
+	 */
+	//public void deletePathResult(String  mpath);
+	
+	
 }

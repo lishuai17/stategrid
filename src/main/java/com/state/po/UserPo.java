@@ -44,6 +44,11 @@ public class UserPo extends BasePo {
 	private String outtime;
 	
 	/**
+	 * 登出时间
+	 */
+	private String drole;
+	
+	/**
 	 * 是否允许登录
 	 */
 	private String islogin;
@@ -110,6 +115,14 @@ public class UserPo extends BasePo {
 
 	public void setIslogin(String islogin) {
 		this.islogin = islogin;
+	}
+
+	public String getDrole() {
+		return drole;
+	}
+
+	public void setDrole(String drole) {
+		this.drole = drole;
 	}
 	
 	

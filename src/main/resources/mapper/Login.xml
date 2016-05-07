@@ -11,7 +11,7 @@
 	</select>
 	
 	<insert id="saveUser">
-		insert into CBPM_USER (mname,area,mkey,dtype,is_login) values
-		(#{user},#{area},#{password},'省','0')
+		insert into CBPM_USER (mname,area,mkey,dtype,is_login,drole) values
+		(#{user},#{area},#{password},'省','0',#{drole})
 	</insert>
 </mapper>
