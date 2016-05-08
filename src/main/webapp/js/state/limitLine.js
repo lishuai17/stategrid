@@ -61,7 +61,7 @@ function LimitLine() {
 			type : 'POST',
 			dataType : 'json',
 			data : {
-				limitLinePo : myLimitLine.makeLimitLineData(),
+				lineLimitStr : myLimitLine.makeLimitLineData(),
 			},
 			success : function(result) {
 				if (result) {
