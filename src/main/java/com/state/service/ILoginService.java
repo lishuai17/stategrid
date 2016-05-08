@@ -1,5 +1,8 @@
 package com.state.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.state.po.UserPo;
 
 
@@ -26,5 +29,11 @@ public interface ILoginService {
 	 * @param user,password,area
 	 */
 	public void saveUser(String user,String password,String area);
+	
+	/**
+	 * 查询已有权限的菜单
+	 * @param user
+	 */
+	public List<Map<String,String>> selectBill(String user);
 
 }

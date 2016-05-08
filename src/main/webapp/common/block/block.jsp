@@ -18,17 +18,13 @@
 				<div class="fl pdt10"><img src="${pageContext.request.contextPath }/img/logo.png"></div>
 				<div class="menu">
 					<ul>
-						<li class="fl">数据申报</li>
-						<li class="fl">限额管理</li>
-						<li class="fl">发布</li>
-						<li class="fl">撮合</li>
-						<li class="fl">通道联络线管理</li>
-						<li class="fl">用户管理</li>
-					</ul>
+					<c:forEach var="b" items="${bill}">
+						<li class="fl"><a href="${b.url}">${b.mname}</a></li>
+					</c:forEach>
 				</div>
 				<div class="rl ureg">
-					<span>李小龙</span>
-					<span>注销</span>
+					<span>${userInfo.mname}</span>
+					<span><a href="${pageContext.request.contextPath }/login/logout">注销</a></span>
 				</div>
 			</div>
 			<div class="cl"></div>

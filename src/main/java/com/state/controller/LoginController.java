@@ -1,6 +1,9 @@
 package com.state.controller;
 
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,6 +38,13 @@ public class LoginController {
 		log.info("跳转到注册页面");
 		return "register";
 	}
+	
+	@RequestMapping(value = "/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().invalidate();
+		log.info("退出登录");
+		return "login";
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/validLogin",method=RequestMethod.POST)
@@ -42,9 +52,11 @@ public class LoginController {
 		log.info("校验并返回结果");
 		//校验用户
 		UserPo pd=loginService.judgeUser(user, password);
+		List<Map<String,String>> bill = loginService.selectBill(pd.getMname());
 		if(pd!=null){
 			if("1".equals(pd.getIslogin())){
 				request.getSession().setAttribute("userInfo", pd);
+				request.getSession().setAttribute("bill", bill);
 				return "success";
 			}else{
 				return "sucnoauthor";

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
 import com.state.po.UserPo;
@@ -121,8 +122,10 @@ public class DeclareController {
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updateDeclare(String classCode, Model model, HttpServletRequest request,
-			HttpServletResponse response,DeclarePo declarePo) {
-		declareService.updateDeclare(declarePo);
+			HttpServletResponse response,String declarePo) {
+		JSONObject bean = com.alibaba.fastjson.JSONObject.parseObject(declarePo);
+		DeclarePo javaObject = JSONObject.toJavaObject(bean, DeclarePo.class);
+		declareService.updateDeclare(javaObject);
 		return "success";
 	}
 }
