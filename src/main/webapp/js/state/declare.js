@@ -33,6 +33,7 @@ function Declare() {
 				myDeclare.initChangeData();
 				return changed;
 			} else {
+				myDeclare.initChangeData();
 				return unchanged;
 			}
 		}
@@ -108,9 +109,9 @@ function Declare() {
 				if (result) {
 					myDeclare.initChangeData();
 					myDeclare.refreshDeclareData();
-					alert("修改成功!");
+					alert("保存成功!");
 				} else {
-					alert("修改失败!");
+					alert("保存失败!");
 				}
 			},
 			error : function(xhr, status) {

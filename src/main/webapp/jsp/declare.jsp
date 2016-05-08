@@ -15,6 +15,8 @@
 			$("#declareMenu li").live('click', function(){declare.getDeclareData($(this), '1a');});
 			$("#declareMenu li").live('dbclick', function(){declare.getDeclareData($(this), '1a');});
 			$("#declareDataDiv input").live("keydown", function(e){declare.copyTableValue($(this), e);});
+			$("#declareDataDiv input").live("click", function(e){declare.changeData();});
+			$("#comment").live("click", function(e){declare.changeData();});
 		})
 	</script>
 </state:override>
