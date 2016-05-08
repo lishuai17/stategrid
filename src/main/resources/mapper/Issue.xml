@@ -18,10 +18,11 @@
 	</delete>
 	 
 	 
-	<select id="selectSheetOfResultByArea" resultType="com.state.vo.ResultNameVo">
-		select distinct tr.dsheet,td.sheet_name as sheetName from CBPM_RESULET tr 
+	<select id="selectSheetOfResultByArea" resultType="DeclarePo">
+		select distinct td.id,td.sheet_name as sheetName,td.descr,td.mdate,td.area,td.dtime,td.mname,td.drloe
+		   from CBPM_RESULET tr 
 			inner join CBPM_SHEET_DECL td on tr.dsheet=td.id 
-			where tr.area=#{area} and tr.mdate=#{mdate}
+			where tr.area=#{area} and tr.mdate=#{mdate} and tr.dprint='1'
 	</select>
 	
 	<update id="updatePrint">

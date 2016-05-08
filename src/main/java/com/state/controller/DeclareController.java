@@ -40,6 +40,7 @@ public class DeclareController {
 	public String init(Model model) {
 		log.info("@ init declare ");
 		TypePo timeType=declareService.getTimeType();
+		timeType.countType();
 		model.addAttribute("timeType", timeType);
 		return "declare";
 	}

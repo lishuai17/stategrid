@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.state.po.DeclarePo;
 import com.state.po.ResultPo;
-import com.state.vo.ResultNameVo;
 
 public interface IssueDao {
 
@@ -29,7 +29,7 @@ public interface IssueDao {
 	 * @param param
 	 * @return 所有单子名称
 	 */
-	public List<ResultNameVo> selectSheetOfResultByArea(@Param("area")String area,@Param("mdate")String mdate);
+	public List<DeclarePo> selectSheetOfResultByArea(@Param("area")String area,@Param("mdate")String mdate);
 	
 	/**
 	 * 根据参数查询结果数据

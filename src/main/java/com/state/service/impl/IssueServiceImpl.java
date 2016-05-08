@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.state.dao.IssueDao;
+import com.state.po.DeclarePo;
 import com.state.po.ResultPo;
 import com.state.service.IssueService;
 import com.state.util.DateUtil;
-import com.state.vo.ResultNameVo;
 
 @Service
 @Transactional
@@ -26,7 +26,7 @@ public class IssueServiceImpl implements IssueService{
 	 * @param area
 	 * @return
 	 */
-	public List<ResultNameVo> getResultNameList(String area){
+	public List<DeclarePo> getResultNameList(String area){
 		Date tomorrow=new Date((new Date()).getTime()+1000*60*60*24);
 		return issueDao.selectSheetOfResultByArea(area, DateUtil.format(tomorrow, "yyyyMMdd"));
 	}

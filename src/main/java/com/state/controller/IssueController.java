@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.state.po.DeclarePo;
 import com.state.po.ResultPo;
 import com.state.po.UserPo;
 import com.state.service.IssueService;
-import com.state.vo.ResultNameVo;
 
 @Controller
 @RequestMapping("/issue")
@@ -45,7 +45,7 @@ public class IssueController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getResultList", method = RequestMethod.POST)
-	public List<ResultNameVo> getResultList(HttpServletRequest request,String area){
+	public List<DeclarePo> getResultList(HttpServletRequest request,String area){
 		
 		if(area==null||"".equals(area)){
 			UserPo user = (UserPo)request.getSession().getAttribute("userInfo");

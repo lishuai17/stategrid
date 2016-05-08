@@ -7,16 +7,14 @@
 	<Link Rel="StyleSheet" Href="${pageContext.request.contextPath }/css/declare.css" Type="Text/Css">
 	<script src="${pageContext.request.contextPath }/js/charts/highcharts.js"></script>
 	<script src="${pageContext.request.contextPath }/js/charts/modules/exporting.js"></script>
-	<script src="${pageContext.request.contextPath }/js/state/declare.js"></script>
+	<script src="${pageContext.request.contextPath }/js/state/issue.js"></script>
 	<script type="text/javascript">
-		var declare = new Declare();
+		var issue = new issue();
 		$(function(){
-			declare.getDeclare();
-			$("#declareMenu li").live('click', function(){declare.getDeclareData($(this), '1a');});
-			$("#declareMenu li").live('dbclick', function(){declare.getDeclareData($(this), '1a');});
-			$("#declareDataDiv input").live("keydown", function(e){declare.copyTableValue($(this), e);});
-			$("#declareDataDiv input").live("click", function(e){declare.changeData();});
-			$(".bz").live("click", function(){$('#comment').focus();});
+			issue.getissue();
+			$("#issueMenu li").live('click', function(){issue.getissueData($(this), '1a');});
+			$("#issueMenu li").live('dbclick', function(){issue.getissueData($(this), '1a');});
+			
 		})
 	</script>
 </state:override>
@@ -31,15 +29,15 @@
 			</div>
 			<div>
 				<div class="lmenu">
-					<ul id="declareMenu">
+					<ul id="issueMenu">
 						
 					</ul>
 				</div>
-				<div id="declareDataDiv" class="fl bd1" style="display:none;">
+				<div id="issueDataDiv" class="fl bd1" style="display:none;">
 					<div class="conrightt1">
-						<div class="fl mne"><a href="#" name="1a" onclick="declare.getDeclareDataByDeclareType('1a');">全天</a></div>
-						<div class="fl mne"><a href="#" name="2a" onclick="declare.getDeclareDataByDeclareType('2a');">高峰</a></div>
-						<div class="fl mne"><a href="#" name="3a" onclick="declare.getDeclareDataByDeclareType('3a');">低谷</a></div>
+						<div class="fl mne"><a href="#" name="1a" onclick="issue.getissueDataByissueType('1a');">全天</a></div>
+						<div class="fl mne"><a href="#" name="2a" onclick="issue.getissueDataByissueType('2a');">高峰</a></div>
+						<div class="fl mne"><a href="#" name="3a" onclick="issue.getissueDataByissueType('3a');">低谷</a></div>
 						
 					</div>
 					<div class="cl"></div>
@@ -201,7 +199,7 @@
 					</div>
 					<div class="cl"></div>
 					<div class="cchart"></div>
-					<div class="bz"><textarea id="comment" onfocus="declare.changeData();"></textarea></div>
+					<div class="bz"><textarea id="comment"></textarea></div>
 				</div>
 			</div>
 		</div>

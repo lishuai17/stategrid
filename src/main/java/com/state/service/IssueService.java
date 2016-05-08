@@ -2,8 +2,8 @@ package com.state.service;
 
 import java.util.List;
 
+import com.state.po.DeclarePo;
 import com.state.po.ResultPo;
-import com.state.vo.ResultNameVo;
 
 
 
@@ -19,7 +19,7 @@ public interface IssueService {
 	 * @param area
 	 * @return
 	 */
-	public List<ResultNameVo> getResultNameList(String area);
+	public List<DeclarePo> getResultNameList(String area);
 
 	/**
 	 * 根据申报单号、类型查找发布单

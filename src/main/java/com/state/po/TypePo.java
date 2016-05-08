@@ -2,6 +2,8 @@ package com.state.po;
 
 import org.apache.ibatis.type.Alias;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 时段类型表
  */
@@ -10,6 +12,12 @@ import org.apache.ibatis.type.Alias;
 public class TypePo extends BasePo {
 	//
 	private String id;
+	//全天类型
+	private int count1a=96;
+	//高峰数量
+	private int count2a=0;
+	//低谷数量
+	private int count3a=0;
 	//
 	private String h01;
 	//
@@ -968,5 +976,43 @@ public class TypePo extends BasePo {
 	public void setH96(String h96) {
 		this.h96 = h96;
 	}
+	
+	public int getCount1a() {
+		return count1a;
+	}
 
+	public void setCount1a(int count1a) {
+		this.count1a = count1a;
+	}
+
+	public int getCount2a() {
+		return count2a;
+	}
+
+	public void setCount2a(int count2a) {
+		this.count2a = count2a;
+	}
+
+	public int getCount3a() {
+		return count3a;
+	}
+
+	public void setCount3a(int count3a) {
+		this.count3a = count3a;
+	}
+
+	public void countType(){
+		String typeStr=JSON.toJSON(this).toString();
+		String[] typeArr=typeStr.split(",");
+		for(String colStr:typeArr){
+			if(colStr.indexOf("id")<0){
+				if(colStr.indexOf("峰")>=0){
+					this.count2a++;
+				}else if(colStr.indexOf("谷")>=0){
+					this.count3a++;
+				}
+			}
+		}
+	}
+	
 }
