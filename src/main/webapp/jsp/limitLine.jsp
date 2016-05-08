@@ -11,6 +11,8 @@
 	<script type="text/javascript">
 		var limitLine = new LimitLine();
 		$(function(){
+			$('.menu').find('a[name=限额管理]').attr('class', 'menufocus');
+			
 			limitLine.getLimitLine();
 			$("#limitLineMenu li").live('click', function(){limitLine.getLimitLineData($(this), '正向限额');});
 			$("#limitLineMenu li").live('dblclick', function(){limitLine.changeLimitLineName();});

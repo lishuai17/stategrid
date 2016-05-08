@@ -11,6 +11,8 @@
 	<script type="text/javascript">
 		var issue = new Issue();
 		$(function(){
+			$('.menu').find('a[name=发布]').attr('class', 'menufocus');
+			
 			issue.getIssue();
 			$("#IssueMenu li").live('click', function(){issue.getIssueData($(this), '1a');});
 			$("#IssueMenu li").live('dbclick', function(){issue.getIssueData($(this), '1a');});

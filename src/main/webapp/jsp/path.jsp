@@ -7,6 +7,9 @@
 	<Link Rel="StyleSheet" Href="${pageContext.request.contextPath }/css/line.css" Type="Text/Css">
 	<script src="${pageContext.request.contextPath }/js/state/path.js"></script>
 	<script type="text/javascript">
+		$(function(){
+			$('.menu').find('a[name=通道联络线管理]').attr('class', 'menufocus');
+		});
 	
 		var path = new Path();
 		$(function(){
