@@ -140,7 +140,7 @@ function Declare() {
 						} else {
 							typeCls = 'bgi';
 						}
-						$('#declareMenu').append('<li declareId="' + declareId + '" declareComment="' + declareComment + '">'
+						$('#declareMenu').append('<li declareId="' + declareId + '" declareName="' + result[i].sheetName + '" declareComment="' + declareComment + '">'
 								+ '<div class="fl ' + typeCls + '"><input value="'
 								+ result[i].sheetName
 								+ '"></div><div class="cl"></div></li>');
