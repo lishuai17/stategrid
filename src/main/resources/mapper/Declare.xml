@@ -25,12 +25,7 @@
 		update CBPM_SHEET_DECL
 		<set> 
 			sheet_name=#{sheetName},
-			descr=#{descr},
-			mdate=#{mdate},
-			area=#{area},
-			dtime=#{dtime},
-			mname=#{mname},
-			drloe=#{drloe}
+			descr=#{descr}
 		</set> 
 		where id=#{id}
 	</update>

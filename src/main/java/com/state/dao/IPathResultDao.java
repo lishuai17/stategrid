@@ -41,13 +41,13 @@ public interface IPathResultDao {
 	 * 根据通道名称删除通道所有相关结果
 	 * @param String 
 	 */
-	//public void deletePathResultByName(String  mpath);
+	public void deletePathResultByName(String  mpath);
 	
 	/**
-	 * 删除通道结果
+	 * 按照日期删除通道结果
 	 * @param String 
 	 */
-	//public void deletePathResult(String  mpath);
+	public void deletePathResultByDate(String mdate);
 	
 	
 }

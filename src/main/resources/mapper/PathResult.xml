@@ -34,4 +34,12 @@
 	<select id="getPathResultList" resultType="PathResultPo">
 		select * from CBPM_PATH_RESULET where  mdate=#{mdate} and mpath=#{mpath} 
 	</select>
+	
+	<delete id="deletePathResultByName" parameterType="String">
+		delete from CBPM_PATH_RESULET where mpath=#{mpath} 
+	</delete>
+	
+	<delete id="deletePathResultByDate" parameterType="String">
+		delete from CBPM_PATH_RESULET where mdate=#{mdate} 
+	</delete>
 </mapper>
