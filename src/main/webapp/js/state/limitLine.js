@@ -1,45 +1,45 @@
-function Issue() {
-	var myIssue = this;
+function LimitLine() {
+	var myLimitLine = this;
 	
-	this.selectedissue;
-	this.issueType;
+	this.selectedlimitLine;
+	this.limitLineType;
 	 
 	// 显示发布单数据DIV
-	this.showIssueDataDiv = function() {
-		$('#IssueDataDiv').show();
+	this.showLimitLineDataDiv = function() {
+		$('#LimitLineDataDiv').show();
 	}
 	
 	// 隐藏发布单数据DIV
-	this.hideIssueDataDiv = function() {
-		$('#IssueDataDiv').hide();
+	this.hideLimitLineDataDiv = function() {
+		$('#LimitLineDataDiv').hide();
 	}
 	
 	
 	// 获取发布单列表
-	this.getIssue = function() {
+	this.getLimitLine = function() {
 		$.ajax({
-			url : 'getResultList',
+			url : 'getAllLine',
 			type : 'POST',
 			dataType : 'json',
 			success : function(result) {
 				if (result) {
-					$('#IssueMenu').text('');
+					$('#LimitLineMenu').text('');
 					for (var i = 0; i < result.length; i++) {
-						var IssueId = result[i].id;
-						var IssueName = result[i].sheetName;
+						var LimitLineId = result[i].id;
+						var LimitLineName = result[i].sheetName;
 						var type = result[i].drloe;
-						var IssueComment = result[i].descr;
+						var LimitLineComment = result[i].descr;
 						var typeCls;
 						if ('buy' == type) {
 							typeCls = 'bgy';
 						} else {
 							typeCls = 'bgi';
 						}
-						$('#IssueMenu').append('<li IssueId="' + IssueId + '" IssueName="' + result[i].sheetName + '" IssueComment="' + IssueComment + '">'
+						$('#LimitLineMenu').append('<li LimitLineId="' + LimitLineId + '" LimitLineName="' + result[i].sheetName + '" LimitLineComment="' + LimitLineComment + '">'
 								+ '<div class="fl ' + typeCls + '">'
 								+ result[i].sheetName
 								+ '</div><div class="cl"></div></li>');
-						myIssue.hideIssueDataDiv()
+						myLimitLine.hideLimitLineDataDiv()
 					}
 					$('.count').text(result.length + '条');
 				} else {
@@ -53,30 +53,30 @@ function Issue() {
 	}
 	
 	// 获取发布单详细数据
-	this.getIssueData = function(selectedissue, type) {
-		if ((!myIssue.selectedissue || myIssue.selectedissue.attr('IssueId') != selectedissue.attr('IssueId')) ) {
-			if (myIssue.selectedissue) {
-				myIssue.selectedissue.attr('class', '');
+	this.getLimitLineData = function(selectedlimitLine, type) {
+		if ((!myLimitLine.selectedlimitLine || myLimitLine.selectedlimitLine.attr('LimitLineId') != selectedlimitLine.attr('LimitLineId')) ) {
+			if (myLimitLine.selectedlimitLine) {
+				myLimitLine.selectedlimitLine.attr('class', '');
 			}
-			selectedissue.attr('class', 'bghh');
-			myIssue.changeIssueTypeStyle(type);
-			myIssue.selectedissue = selectedissue;
-			myIssue.issueType = type;
+			selectedlimitLine.attr('class', 'bghh');
+			myLimitLine.changeLimitLineTypeStyle(type);
+			myLimitLine.selectedlimitLine = selectedlimitLine;
+			myLimitLine.limitLineType = type;
 
 			$.ajax({
 				url : 'getResult',
 				type : 'POST',
 				dataType : 'json',
 				data : {
-					dsheet : selectedissue.attr('IssueId'),
+					dsheet : selectedlimitLine.attr('LimitLineId'),
 					dtype : type
 				},
 				success : function(result) {
 					if (result) {
-						myIssue.inputValueToTable(result);
-						myIssue.makeDataToChart(result);
-						myIssue.inputValueToArea(selectedissue.attr('IssueComment'));
-						myIssue.showIssueDataDiv();
+						myLimitLine.inputValueToTable(result);
+						myLimitLine.makeDataToChart(result);
+						myLimitLine.inputValueToArea(selectedlimitLine.attr('LimitLineComment'));
+						myLimitLine.showLimitLineDataDiv();
 					} else {
 						alert("获取失败!");
 					}
@@ -90,22 +90,22 @@ function Issue() {
 	
 	
 	// 根据发布单类型获取发布单类型数据
-	this.getIssueDataByIssueType = function(type) {
-		myIssue.changeIssueTypeStyle(type);
-		myIssue.issueType = type;
-		IssueType = type;
+	this.getLimitLineDataByLimitLineType = function(type) {
+		myLimitLine.changeLimitLineTypeStyle(type);
+		myLimitLine.limitLineType = type;
+		LimitLineType = type;
 		$.ajax({
 			url : 'getResult',
 			type : 'POST',
 			dataType : 'json',
 			data : {
-				dsheet : myIssue.selectedissue.attr('IssueId'),
+				dsheet : myLimitLine.selectedlimitLine.attr('LimitLineId'),
 				dtype : type
 			},
 			success : function(result) {
 				if (result) {
-					myIssue.inputValueToTable(result);
-					myIssue.makeDataToChart(result);
+					myLimitLine.inputValueToTable(result);
+					myLimitLine.makeDataToChart(result);
 				} else {
 					alert("获取失败!");
 				}
@@ -122,7 +122,7 @@ function Issue() {
 		if (data) {
 			for (var key in data) {
 				if (/^h[0-9]{2}$/.test(key)) {
-					$('#IssueDataDiv input[name=' + key + ']').val(data[key]);
+					$('#LimitLineDataDiv input[name=' + key + ']').val(data[key]);
 				}
 			}
 			if (!data.sumQ || data.sumQ == 'null') {
@@ -131,8 +131,8 @@ function Issue() {
 			if (!data.aveP || data.aveP == 'null') {
 				data.aveP = 0;
 			}
-			$('#IssueDataDiv span[name=sumValue]').text(data.sumQ);
-			$('#IssueDataDiv span[name=avgValue]').text(data.aveP);
+			$('#LimitLineDataDiv span[name=sumValue]').text(data.sumQ);
+			$('#LimitLineDataDiv span[name=avgValue]').text(data.aveP);
 		}
 	}
 	
@@ -210,52 +210,52 @@ function Issue() {
 	}
 	
 	// 整理需要修改的发布单数据
-	this.makeIssueData = function() {
-		var Issue = {};
-		var IssueId = myIssue.selectedissue.attr('IssueId');
-		var IssueName = myIssue.selectedissue.find('input').val();
+	this.makeLimitLineData = function() {
+		var LimitLine = {};
+		var LimitLineId = myLimitLine.selectedlimitLine.attr('LimitLineId');
+		var LimitLineName = myLimitLine.selectedlimitLine.find('input').val();
 		var comment = $('#comment').text();
-		var IssueType = myIssue.issueType;
-		var IssueTypeData = myIssue.makeDataByTable();
-		Issue['id'] = IssueId;
-		Issue['sheetName'] = IssueName;
-		Issue['descr'] = comment;
-		Issue['IssueDatas'] = [IssueTypeData];
-		return JSON.stringify(Issue);
+		var LimitLineType = myLimitLine.limitLineType;
+		var LimitLineTypeData = myLimitLine.makeDataByTable();
+		LimitLine['id'] = LimitLineId;
+		LimitLine['sheetName'] = LimitLineName;
+		LimitLine['descr'] = comment;
+		LimitLine['LimitLineDatas'] = [LimitLineTypeData];
+		return JSON.stringify(LimitLine);
 	}
 	
 	// 根据表格整理发布单类型数据
 	this.makeDataByTable = function() {
-		var IssueTypeDataInputs = $('#IssueDataDiv').find('table input');
-		var IssueTypeData = {};
+		var LimitLineTypeDataInputs = $('#LimitLineDataDiv').find('table input');
+		var LimitLineTypeData = {};
 		var sum = 0;
-		for (var index in IssueTypeDataInputs) {
-			var IssueTypeDataInput = IssueTypeDataInputs[index];
-			IssueTypeData[IssueTypeDataInput.name] = IssueTypeDataInput.value;
-			if (IssueTypeDataInput.value) {
-				sum += Number(IssueTypeDataInput.value);
+		for (var index in LimitLineTypeDataInputs) {
+			var LimitLineTypeDataInput = LimitLineTypeDataInputs[index];
+			LimitLineTypeData[LimitLineTypeDataInput.name] = LimitLineTypeDataInput.value;
+			if (LimitLineTypeDataInput.value) {
+				sum += Number(LimitLineTypeDataInput.value);
 			}
 		}
 		var avg = sum / 96;
-		IssueTypeData['id'] = myIssue.selectedissue.attr('IssueId');
-		IssueTypeData['dtype'] = myIssue.issueType;
-		IssueTypeData['sumQ'] = sum;
-		IssueTypeData['aveP'] = avg.toFixed(2);
-		return IssueTypeData;
+		LimitLineTypeData['id'] = myLimitLine.selectedlimitLine.attr('LimitLineId');
+		LimitLineTypeData['dtype'] = myLimitLine.limitLineType;
+		LimitLineTypeData['sumQ'] = sum;
+		LimitLineTypeData['aveP'] = avg.toFixed(2);
+		return LimitLineTypeData;
 	}
 	
 	
 	// 修改发布单类型样式
-	this.changeIssueTypeStyle = function(type) {
-		var IssueTypes = $('#IssueDataDiv .conrightt1 a');
+	this.changeLimitLineTypeStyle = function(type) {
+		var LimitLineTypes = $('#LimitLineDataDiv .conrightt1 a');
 		for (var i = 0; i < 3 ; i++) {
-			var IssueType = IssueTypes[i];
-			if (IssueType.name == type) {
-				IssueType.style.color = '#D1B664';
-				IssueType.style.fontWeight = 'bold';
+			var LimitLineType = LimitLineTypes[i];
+			if (LimitLineType.name == type) {
+				LimitLineType.style.color = '#D1B664';
+				LimitLineType.style.fontWeight = 'bold';
 			} else {
-				IssueType.style.color = '#7F7F7F';
-				IssueType.style.fontWeight = '';
+				LimitLineType.style.color = '#7F7F7F';
+				LimitLineType.style.fontWeight = '';
 			}
 		}
 	}
