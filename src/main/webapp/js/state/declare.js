@@ -102,7 +102,9 @@ function Declare() {
 			url : 'update',
 			type : 'POST',
 			dataType : 'json',
-			data : myDeclare.makeDeclareData(),
+			data : {
+				declarePo : myDeclare.makeDeclareData(),
+			},
 			success : function(result) {
 				if ("success" == result) {
 					myDeclare.initChangeData();
@@ -305,7 +307,7 @@ function Declare() {
 		declare['sheetName'] = declareName;
 		declare['descr'] = comment;
 		declare['declareDatas'] = [declareTypeData];
-		return declare;
+		return JSON.stringify(declare);
 	}
 	
 	// 根据表格整理申报单类型数据
