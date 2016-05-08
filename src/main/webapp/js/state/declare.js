@@ -438,7 +438,15 @@ function Declare() {
 				} else {
 					key = 'h' + i;
 				}
-				$('#declareDataDiv input[name=' + key + ']').val(value);
+				if (myDeclare.dalareType == '1a') {
+					$('#declareDataDiv input[name=' + key + ']').val(value);
+				}
+				if (myDeclare.dalareType == '2a' && myDeclare.timeType[key] == '峰') {
+					$('#declareDataDiv input[name=' + key + ']').val(value);
+				}
+				if (myDeclare.dalareType == '3a' && myDeclare.timeType[key] == '谷') {
+					$('#declareDataDiv input[name=' + key + ']').val(value);
+				}
 			}
 		}
 	}
