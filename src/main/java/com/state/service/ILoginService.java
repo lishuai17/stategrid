@@ -28,12 +28,36 @@ public interface ILoginService {
 	 * 注册用户
 	 * @param user,password,area
 	 */
-	public void saveUser(String user,String password,String area);
+	public void saveUser(String user,String password,String area,String sf);
 	
 	/**
 	 * 查询已有权限的菜单
 	 * @param user
 	 */
 	public List<Map<String,String>> selectBill(String user);
+	
+	/**
+	 * 查询未审核用户
+	 * @param user
+	 */
+	public List<UserPo> selectNopass();
+	
+	/**
+	 * 查询已审核用户
+	 * @param user
+	 */
+	public List<UserPo> selectPass();
+	
+	/**
+	 * 审批用户
+	 * @param user
+	 */
+	public void approve(String user);
+	
+	/**
+	 * 给用户分配菜单
+	 * @param user
+	 */
+	public void allotBill(String user);
 
 }

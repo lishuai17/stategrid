@@ -16,14 +16,14 @@ function Declare() {
 	}
 	
 	// 显示区域
-	this.showArea = function(area) {
+	this.showArea = function(userArea) {
 		for (var i = 0; i < myDeclare.areaList.length; i++) {
 			var area = myDeclare.areaList[i].area;
 			if (area != '国调') {
 				$('#area').append('<option value="' + area + '">' + area + '</option>');
 			}
 		}
-		if (area == '国调') {
+		if (userArea == '国调') {
 			$('.posty').css('display', 'block');
 		} else {
 			$('.posty').css('display', 'none');

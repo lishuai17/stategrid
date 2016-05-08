@@ -1,6 +1,7 @@
 package com.state.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.state.po.UserPo;
 import com.state.service.ILoginService;
@@ -45,15 +48,15 @@ public class LoginController {
 		log.info("退出登录");
 		return "login";
 	}
-
+	
 	@ResponseBody
 	@RequestMapping(value = "/validLogin",method=RequestMethod.POST)
 	public String validLogin(HttpServletRequest request,String user,String password) {
 		log.info("校验并返回结果");
 		//校验用户
 		UserPo pd=loginService.judgeUser(user, password);
-		List<Map<String,String>> bill = loginService.selectBill(pd.getMname());
 		if(pd!=null){
+			List<Map<String,String>> bill = loginService.selectBill(pd.getMname());
 			if("1".equals(pd.getIslogin())){
 				request.getSession().setAttribute("userInfo", pd);
 				request.getSession().setAttribute("bill", bill);
@@ -85,14 +88,15 @@ public class LoginController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/registerUser",method=RequestMethod.POST)
-	public String registerUser(String user,String password,String area) {
+	public String registerUser(String user,String password,String area,String sf) {
 		log.info("注册用户");
 		try{
-			loginService.saveUser(user, password, area);
+			loginService.saveUser(user, password, area,sf);
 		}catch (Exception e) {
 			log.error("注册失败",e);
 			return "fail";
 		}
 		return "success";
 	}
+	
 }

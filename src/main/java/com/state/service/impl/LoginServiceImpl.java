@@ -26,12 +26,30 @@ public class LoginServiceImpl implements ILoginService{
 		return loginDao.containUser(user);
 	}
 	
-	public void saveUser(String user,String password,String area){
-		loginDao.saveUser(user, password, area); 
+	public void saveUser(String user,String password,String area,String sf){
+		loginDao.saveUser(user, password, area,sf); 
 	}
 	
 	public List<Map<String,String>> selectBill(String user){
 		return loginDao.selectBill(user);
+	}
+	
+	public List<UserPo> selectNopass(){
+		return loginDao.selectNopass();
+	}
+
+	public List<UserPo> selectPass(){
+		return loginDao.selectPass();
+	}
+
+	public void approve(String user){
+		loginDao.approve(user);
+	}
+	
+	public void allotBill(String user){
+		for(int i=1;i<=3;i++){
+			loginDao.allotBill(user,i);
+		}
 	}
 
 }

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
+import com.state.po.DeclarePo;
 import com.state.po.LineDefinePo;
 import com.state.po.PathDefinePo;
 import com.state.service.ILineService;
@@ -43,7 +45,7 @@ public class PathController {
 	public String init(HttpServletRequest request,HttpServletResponse response) {
 		log.info("@ init limitLine ");
 		
-		return "limitLine";
+		return "path";
 	}
 	
 	/**
@@ -79,14 +81,17 @@ public class PathController {
 	 * @param pathDefine
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/addPath")
-	public String addPath(PathDefinePo pathDefine){
-		
-		if(pathService.existsPath(pathDefine.getMpath())){
+	public String addPath(String pathDefine){
+		log.info(" add path");
+		JSONObject bean = com.alibaba.fastjson.JSONObject.parseObject(pathDefine);
+		PathDefinePo javaObject = JSONObject.toJavaObject(bean, PathDefinePo.class);
+		if(pathService.existsPath(javaObject.getMpath())){
 			return "通道已经存在";
 		}
 		try {
-			pathService.addPath(pathDefine);
+			pathService.addPath(javaObject);
 		} catch (Exception e) {
 			log.error("add pathDefine fail !",e);
 			return "fail";
@@ -99,14 +104,16 @@ public class PathController {
 	 * @param lineDefine
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/addLine")
-	public String addLine(LineDefinePo lineDefine){
-		
-		if(lineService.existsLine(lineDefine.getMcorhr())){
+	public String addLine(String lineDefine){
+		JSONObject bean = com.alibaba.fastjson.JSONObject.parseObject(lineDefine);
+		LineDefinePo javaObject = JSONObject.toJavaObject(bean, LineDefinePo.class);
+		if(lineService.existsLine(javaObject.getMcorhr())){
 			return "联络线已经存在";
 		}
 		try {
-			lineService.addLine(lineDefine);
+			lineService.addLine(javaObject);
 		} catch (Exception e) {
 			log.error("add lineDefine fail !",e);
 			return "fail";
@@ -119,6 +126,7 @@ public class PathController {
 	 * @param mpath
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/deletePath")
 	public String deletePath(String mpath){
 		
@@ -139,6 +147,7 @@ public class PathController {
 	 * @param mcorhr
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/deleteLine")
 	public String deleteLine(String mcorhr){
 		

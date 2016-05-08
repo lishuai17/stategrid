@@ -19,13 +19,14 @@
 				<div class="menu">
 					<ul>
 						<c:forEach var="b" items="${bill}">
-							<li class="fl"><a href="${pageContext.request.contextPath }${b.url}">${b.mname}</a></li>
+							<li class="fl"><a href="${pageContext.request.contextPath }${b.url}" name="${b.mname}">${b.mname}</a></li>
 						</c:forEach>
 					</ul>
+
 				</div>
 				<div class="rl ureg">
 					<span>${userInfo.mname}</span>
-					<span><a href="${pageContext.request.contextPath }/login/logout">注销</a></span>
+					<span><a href="${pageContext.request.contextPath}/login/logout">注销</a></span>
 				</div>
 			</div>
 			<div class="cl"></div>

@@ -9,17 +9,13 @@ body {
 #tk{
 	display:none;
 }
-#tk_line{
-	display:none;
-}
 .bcon{
-	position:fixed;
-	top:50%;
-	left:50%;
-	margin:-150px 0 0 -225px;
 	width:400px;
 	background-color: #FFFFFF;
 	z-index: 1000;
+	position: fixed;
+	top: 100px;
+	left:100px;
 	font-size: 14px;
 	padding: 10px 10px 40px 40px;
 	border-radius: 5px;
@@ -34,7 +30,9 @@ body {
 	left: 0px;
 	top: 0px;
 }
-
+.bgw{
+		background-color: #ededed;
+}
 .rl {
 	float: right;
 }
@@ -53,8 +51,15 @@ body {
 	background-color: #F77E39;
 	padding: 2px 10px 4px 10px;
 	font-size: 14px;
+	text-decoration: none;
+	color: #ffffff;
 }
-
+.btnh1 {
+	border-radius: 3px;
+	background-color: #cbcbcb;
+	padding: 2px 10px 4px 10px;
+	font-size: 14px;
+}
 .btn2 {
 	border-radius: 15px;
 	background-color: #cbcbcb;
@@ -62,7 +67,13 @@ body {
 	padding: 2px 10px 4px 10px;
 	font-size: 14px;
 }
-
+.btnh2 {
+	border-radius: 15px;
+	background-color: #06938e;
+	color: #fff !important;
+	padding: 2px 10px 4px 10px;
+	font-size: 14px;
+}
 .btn3 {
 	border-radius: 5px;
 	background-color: #C19D30;
@@ -85,10 +96,6 @@ body {
 	padding-top: 20px;
 }
 
-a {
-	text-decoration: none;
-	color: #ffffff;
-}
 
 
 /*  content */
@@ -136,17 +143,23 @@ a {
 	border-top: 0px;
 	border-left: 0px;
 	border-right: 0px;
-	background-color: #ededed;
-}
 
+}
+.lmenu input{
+	border: 0px;
+	color:#494949;
+}
 .cwhite {
 	background-color: #fff;
 }
 
 .mne {
 	border-right: solid 1px #dcdcdb;
+	float: left;
 }
-
+.mnea{
+	color: #d1b664 !important;
+}
 .bwr {
 	position: relative;
 	width: 6px;
@@ -234,6 +247,10 @@ table input {
 .bgh {
 	background-color: #ebebeb;
 }
+.bghh {
+	background-color: #e5e5e5;
+	
+}
 
 tr {
 	height: 30px;
@@ -257,7 +274,13 @@ td {
 	text-align: left;
 	padding: 20px;
 }
-
+.bz textarea{
+	font-size:14px;
+	width: 940px;
+	border: 0px;
+	color: #C19D30;
+overflow-y:visible;
+}
 .posty {
 	margin-left: 60px;
 	border-radius: 20px;
@@ -301,4 +324,68 @@ td {
 	color: #068F81 !important;
 	padding: 0px 10px;
 	font-size: 12px;
+}
+
+.regi{
+margin: auto;
+width:880px;
+height:auto;
+padding-top: 80px;
+}
+.regbtn{
+	background-color: #f77e39;
+}
+.wid600{
+	padding:32px 145px 0 146px;
+}
+.pd16{
+	padding: 6px;
+}
+.pdds{
+	padding: 6px 0px 0px 298px;
+}
+.pdl15{
+	padding:6px 6px 0px 13px;
+}
+.login{
+	color: #06938e;
+	font-size: 14px;
+}
+.login p{
+	padding-left: 20px;
+	width:240px;
+}
+.login input{
+	border: #06938E 1px solid;
+	width:100px;
+	color: #06938e;
+}
+.wid40{
+	padding: 0px 30px;
+}
+.wid60{
+	padding: 0px 36px 0px 30px;
+}
+
+.wid100{
+	padding: 0px 10px 0px 114px;
+}
+/**/
+.rest{
+	margin: auto;
+	width: 400px;
+    margin-top: 80px;
+	color: #06938e;
+	font-weight: bold;
+}
+.res{
+	margin: auto;
+    margin-top: 10px;
+	width: 400px;
+	height:400px;
+	border: solid #068F8A 1px;
+	color: #06938e;
+}
+.pdt100{
+	padding: 100px 20px 0 300px;
 }

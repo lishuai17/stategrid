@@ -21,7 +21,7 @@ public class AreaController {
 	@ResponseBody
 	@RequestMapping(value="/getAllArea",method=RequestMethod.POST)
 	public List<AreaPo> getAllArea(){
-		
+		System.out.println("dsfdfddddd");
 		return areaService.getAllArea();
 	}
 
