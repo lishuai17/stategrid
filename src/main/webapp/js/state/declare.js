@@ -4,8 +4,14 @@ function Declare() {
 	var changed = true;
 	var unchanged = false;
 	
+	this.timeType;
 	this.selectedDalare;
 	this.dalareType;
+	
+	// 加载EL数据
+	this.loadTimeType = function(timeType) {
+		myDeclare.timeType = timeType;
+	}
 	
 	// 申报单中数据变动flag(变动为true,未变动为false)
 	this.dataFlag = unchanged;
@@ -33,6 +39,9 @@ function Declare() {
 				myDeclare.initChangeData();
 				return changed;
 			} else {
+				myDeclare.selectedDalare.find('input').val(myDeclare.selectedDalare.attr('declareName'));
+				// 还原文本域失效
+				myDeclare.inputValueToArea(myDeclare.selectedDalare.attr('declareComment'));
 				myDeclare.initChangeData();
 				return unchanged;
 			}
@@ -143,7 +152,7 @@ function Declare() {
 						$('#declareMenu').append('<li declareId="' + declareId + '" declareName="' + result[i].sheetName + '" declareComment="' + declareComment + '">'
 								+ '<div class="fl ' + typeCls + '"><input value="'
 								+ result[i].sheetName
-								+ '"></div><div class="cl"></div></li>');
+								+ '" readonly="readonly"></div><div class="cl"></div></li>');
 						myDeclare.hideDeclareDataDiv()
 					}
 					$('.count').text(result.length + '条');
@@ -160,10 +169,15 @@ function Declare() {
 	// 获取申报单类型数据
 	this.getDeclareData = function(selectedDalare, type) {
 		if ((!myDeclare.selectedDalare || myDeclare.selectedDalare.attr('declareId') != selectedDalare.attr('declareId')) && !myDeclare.checkDataChanged()) {
+			
 			if (myDeclare.selectedDalare) {
 				myDeclare.selectedDalare.attr('class', '');
+				myDeclare.selectedDalare.find('input').attr('class', '');
+				myDeclare.selectedDalare.find('input').attr('readonly', 'readonly');
 			}
 			selectedDalare.attr('class', 'bghh');
+			selectedDalare.find('input').attr('class', 'bghh');
+			
 			myDeclare.changeDeclareTypeStyle(type);
 			myDeclare.selectedDalare = selectedDalare;
 			myDeclare.dalareType = type;
@@ -194,6 +208,8 @@ function Declare() {
 	
 	// 刷新申报单类型数据
 	this.refreshDeclareData = function() {
+		myDeclare.selectedDalare.attr('declareName', myDeclare.selectedDalare.find('input').val());
+		myDeclare.selectedDalare.attr('declareComment', $('#comment').text());
 		$.ajax({
 			url : 'getDeclareData',
 			type : 'POST',
@@ -292,7 +308,7 @@ function Declare() {
 					},
 					yAxis : {
 						title : {
-							text : '单位：条'
+							text : '单位：MW'
 						},
 						plotLines : [{
 							value : 0,
@@ -301,7 +317,7 @@ function Declare() {
 						}]
 					},
 					tooltip : {
-						valueSuffix : '条'
+						valueSuffix : 'MW'
 					},
 					legend : {
 						layout : 'vertical',
@@ -406,5 +422,18 @@ function Declare() {
 				declareType.style.fontWeight = '';
 			}
 		}
+	}
+	
+	// 修改申报单名称
+	this.changeDeclareName = function() {
+		myDeclare.selectedDalare.find('input').attr('class', '');
+		myDeclare.selectedDalare.find('input').attr('readonly', false);
+		declare.changeData();
+	}
+	
+	// 完成修改申报单名称
+	this.finishChangeDeclareName = function() {
+		myDeclare.selectedDalare.find('input').attr('class', 'bghh');
+		myDeclare.selectedDalare.find('input').attr('readonly', 'readonly');
 	}
 }

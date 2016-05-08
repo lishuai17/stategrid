@@ -12,8 +12,10 @@
 		var declare = new Declare();
 		$(function(){
 			declare.getDeclare();
+			declare.loadTimeType("${timeType}");
 			$("#declareMenu li").live('click', function(){declare.getDeclareData($(this), '1a');});
-			$("#declareMenu li").live('dbclick', function(){declare.getDeclareData($(this), '1a');});
+			$("#declareMenu li").live('dblclick', function(){declare.changeDeclareName();});
+			$("#declareMenu li").live('blur', function(){declare.finishChangeDeclareName();});
 			$("#declareDataDiv input").live("keydown", function(e){declare.copyTableValue($(this), e);});
 			$("#declareDataDiv input").live("click", function(e){declare.changeData();});
 			$(".bz").live("click", function(){$('#comment').focus();});
