@@ -14,7 +14,7 @@
 			$('.menu').find('a[name=撮合]').attr('class', 'menufocus');
 			
 			match.getMatch();
-			$("#matchMenu li").live('click', function(){match.getMatchData($(this), '正向限额');});
+			$("#matchMenu li").live('click', function(){match.getMatchData($(this), '交易功率');});
 		})
 	</script>
 </state:override>
@@ -35,9 +35,9 @@
 				</div>
 				<div id="matchDataDiv" class="fl bd1" style="display:none;">
 					<div class="conrightt1">
+						<div class="fl mne"><a href="#" name="交易功率" onclick="match.getMatchDataByMatchType('交易功率');">交易功率</a></div>
 						<div class="fl mne"><a href="#" name="正向限额" onclick="match.getMatchDataByMatchType('正向限额');">正向限额</a></div>
 						<div class="fl mne"><a href="#" name="反向限额" onclick="match.getMatchDataByMatchType('反向限额');">反向限额</a></div>
-						<div class="fl mne"><a href="#" name="交易功率" onclick="match.getMatchDataByMatchType('交易功率');">交易功率</a></div>
 					</div>
 					<div class="cl"></div>
 					<div class="fl pdl10">

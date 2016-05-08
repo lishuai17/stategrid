@@ -41,7 +41,6 @@
 						<div class="fl mne"><a href="#" name="1a" onclick="issue.getIssueDataByIssueType('1a');">全天</a></div>
 						<div class="fl mne"><a href="#" name="2a" onclick="issue.getIssueDataByIssueType('2a');">高峰</a></div>
 						<div class="fl mne"><a href="#" name="3a" onclick="issue.getIssueDataByIssueType('3a');">低谷</a></div>
-						<div >
 					</div>
 					
 					<div class="cl"></div>
