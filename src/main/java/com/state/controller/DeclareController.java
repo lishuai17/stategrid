@@ -51,10 +51,12 @@ public class DeclareController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getDeclareList", method = RequestMethod.POST)
-	public List<DeclarePo> getDeclare(HttpServletRequest request,HttpServletResponse response,String date){
-		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
-		
-		return declareService.getDeclares(user.getArea(),(StringUtils.hasText(date) ? date : null));
+	public List<DeclarePo> getDeclare(HttpServletRequest request,String area){
+		if(area==null||"".equals(area)){
+			UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
+			area=user.getArea();
+		}
+		return declareService.getDeclares(area);
 	}
 	
 	/**

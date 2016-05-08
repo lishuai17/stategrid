@@ -73,12 +73,10 @@ public class DeclareServiceImpl implements IDeclareService{
 		declareDao.deleteDeclare(id);
 	}
 
-	public List<DeclarePo> getDeclares(String area,String date) {
-		if(null == date){
-			Date today = new Date();
-			date = DateUtil.format(new Date(today.getTime()+1000*60*60*24), "yyyyMMdd");
-		}
-		return declareDao.selectDeclareByParam(area, date, null);
+	public List<DeclarePo> getDeclares(String area) {
+		
+		Date tomrrow = new Date((new Date()).getTime()+1000*60*60*24);
+		return declareDao.selectDeclareByParam(area, DateUtil.format(tomrrow, "yyyyMMdd"), null);
 	}
 
 	public DeclareDataPo getDeclareData(Long id, String dtype) {

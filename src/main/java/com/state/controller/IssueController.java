@@ -45,10 +45,13 @@ public class IssueController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getResultList", method = RequestMethod.POST)
-	public List<ResultNameVo> getResultList(HttpServletRequest request,HttpServletResponse response){
-		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
+	public List<ResultNameVo> getResultList(HttpServletRequest request,String area){
 		
-		return issueService.getResultNameList(user.getArea());
+		if(area==null||"".equals(area)){
+			UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
+			area=user.getArea();
+		}
+		return issueService.getResultNameList(area);
 	}
 	
 	/**

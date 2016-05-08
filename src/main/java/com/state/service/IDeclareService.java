@@ -21,7 +21,7 @@ public interface IDeclareService {
 	 * @param area
 	 * @return
 	 */
-	public List<DeclarePo> getDeclares(String area,String date);
+	public List<DeclarePo> getDeclares(String area);
 	
 	/**
 	 * 查询申报数据
