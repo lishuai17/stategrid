@@ -9,7 +9,9 @@ body {
 	background: #06938e;
 	height: 88px;
 }
-
+.menufocus{
+	color: #ffa110 !important;
+}
 .mid {
 	margin: auto;
 	width: 1200px;
