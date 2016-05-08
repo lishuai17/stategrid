@@ -11,6 +11,8 @@
 	<script type="text/javascript">
 		var match = new Match();
 		$(function(){
+			$('.menu').find('a[name=撮合]').attr('class', 'menufocus');
+			
 			match.getMatch();
 			$("#matchMenu li").live('click', function(){match.getMatchData($(this), '正向限额');});
 		})

@@ -11,6 +11,8 @@
 	<script type="text/javascript">
 		var declare = new Declare();
 		$(function(){
+			$('.menu').find('a[name=数据申报]').attr('class', 'menufocus');
+			
 			declare.getDeclare();
 			declare.loadElData(${timeType}, ${areaList});
 			declare.showArea("${userInfo.area}");
