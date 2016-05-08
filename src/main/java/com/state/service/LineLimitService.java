@@ -3,6 +3,7 @@ package com.state.service;
 import java.util.List;
 
 import com.state.po.LineLimitPo;
+import com.state.po.PathDefinePo;
 
 
 
@@ -42,5 +43,7 @@ public interface LineLimitService {
 	 * @return 联络线限额列表
 	 */
 	public List<LineLimitPo> selectLineLimitList(String mcorhr,String mdate);
+
+	
 
 }

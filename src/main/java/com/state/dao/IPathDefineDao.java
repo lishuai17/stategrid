@@ -36,5 +36,12 @@ public interface IPathDefineDao {
 	 * @param pathDefinePo
 	 */
 	public void insertPathDefine(PathDefinePo pathDefinePo);
+
+	/**
+	 * 根据通道名称查询通道个数
+	 * @param mpath
+	 * @return
+	 */
+	public int countPathByName(String mpath);
 	
 }

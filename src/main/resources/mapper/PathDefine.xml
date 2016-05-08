@@ -42,6 +42,10 @@
 		select <include refid="pathDefineInfo" /> from CBPM_PATH_DEFINE
 	</select>
 	
+	<select id="countPathByName"  parameterType="String" resultType="int">
+		select count(1) from CBPM_PATH_DEFINE where  mpath=#{mpath}
+	</select>
+	
 	<select id="getPathByName" resultType="PathDefinePo" parameterType="String">
 		select <include refid="pathDefineInfo" /> from CBPM_PATH_DEFINE where  mpath=#{mpath}
 	</select>

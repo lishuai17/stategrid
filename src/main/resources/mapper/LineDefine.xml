@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.state.dao.LineDefineDao">
+	<sql id="lineDefineInfo">
+		mcorhr,start_area as startArea,end_area as endArea
+	</sql>
 	
 	<select id="getLineDefine" resultType="LineDefinePo" parameterType="String">
-		select * from CBPM_LINE_DEFINE 
-			where mcorhr=#{mcorhr} 
+		select <include refid="lineDefineInfo" /> from CBPM_LINE_DEFINE  where mcorhr=#{mcorhr} 
+	</select>
+	
+	<select id="getAllLine" resultType="LineDefinePo" >
+		select <include refid="lineDefineInfo" /> from CBPM_LINE_DEFINE 
+	</select>
+	
+	<select id="countLineByMcorhr" resultType="int" parameterType="String">
+		select count(1) from CBPM_LINE_DEFINE  where mcorhr=#{mcorhr} 
 	</select>	
 	
+	<insert id="insertLineDefine">
+		insert into CBPM_LINE_DEFINE
+			(mcorhr,start_area,end_area)
+		values
+			(mcorhr,startArea,endArea)
+	</insert>
+	
+	<delete id="deleteLineDefine" parameterType="String">
+		delete from CBPM_LINE_DEFINE where mcorhr=#{mcorhr} 
+	</delete>
 </mapper>
