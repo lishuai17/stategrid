@@ -4,8 +4,14 @@ function Declare() {
 	var changed = true;
 	var unchanged = false;
 	
+	this.timeType;
 	this.selectedDalare;
 	this.dalareType;
+	
+	// 加载EL数据
+	this.loadTimeType = function(timeType) {
+		myDeclare.timeType = timeType;
+	}
 	
 	// 申报单中数据变动flag(变动为true,未变动为false)
 	this.dataFlag = unchanged;
@@ -302,7 +308,7 @@ function Declare() {
 					},
 					yAxis : {
 						title : {
-							text : '单位：条'
+							text : '单位：MW'
 						},
 						plotLines : [{
 							value : 0,
@@ -311,7 +317,7 @@ function Declare() {
 						}]
 					},
 					tooltip : {
-						valueSuffix : '条'
+						valueSuffix : 'MW'
 					},
 					legend : {
 						layout : 'vertical',
