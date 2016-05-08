@@ -25,6 +25,7 @@
 
 				</div>
 				<div class="rl ureg">
+					<span>${userInfo.matchDate}</span>
 					<span>${userInfo.mname}</span>
 					<span><a href="${pageContext.request.contextPath}/login/logout">注销</a></span>
 				</div>
