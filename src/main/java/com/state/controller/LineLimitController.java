@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.state.po.LineDefinePo;
 import com.state.po.LineLimitPo;
 import com.state.po.TypePo;
@@ -86,8 +87,10 @@ public class LineLimitController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/updateLineLimit")
-	public String updateLineLimit(LineLimitPo lineLimit) {
+	public String updateLineLimit(String lineLimitStr) {
 		log.info("@ updateLineLimit ");
+		JSONObject bean = com.alibaba.fastjson.JSONObject.parseObject(lineLimitStr);
+		LineLimitPo lineLimit = JSONObject.toJavaObject(bean, LineLimitPo.class);
 		lineLimitService.updateLineLimit(lineLimit);
 		return "success";
 	}

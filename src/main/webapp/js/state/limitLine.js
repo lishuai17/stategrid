@@ -296,18 +296,7 @@ function LimitLine() {
 	
 	// 整理需要修改的申报单数据
 	this.makeLimitLineData = function() {
-		var limitLine = {};
-		var limitLineId = myLimitLine.selectedDalare.attr('limitLineId');
-		
-		var limitLineType = myLimitLine.limitLineType;
-		var limitLineTypeData = myLimitLine.makeDataByTable();
-		limitLine['mcorhr'] = limitLineId;
-		limitLine['mdate'] = myLimitLine.mdate;
-		alert( myLimitLine.dtype);
-
-		limitLine['dtype'] = myLimitLine.dtype;
-		limitLine['limitLineDatas'] = [limitLineTypeData];
-		return JSON.stringify(limitLine);
+		return JSON.stringify(myLimitLine.makeDataByTable());
 	}
 	
 	// 根据表格整理申报单类型数据
@@ -323,10 +312,11 @@ function LimitLine() {
 			}
 		}
 		var avg = sum / 96;
-		limitLineTypeData['id'] = myLimitLine.selectedDalare.attr('limitLineId');
-		limitLineTypeData['dtype'] = myLimitLine.limitLineType;
 		limitLineTypeData['sumQ'] = sum;
 		limitLineTypeData['aveP'] = avg.toFixed(2);
+		limitLineTypeData['mcorhr'] = myLimitLine.mcorhr;
+		limitLineTypeData['mdate'] = myLimitLine.mdate;
+		limitLineTypeData['dtype'] = myLimitLine.dtype;
 		return limitLineTypeData;
 	}
 	

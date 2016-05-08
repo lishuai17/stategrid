@@ -131,7 +131,7 @@ public class DeclareController {
 	 * @return
 	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateDeclare(String classCode, Model model, HttpServletRequest request,
+	public String updateDeclare( Model model, HttpServletRequest request,
 			HttpServletResponse response,String declarePo) {
 		JSONObject bean = com.alibaba.fastjson.JSONObject.parseObject(declarePo);
 		DeclarePo javaObject = JSONObject.toJavaObject(bean, DeclarePo.class);
