@@ -11,7 +11,7 @@ function LimitLine() {
 	this.selectedDalare;
 	this.limitLineType;	
 	
-	// 申报单中数据变动flag(变动为true,未变动为false)
+	// 联络线中数据变动flag(变动为true,未变动为false)
 	this.dataFlag = unchanged;
 	
 	// 修改数据变动flag状态
@@ -44,17 +44,17 @@ function LimitLine() {
 		return unchanged;
 	}
 	
-	// 显示申报单类型DIV
+	// 显示联络线类型DIV
 	this.showLimitLineDataDiv = function() {
 		$('#limitLineDataDiv').show();
 	}
 	
-	// 隐藏申报单类型DIV
+	// 隐藏联络线类型DIV
 	this.hideLimitLineDataDiv = function() {
 		$('#limitLineDataDiv').hide();
 	}
 	
-	// 修改申报单数据
+	// 修改联络线数据
 	this.updateLimitLine = function() {
 		$.ajax({
 			url : 'updateLineLimit',
@@ -78,7 +78,7 @@ function LimitLine() {
 		});
 	}
 	
-	// 获取申报单数据
+	// 获取联络线列表
 	this.getLimitLine = function() {
 		$.ajax({
 			url : 'getAllLine',
@@ -106,7 +106,7 @@ function LimitLine() {
 		});
 	}
 	
-	// 获取申报单类型数据
+	// 获取联络线类型数据
 	this.getLimitLineData = function(selectedDalare, type) {
 		if ((!myLimitLine.selectedDalare || myLimitLine.selectedDalare.attr('limitLineId') != selectedDalare.attr('limitLineId')) && !myLimitLine.checkDataChanged()) {
 			
@@ -148,7 +148,7 @@ function LimitLine() {
 		}
 	}
 	
-	// 刷新申报单类型数据
+	// 刷新联络线类型数据
 	this.refreshLimitLineData = function() {
 		
 		$.ajax({
@@ -178,7 +178,7 @@ function LimitLine() {
 		});
 	}
 	
-	// 根据申报单类型获取申报单类型数据
+	// 根据联络线类型获取联络线类型数据
 	this.getLimitLineDataByLimitLineType = function(type) {
 		if (!myLimitLine.checkDataChanged()) {
 			myLimitLine.changeLimitLineTypeStyle(type);
@@ -210,26 +210,27 @@ function LimitLine() {
 		}
 	}
 	
-	// 将申报单类型数据插入表格中
+	// 将联络线类型数据插入表格中
 	this.inputValueToTable = function(data) {
 		if (data) {
+			var sum=0;
 			for (var key in data) {
 				if (/^h[0-9]{2}$/.test(key)) {
 					$('#limitLineDataDiv input[name=' + key + ']').val(data[key]);
+					sum += Number(data[key]);
 				}
 			}
-			if (!data.sumQ || data.sumQ == 'null') {
-				data.sumQ = 0;
-			}
-			if (!data.aveP || data.aveP == 'null') {
-				data.aveP = 0;
-			}
+			var avg = sum /96;
+			
+			data.sumQ = sum;
+			data.aveP =avg.toFixed(0);
+			
 			$('#limitLineDataDiv span[name=sumValue]').text(data.sumQ);
 			$('#limitLineDataDiv span[name=avgValue]').text(data.aveP);
 		}
 	}
 	
-	// 将申报单类型数据插入曲线图中
+	// 将联络线类型数据插入曲线图中
 	this.makeDataToChart = function(data) {
 		if (data) {
 			var charts = {
@@ -294,12 +295,12 @@ function LimitLine() {
 		}
 	}
 	
-	// 整理需要修改的申报单数据
+	// 整理需要修改的联络线数据
 	this.makeLimitLineData = function() {
 		return JSON.stringify(myLimitLine.makeDataByTable());
 	}
 	
-	// 根据表格整理申报单类型数据
+	// 根据表格整理联络线类型数据
 	this.makeDataByTable = function() {
 		var limitLineTypeDataInputs = $('#limitLineDataDiv').find('table input');
 		var limitLineTypeData = {};
@@ -320,7 +321,7 @@ function LimitLine() {
 		return limitLineTypeData;
 	}
 	
-	// 申报单类型数据修改后按回车修改所有单元格数据
+	// 联络线类型数据修改后按回车修改所有单元格数据
 	this.copyTableValue = function(thisInput, e) {
 		// 兼容FF和IE和Opera
 		var theEvent = e || window.event;
@@ -339,7 +340,7 @@ function LimitLine() {
 		}
 	}
 	
-	// 修改申报单类型样式
+	// 修改联络线类型样式
 	this.changeLimitLineTypeStyle = function(type) {
 		var limitLineTypes = $('#limitLineDataDiv .conrightt1 a');
 		for (var i = 0; i < 3 ; i++) {
@@ -354,14 +355,14 @@ function LimitLine() {
 		}
 	}
 	
-	// 修改申报单名称
+	// 修改联络线名称
 	this.changeLimitLineName = function() {
 		myLimitLine.selectedDalare.find('input').attr('class', '');
 		myLimitLine.selectedDalare.find('input').attr('readonly', false);
 		limitLine.changeData();
 	}
 	
-	// 完成修改申报单名称
+	// 完成修改联络线名称
 	this.finishChangeLimitLineName = function() {
 		myLimitLine.selectedDalare.find('input').attr('class', 'bghh');
 		myLimitLine.selectedDalare.find('input').attr('readonly', true);
