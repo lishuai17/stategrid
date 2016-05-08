@@ -31,6 +31,8 @@ public class TypePo extends BasePo {
 	//
 	private String h06;
 	//
+	private String h07;
+	//
 	private String h08;
 	//
 	private String h09;
@@ -999,6 +1001,14 @@ public class TypePo extends BasePo {
 
 	public void setCount3a(int count3a) {
 		this.count3a = count3a;
+	}
+
+	public String getH07() {
+		return h07;
+	}
+
+	public void setH07(String h07) {
+		this.h07 = h07;
 	}
 
 	public void countType(){
