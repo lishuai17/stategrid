@@ -39,7 +39,7 @@
 		sum(h84) h84,sum(h85) h85,sum(h86) h86,sum(h87) h87,sum(h88) h88,sum(h89) h89,sum(h90) h90,
 		sum(h91) h91,sum(h92) h92,sum(h93) h93,sum(h94) h94,sum(h95) h95,sum(h96) h96
 		
-        from EMSHIS.CBPM.CBPM_SHEET_DECL_bak a,EMSHIS.CBPM.CBPM_DECL_bak b 
+        from EMSHIS.CBPM.CBPM_SHEET_DECL a,EMSHIS.CBPM.CBPM_DECL b 
         where a.drloe='sale' and a.id=b.id and a.mdate=#{date}; 
 </select>
 
@@ -50,7 +50,7 @@
 		h65,h66,h67,h68,h69,h70,h71,h72,h73,h74,h75,h76,h77,h78,h79,h80,h81,h82,h83,h84,h85,h86,
 		h87,h88,h89,h90,h91,h92,h93,h94,h95,h96
 		
-        from EMSHIS.CBPM.CBPM_SHEET_DECL_bak a,EMSHIS.CBPM.CBPM_DECL_bak b 
+        from EMSHIS.CBPM.CBPM_SHEET_DECL a,EMSHIS.CBPM.CBPM_DECL b 
         where a.drloe='sale' and a.id=b.id and a.mdate=#{date}; 
 </select>
 
@@ -61,7 +61,7 @@
 		h65,h66,h67,h68,h69,h70,h71,h72,h73,h74,h75,h76,h77,h78,h79,h80,h81,h82,h83,h84,h85,h86,
 		h87,h88,h89,h90,h91,h92,h93,h94,h95,h96
 		
-        from EMSHIS.CBPM.CBPM_SHEET_DECL_bak a,EMSHIS.CBPM.CBPM_DECL_bak b 
+        from EMSHIS.CBPM.CBPM_SHEET_DECL a,EMSHIS.CBPM.CBPM_DECL b 
         where a.drloe='buy' and a.id=b.id and a.mdate=#{date}; 
 </select>
 
@@ -100,20 +100,20 @@ select MPATH,START_AREA startArea,END_AREA endArea from "EMSHIS"."CBPM"."CBPM_PA
 </select>
 
 <select id="getSaleAreaList" parameterType="String" resultType="DeclarePo">
- select distinct(area) area from "EMSHIS"."CBPM"."CBPM_SHEET_DECL_bak" where drloe='sale' and mdate=#{date};
+ select distinct(area) area from EMSHIS.CBPM.CBPM_SHEET_DECL where drloe='sale' and mdate=#{date};
 </select>
 
 <select id="getBuyAreaList" parameterType="String" resultType="DeclarePo">
- select distinct(area) area from "EMSHIS"."CBPM"."CBPM_SHEET_DECL_bak" where drloe='buy' and mdate=#{date};
+ select distinct(area) area from "EMSHIS"."CBPM"."CBPM_SHEET_DECL" where drloe='buy' and mdate=#{date};
 </select>
 
 <select id="getDeclarePoById" resultType="DeclarePo">
-select * from EMSHIS.CBPM.CBPM_SHEET_DECL_bak where id=#{id} and mdate=#{date};
+select * from EMSHIS.CBPM.CBPM_SHEET_DECL where id=#{id} and mdate=#{date};
 
 </select>
 
 <select id="getDeclareDataPoById" parameterType="Long" resultType="DeclarePo">
-select * from EMSHIS.CBPM.CBPM_DECL_bak where id=#{id};
+select * from EMSHIS.CBPM.CBPM_DECL where id=#{id};
 
 </select>
 
