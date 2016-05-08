@@ -7,15 +7,14 @@
 	<Link Rel="StyleSheet" Href="${pageContext.request.contextPath }/css/declare.css" Type="Text/Css">
 	<script src="${pageContext.request.contextPath }/js/charts/highcharts.js"></script>
 	<script src="${pageContext.request.contextPath }/js/charts/modules/exporting.js"></script>
-	<script src="${pageContext.request.contextPath }/js/state/issue.js"></script>
+	<script src="${pageContext.request.contextPath }/js/state/issue.js?date=new Date()"></script>
 	<script type="text/javascript">
-		var issue = new issue();
+		var issue = new Issue();
 		$(function(){
-			issue.getissue();
-			$("#issueMenu li").live('click', function(){issue.getissueData($(this), '1a');});
-			$("#issueMenu li").live('dbclick', function(){issue.getissueData($(this), '1a');});
-			
-		})
+			issue.getIssue();
+			$("#IssueMenu li").live('click', function(){issue.getIssueData($(this), '1a');});
+			$("#IssueMenu li").live('dbclick', function(){issue.getIssueData($(this), '1a');});
+		})	
 	</script>
 </state:override>
 <state:override name="content">
@@ -29,15 +28,15 @@
 			</div>
 			<div>
 				<div class="lmenu">
-					<ul id="issueMenu">
+					<ul id="IssueMenu">
 						
 					</ul>
 				</div>
-				<div id="issueDataDiv" class="fl bd1" style="display:none;">
+				<div id="IssueDataDiv" class="fl bd1" style="display:none;">
 					<div class="conrightt1">
-						<div class="fl mne"><a href="#" name="1a" onclick="issue.getissueDataByissueType('1a');">全天</a></div>
-						<div class="fl mne"><a href="#" name="2a" onclick="issue.getissueDataByissueType('2a');">高峰</a></div>
-						<div class="fl mne"><a href="#" name="3a" onclick="issue.getissueDataByissueType('3a');">低谷</a></div>
+						<div class="fl mne"><a href="#" name="1a" onclick="issue.getIssueDataByIssueType('1a');">全天</a></div>
+						<div class="fl mne"><a href="#" name="2a" onclick="issue.getIssueDataByIssueType('2a');">高峰</a></div>
+						<div class="fl mne"><a href="#" name="3a" onclick="issue.getIssueDataByIssueType('3a');">低谷</a></div>
 						
 					</div>
 					<div class="cl"></div>
@@ -199,11 +198,12 @@
 					</div>
 					<div class="cl"></div>
 					<div class="cchart"></div>
-					<div class="bz"><textarea id="comment"></textarea></div>
+					<div class="bz" id='commentDiv'></div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 </state:override>
 
 <%@ include file="/common/block/block.jsp" %>

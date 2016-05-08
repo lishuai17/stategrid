@@ -62,8 +62,8 @@ public class IssueController {
 	 */
 	@RequestMapping(value = "/getResult", method = RequestMethod.POST)
 	public ResultPo getResult(String dsheet,String dtype){
-		
-		return issueService.getResultBySheetId(dsheet,dtype);
+		ResultPo r=issueService.getResultBySheetId(dsheet,dtype);
+		return r;
 	}
 	
 	

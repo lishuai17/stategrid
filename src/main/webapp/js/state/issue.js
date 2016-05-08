@@ -25,7 +25,7 @@ function Issue() {
 				if (result) {
 					$('#IssueMenu').text('');
 					for (var i = 0; i < result.length; i++) {
-						var IssueId = result[i].dsheet;
+						var IssueId = result[i].id;
 						var IssueName = result[i].sheetName;
 						var type = result[i].drloe;
 						var IssueComment = result[i].descr;
@@ -36,9 +36,9 @@ function Issue() {
 							typeCls = 'bgi';
 						}
 						$('#IssueMenu').append('<li IssueId="' + IssueId + '" IssueName="' + result[i].sheetName + '" IssueComment="' + IssueComment + '">'
-								+ '<div class="fl ' + typeCls + '"><input value="'
+								+ '<div class="fl ' + typeCls + '">'
 								+ result[i].sheetName
-								+ '"></div><div class="cl"></div></li>');
+								+ '</div><div class="cl"></div></li>');
 						myIssue.hideIssueDataDiv()
 					}
 					$('.count').text(result.length + '条');
@@ -62,15 +62,17 @@ function Issue() {
 			myIssue.changeIssueTypeStyle(type);
 			myIssue.selectedissue = selectedissue;
 			myIssue.issueType = type;
+
 			$.ajax({
 				url : 'getResult',
 				type : 'POST',
 				dataType : 'json',
 				data : {
-					id : selectedissue.attr('IssueId'),
-					type : type
+					dsheet : selectedissue.attr('IssueId'),
+					dtype : type
 				},
 				success : function(result) {
+					alert(result);
 					if (result) {
 						myIssue.inputValueToTable(result);
 						myIssue.makeDataToChart(result);
@@ -98,8 +100,8 @@ function Issue() {
 			type : 'POST',
 			dataType : 'json',
 			data : {
-				id : myIssue.selectedissue.attr('IssueId'),
-				type : type
+				dsheet : myIssue.selectedissue.attr('IssueId'),
+				dtype : type
 			},
 			success : function(result) {
 				if (result) {
@@ -205,7 +207,7 @@ function Issue() {
 		if (data == 'null') {
 			data = '';
 		}
-		$('#comment').text(data);
+		//$('#commentDiv').html(data);
 	}
 	
 	// 整理需要修改的发布单数据
@@ -243,24 +245,6 @@ function Issue() {
 		return IssueTypeData;
 	}
 	
-	// 发布单类型数据修改后按回车修改所有单元格数据
-	this.copyTableValue = function(thisInput, e) {
-		// 兼容FF和IE和Opera
-		var theEvent = e || window.event;
-		var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
-		if (thisInput.focus() && code == 13) {
-			var value = thisInput.val();
-			for (var i = 1; i <= 96 ; i++) {
-				var key;
-				if (i < 10) {
-					key = 'h0' + i;
-				} else {
-					key = 'h' + i;
-				}
-				$('#IssueDataDiv input[name=' + key + ']').val(value);
-			}
-		}
-	}
 	
 	// 修改发布单类型样式
 	this.changeIssueTypeStyle = function(type) {
