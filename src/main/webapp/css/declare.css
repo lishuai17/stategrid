@@ -147,7 +147,10 @@ a {
 	border-right: 0px;
 
 }
-
+.lmenu input{
+	border: 0px;
+	color:#494949;
+}
 .cwhite {
 	background-color: #fff;
 }
@@ -324,3 +327,10 @@ overflow-y:visible;
 	padding: 0px 10px;
 	font-size: 12px;
 }
+
+.regi{
+margin:0 auto;
+width:880px;
+height:auto;
+}
+
