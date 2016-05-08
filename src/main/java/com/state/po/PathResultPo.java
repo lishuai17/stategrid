@@ -34,6 +34,8 @@ public class PathResultPo extends BasePo {
 	private Double h05;
 
 	private Double h06;
+	
+	private Double h07;
 
 	private Double h08;
 
@@ -275,6 +277,14 @@ public class PathResultPo extends BasePo {
 
 	public void setH06(Double h06) {
 		this.h06 = h06;
+	}
+	
+	public Double getH07() {
+		return h07;
+	}
+
+	public void setH07(Double h07) {
+		this.h07 = h07;
 	}
 
 	public Double getH08() {
