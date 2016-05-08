@@ -97,7 +97,6 @@ function Declare() {
 	
 	// 修改申报单数据
 	this.updateDeclare = function() {
-		myDeclare.makeDeclareData();
 		$.ajax({
 			url : 'update',
 			type : 'POST',
@@ -106,7 +105,7 @@ function Declare() {
 				declarePo : myDeclare.makeDeclareData(),
 			},
 			success : function(result) {
-				if ("success" == result) {
+				if (result) {
 					myDeclare.initChangeData();
 					myDeclare.getDeclareData(myDeclare.selectedDalare, myDeclare.dalareType);
 					alert("修改成功!");
@@ -156,7 +155,7 @@ function Declare() {
 	
 	// 获取申报单类型数据
 	this.getDeclareData = function(selectedDalare, type) {
-		if ((!selectedDalare || myDeclare.selectedDalare != selectedDalare) && !myDeclare.checkDataChanged()) {
+		if ((!myDeclare.selectedDalare || myDeclare.selectedDalare.attr('declareId') != selectedDalare.attr('declareId')) && !myDeclare.checkDataChanged()) {
 			myDeclare.selectedDalare = selectedDalare;
 			myDeclare.dalareType = type;
 			$.ajax({
@@ -220,8 +219,12 @@ function Declare() {
 					$('#declareDataDiv input[name=' + key + ']').val(data[key]);
 				}
 			}
-			$('#declareDataDiv span[name=sumValue]').text(data.sumQ);
-			$('#declareDataDiv span[name=avgValue]').text(data.aveP);
+			if (data.sumQ) {
+				$('#declareDataDiv span[name=sumValue]').text(data.sumQ);
+			}
+			if (data.aveP) {
+				$('#declareDataDiv span[name=avgValue]').text(data.aveP);
+			}
 		}
 	}
 	
@@ -292,7 +295,9 @@ function Declare() {
 	
 	// 将申报单类型说明插入文本域中
 	this.inputValueToArea = function(data) {
-		$('.bz').text(data);
+		if (data != 'null') {
+			$('.bz').text(data);
+		}
 	}
 	
 	// 整理需要修改的申报单数据
