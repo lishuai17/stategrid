@@ -5,12 +5,29 @@ function Declare() {
 	var unchanged = false;
 	
 	this.timeType;
+	this.areaList;
 	this.selectedDalare;
 	this.dalareType;
 	
 	// 加载EL数据
-	this.loadTimeType = function(timeType) {
+	this.loadElData = function(timeType, areaList) {
 		myDeclare.timeType = timeType;
+		myDeclare.areaList = areaList;
+	}
+	
+	// 显示区域
+	this.showArea = function(area) {
+		for (var i = 0; i < myDeclare.areaList.length; i++) {
+			var area = myDeclare.areaList[i].area;
+			if (area != '国调') {
+				$('#area').append('<option value="' + area + '">' + area + '</option>');
+			}
+		}
+		if (area == '国调') {
+			$('.posty').css('display', 'block');
+		} else {
+			$('.posty').css('display', 'none');
+		}
 	}
 	
 	// 申报单中数据变动flag(变动为true,未变动为false)
@@ -57,6 +74,10 @@ function Declare() {
 	// 隐藏申报单类型DIV
 	this.hideDeclareDataDiv = function() {
 		$('#declareDataDiv').hide();
+	}
+	
+	this.changeArea = function() {
+		myDeclare.getDeclare();
 	}
 	
 	// 新增申报单
@@ -135,6 +156,9 @@ function Declare() {
 			url : 'getDeclareList',
 			type : 'POST',
 			dataType : 'json',
+			data : {
+				area : $('#area').val()
+			},
 			success : function(result) {
 				if (result) {
 					$('#declareMenu').text('');
