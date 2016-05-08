@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
@@ -41,7 +42,7 @@ public class DeclareController {
 		log.info("@ init declare ");
 		TypePo timeType=declareService.getTimeType();
 		timeType.countType();
-		model.addAttribute("timeType", timeType);
+		model.addAttribute("timeType", JSON.toJSON(timeType).toString());
 		return "declare";
 	}
 
