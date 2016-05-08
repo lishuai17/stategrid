@@ -7,16 +7,12 @@
 	<Link Rel="StyleSheet" Href="${pageContext.request.contextPath }/css/declare.css" Type="Text/Css">
 	<script src="${pageContext.request.contextPath }/js/charts/highcharts.js"></script>
 	<script src="${pageContext.request.contextPath }/js/charts/modules/exporting.js"></script>
-	<script src="${pageContext.request.contextPath }/js/state/declare.js"></script>
+	<script src="${pageContext.request.contextPath }/js/state/match.js"></script>
 	<script type="text/javascript">
-		var declare = new Declare();
+		var match = new Match();
 		$(function(){
-			declare.getDeclare();
-			$("#declareMenu li").live('click', function(){declare.getDeclareData($(this), '1a');});
-			$("#declareMenu li").live('dbclick', function(){declare.getDeclareData($(this), '1a');});
-			$("#declareDataDiv input").live("keydown", function(e){declare.copyTableValue($(this), e);});
-			$("#declareDataDiv input").live("click", function(e){declare.changeData();});
-			$(".bz").live("click", function(){$('#comment').focus();});
+			match.getMatch();
+			$("#matchMenu li").live('click', function(){match.getMatchData($(this), '正向限额');});
 		})
 	</script>
 </state:override>
@@ -25,25 +21,21 @@
 	<div>
 		<div class="mid">
 			<div class="contop">
-				<div class="fl"><span class="xmenu">数据申报单</span><span class="count">0条</span></div>
-				<div class="rl"><span><a class="btn1" href="#" onclick="declare.addDeclare();">+添加</a></span><span><a class="btn1" href="#" onclick="declare.deleteDeclare();">-删除</a></span></div>
+				<div class="fl"><span class="xmenu">撮合</span><span class="count">0条</span></div>
 				<div class="cl"></div>
 			</div>
 			<div>
 				<div class="lmenu">
-					<ul id="declareMenu">
+					<ul id="matchMenu">
 						
 					</ul>
 				</div>
-				<div id="declareDataDiv" class="fl bd1" style="display:none;">
+				<div id="matchDataDiv" class="fl bd1" style="display:none;">
 					<div class="conrightt1">
-						<div class="fl mne"><a href="#" name="1a" onclick="declare.getDeclareDataByDeclareType('1a');">全天</a></div>
-						<div class="fl mne"><a href="#" name="2a" onclick="declare.getDeclareDataByDeclareType('2a');">高峰</a></div>
-						<div class="fl mne"><a href="#" name="3a" onclick="declare.getDeclareDataByDeclareType('3a');">低谷</a></div>
-						<div class="rl"><a class="btnh2" href="#" onclick="declare.updateDeclare();">保存</a></div>
+						<div class="fl mne"><a href="#" name="正向限额" onclick="match.getMatchDataByMatchType('正向限额');">正向限额</a></div>
+						<div class="fl mne"><a href="#" name="反向限额" onclick="match.getMatchDataByMatchType('反向限额');">反向限额</a></div>
+						<div class="fl mne"><a href="#" name="交易功率" onclick="match.getMatchDataByMatchType('交易功率');">交易功率</a></div>
 					</div>
-					<div class="cl"></div>
-					<div class="fl conrightt2"><span>总值:</span><span name="sumValue" class="avenum">0</span>|<span class="pdl30">平均值:</span><span name="avgValue" class="avenun">0</span></div>
 					<div class="cl"></div>
 					<div class="fl pdl10">
 						<table width="968" height="302" cellpadding="0" cellspacing="0">
@@ -64,63 +56,63 @@
 							</thead>
 							<tr>
 								<td width="16%">00:00</td>
-								<td width="7%"><input name="h01"></td>
-								<td width="7%"><input name="h02"></td>
-								<td width="7%"><input name="h03"></td>
-								<td width="7%"><input name="h04"></td>
-								<td width="7%"><input name="h05"></td>
-								<td width="7%"><input name="h06"></td>
-								<td width="7%"><input name="h07"></td>
-								<td width="7%"><input name="h08"></td>
-								<td width="7%"><input name="h09"></td>
-								<td width="7%"><input name="h10"></td>
-								<td width="7%"><input name="h11"></td>
-								<td width="7%"><input name="h12"></td>
+								<td width="7%"><input readonly="true" name="h01"></td>
+								<td width="7%"><input readonly="true" name="h02"></td>
+								<td width="7%"><input readonly="true" name="h03"></td>
+								<td width="7%"><input readonly="true" name="h04"></td>
+								<td width="7%"><input readonly="true" name="h05"></td>
+								<td width="7%"><input readonly="true" name="h06"></td>
+								<td width="7%"><input readonly="true" name="h07"></td>
+								<td width="7%"><input readonly="true" name="h08"></td>
+								<td width="7%"><input readonly="true" name="h09"></td>
+								<td width="7%"><input readonly="true" name="h10"></td>
+								<td width="7%"><input readonly="true" name="h11"></td>
+								<td width="7%"><input readonly="true" name="h12"></td>
 							</tr>
 							<tr class="bgh">
 								<td width="16%">00:15</td>
-								<td width="7%"><input name="h13"></td>
-								<td width="7%"><input name="h14"></td>
-								<td width="7%"><input name="h15"></td>
-								<td width="7%"><input name="h16"></td>
-								<td width="7%"><input name="h17"></td>
-								<td width="7%"><input name="h18"></td>
-								<td width="7%"><input name="h19"></td>
-								<td width="7%"><input name="h20"></td>
-								<td width="7%"><input name="h21"></td>
-								<td width="7%"><input name="h22"></td>
-								<td width="7%"><input name="h23"></td>
-								<td width="7%"><input name="h24"></td>
+								<td width="7%"><input readonly="true" name="h13"></td>
+								<td width="7%"><input readonly="true" name="h14"></td>
+								<td width="7%"><input readonly="true" name="h15"></td>
+								<td width="7%"><input readonly="true" name="h16"></td>
+								<td width="7%"><input readonly="true" name="h17"></td>
+								<td width="7%"><input readonly="true" name="h18"></td>
+								<td width="7%"><input readonly="true" name="h19"></td>
+								<td width="7%"><input readonly="true" name="h20"></td>
+								<td width="7%"><input readonly="true" name="h21"></td>
+								<td width="7%"><input readonly="true" name="h22"></td>
+								<td width="7%"><input readonly="true" name="h23"></td>
+								<td width="7%"><input readonly="true" name="h24"></td>
 							</tr>
 							<tr>
 								<td width="16%">00:30</td>
-								<td width="7%"><input name="h25"></td>
-								<td width="7%"><input name="h26"></td>
-								<td width="7%"><input name="h27"></td>
-								<td width="7%"><input name="h28"></td>
-								<td width="7%"><input name="h29"></td>
-								<td width="7%"><input name="h30"></td>
-								<td width="7%"><input name="h31"></td>
-								<td width="7%"><input name="h32"></td>
-								<td width="7%"><input name="h33"></td>
-								<td width="7%"><input name="h34"></td>
-								<td width="7%"><input name="h35"></td>
-								<td width="7%"><input name="h36"></td>
+								<td width="7%"><input readonly="true" name="h25"></td>
+								<td width="7%"><input readonly="true" name="h26"></td>
+								<td width="7%"><input readonly="true" name="h27"></td>
+								<td width="7%"><input readonly="true" name="h28"></td>
+								<td width="7%"><input readonly="true" name="h29"></td>
+								<td width="7%"><input readonly="true" name="h30"></td>
+								<td width="7%"><input readonly="true" name="h31"></td>
+								<td width="7%"><input readonly="true" name="h32"></td>
+								<td width="7%"><input readonly="true" name="h33"></td>
+								<td width="7%"><input readonly="true" name="h34"></td>
+								<td width="7%"><input readonly="true" name="h35"></td>
+								<td width="7%"><input readonly="true" name="h36"></td>
 							</tr>
 							<tr class="bgh">
 								<td width="16%">00:45</td>
-								<td width="7%"><input name="h37"></td>
-								<td width="7%"><input name="h38"></td>
-								<td width="7%"><input name="h39"></td>
-								<td width="7%"><input name="h40"></td>
-								<td width="7%"><input name="h41"></td>
-								<td width="7%"><input name="h42"></td>
-								<td width="7%"><input name="h43"></td>
-								<td width="7%"><input name="h44"></td>
-								<td width="7%"><input name="h45"></td>
-								<td width="7%"><input name="h46"></td>
-								<td width="7%"><input name="h47"></td>
-								<td width="7%"><input name="h48"></td>
+								<td width="7%"><input readonly="true" name="h37"></td>
+								<td width="7%"><input readonly="true" name="h38"></td>
+								<td width="7%"><input readonly="true" name="h39"></td>
+								<td width="7%"><input readonly="true" name="h40"></td>
+								<td width="7%"><input readonly="true" name="h41"></td>
+								<td width="7%"><input readonly="true" name="h42"></td>
+								<td width="7%"><input readonly="true" name="h43"></td>
+								<td width="7%"><input readonly="true" name="h44"></td>
+								<td width="7%"><input readonly="true" name="h45"></td>
+								<td width="7%"><input readonly="true" name="h46"></td>
+								<td width="7%"><input readonly="true" name="h47"></td>
+								<td width="7%"><input readonly="true" name="h48"></td>
 							</tr>
 							<tr>
 								<td width="16%">时间</td>
@@ -139,69 +131,68 @@
 							</tr>
 							<tr class="bgh">
 								<td width="16%">00:00</td>
-								<td width="7%"><input name="h49"></td>
-								<td width="7%"><input name="h50"></td>
-								<td width="7%"><input name="h51"></td>
-								<td width="7%"><input name="h52"></td>
-								<td width="7%"><input name="h53"></td>
-								<td width="7%"><input name="h54"></td>
-								<td width="7%"><input name="h55"></td>
-								<td width="7%"><input name="h56"></td>
-								<td width="7%"><input name="h57"></td>
-								<td width="7%"><input name="h58"></td>
-								<td width="7%"><input name="h59"></td>
-								<td width="7%"><input name="h60"></td>
+								<td width="7%"><input readonly="true" name="h49"></td>
+								<td width="7%"><input readonly="true" name="h50"></td>
+								<td width="7%"><input readonly="true" name="h51"></td>
+								<td width="7%"><input readonly="true" name="h52"></td>
+								<td width="7%"><input readonly="true" name="h53"></td>
+								<td width="7%"><input readonly="true" name="h54"></td>
+								<td width="7%"><input readonly="true" name="h55"></td>
+								<td width="7%"><input readonly="true" name="h56"></td>
+								<td width="7%"><input readonly="true" name="h57"></td>
+								<td width="7%"><input readonly="true" name="h58"></td>
+								<td width="7%"><input readonly="true" name="h59"></td>
+								<td width="7%"><input readonly="true" name="h60"></td>
 							</tr>
 							<tr>
 								<td width="16%">00:15</td>
-								<td width="7%"><input name="h61"></td>
-								<td width="7%"><input name="h62"></td>
-								<td width="7%"><input name="h63"></td>
-								<td width="7%"><input name="h64"></td>
-								<td width="7%"><input name="h65"></td>
-								<td width="7%"><input name="h66"></td>
-								<td width="7%"><input name="h67"></td>
-								<td width="7%"><input name="h68"></td>
-								<td width="7%"><input name="h69"></td>
-								<td width="7%"><input name="h70"></td>
-								<td width="7%"><input name="h71"></td>
-								<td width="7%"><input name="h72"></td>
+								<td width="7%"><input readonly="true" name="h61"></td>
+								<td width="7%"><input readonly="true" name="h62"></td>
+								<td width="7%"><input readonly="true" name="h63"></td>
+								<td width="7%"><input readonly="true" name="h64"></td>
+								<td width="7%"><input readonly="true" name="h65"></td>
+								<td width="7%"><input readonly="true" name="h66"></td>
+								<td width="7%"><input readonly="true" name="h67"></td>
+								<td width="7%"><input readonly="true" name="h68"></td>
+								<td width="7%"><input readonly="true" name="h69"></td>
+								<td width="7%"><input readonly="true" name="h70"></td>
+								<td width="7%"><input readonly="true" name="h71"></td>
+								<td width="7%"><input readonly="true" name="h72"></td>
 							</tr>
 							<tr class="bgh">
 								<td width="16%">00:30</td>
-								<td width="7%"><input name="h73"></td>
-								<td width="7%"><input name="h74"></td>
-								<td width="7%"><input name="h75"></td>
-								<td width="7%"><input name="h76"></td>
-								<td width="7%"><input name="h77"></td>
-								<td width="7%"><input name="h78"></td>
-								<td width="7%"><input name="h79"></td>
-								<td width="7%"><input name="h80"></td>
-								<td width="7%"><input name="h81"></td>
-								<td width="7%"><input name="h82"></td>
-								<td width="7%"><input name="h83"></td>
-								<td width="7%"><input name="h84"></td>
+								<td width="7%"><input readonly="true" name="h73"></td>
+								<td width="7%"><input readonly="true" name="h74"></td>
+								<td width="7%"><input readonly="true" name="h75"></td>
+								<td width="7%"><input readonly="true" name="h76"></td>
+								<td width="7%"><input readonly="true" name="h77"></td>
+								<td width="7%"><input readonly="true" name="h78"></td>
+								<td width="7%"><input readonly="true" name="h79"></td>
+								<td width="7%"><input readonly="true" name="h80"></td>
+								<td width="7%"><input readonly="true" name="h81"></td>
+								<td width="7%"><input readonly="true" name="h82"></td>
+								<td width="7%"><input readonly="true" name="h83"></td>
+								<td width="7%"><input readonly="true" name="h84"></td>
 							</tr>
 							<tr>
 								<td width="16%">00:45</td>
-								<td width="7%"><input name="h85"></td>
-								<td width="7%"><input name="h86"></td>
-								<td width="7%"><input name="h87"></td>
-								<td width="7%"><input name="h88"></td>
-								<td width="7%"><input name="h89"></td>
-								<td width="7%"><input name="h90"></td>
-								<td width="7%"><input name="h91"></td>
-								<td width="7%"><input name="h92"></td>
-								<td width="7%"><input name="h93"></td>
-								<td width="7%"><input name="h94"></td>
-								<td width="7%"><input name="h95"></td>
-								<td width="7%"><input name="h96"></td>
+								<td width="7%"><input readonly="true" name="h85"></td>
+								<td width="7%"><input readonly="true" name="h86"></td>
+								<td width="7%"><input readonly="true" name="h87"></td>
+								<td width="7%"><input readonly="true" name="h88"></td>
+								<td width="7%"><input readonly="true" name="h89"></td>
+								<td width="7%"><input readonly="true" name="h90"></td>
+								<td width="7%"><input readonly="true" name="h91"></td>
+								<td width="7%"><input readonly="true" name="h92"></td>
+								<td width="7%"><input readonly="true" name="h93"></td>
+								<td width="7%"><input readonly="true" name="h94"></td>
+								<td width="7%"><input readonly="true" name="h95"></td>
+								<td width="7%"><input readonly="true" name="h96"></td>
 							</tr>
 						</table>
 					</div>
 					<div class="cl"></div>
 					<div class="cchart"></div>
-					<div class="bz"><textarea id="comment" onfocus="declare.changeData();"></textarea></div>
 				</div>
 			</div>
 		</div>
