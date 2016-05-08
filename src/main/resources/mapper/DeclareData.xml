@@ -31,7 +31,7 @@
 			h81=#{h81},h82=#{h82},h83=#{h83},h84=#{h84},h85=#{h85},h86=#{h86},h87=#{h87},h88=#{h88},h89=#{h89},h90=#{h90},
 			h91=#{h91},h92=#{h92},h93=#{h93},h94=#{h94},h95=#{h95},h96=#{h96}
 		</set> 
-		where id=#{id} and dtype=#{dtype}
+		where id=#{id} and dtype=#{dtype.code}
 	</update>
 	
 	<select id="getDeclDataById" resultType="DeclareDataPo">

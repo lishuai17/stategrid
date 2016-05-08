@@ -8,15 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.state.po.DeclareDataPo;
-import com.state.po.DeclarePo;
-import com.state.po.UserPo;
+import com.state.po.LineDefinePo;
+import com.state.po.LineLimitPo;
+import com.state.service.ILineService;
 import com.state.service.LineLimitService;
 
 @Controller
@@ -28,8 +25,12 @@ public class LineLimitController {
 	@Autowired
 	private LineLimitService lineLimitService;
 	
+
+	@Autowired
+	private ILineService lineService;
+	
 	/**
-	 * 跳转申报页面
+	 * 跳转联络线限额
 	 * @param request
 	 * @param response
 	 * @return
@@ -39,6 +40,48 @@ public class LineLimitController {
 		log.info("@ init limitLine ");
 		
 		return "limitLine";
+	}
+	
+	/**
+	 * 查询所有的联络线
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getAllLine")
+	public List<LineDefinePo> getAllLine(HttpServletRequest request,HttpServletResponse response) {
+		log.info("@ getAllLine ");
+		
+		return lineService.getAllLine();
+	}
+	
+	/**
+	 * 查询指定类型的联络线限额
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getLineLimit")
+	public LineLimitPo getLineLimit(String mcorhr,String dtype) {
+		log.info("@ getLineLimit");
+		
+		return lineLimitService.selectLineLimitList(mcorhr, dtype);
+	}
+	
+	/**
+	 * 更新联络线
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/updateLineLimit")
+	public String updateLineLimit(LineLimitPo lineLimit) {
+		log.info("@ updateLineLimit ");
+		lineLimitService.updateLineLimit(lineLimit);
+		return "success";
 	}
 
 }

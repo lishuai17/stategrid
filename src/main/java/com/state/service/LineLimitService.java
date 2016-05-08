@@ -39,10 +39,10 @@ public interface LineLimitService {
 	/**
 	 * 根据参数查找联络线限额列表
 	 * @param mcorhr
-	 * @param mdate
+	 * @param dtype
 	 * @return 联络线限额列表
 	 */
-	public List<LineLimitPo> selectLineLimitList(String mcorhr,String mdate);
+	public LineLimitPo selectLineLimitList(String mcorhr,String dtype);
 
 	
 
