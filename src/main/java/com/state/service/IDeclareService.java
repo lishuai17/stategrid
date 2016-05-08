@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
+import com.state.po.TypePo;
 import com.state.po.UserPo;
 
 
@@ -55,5 +56,11 @@ public interface IDeclareService {
 	 * @return
 	 */
 	public void updateDeclare (DeclarePo declarePo);
+
+	/**
+	 * 查询时段类型
+	 * @return
+	 */
+	public TypePo getTimeType();
 
 }

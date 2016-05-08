@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
+import com.state.po.TypePo;
 import com.state.po.UserPo;
 import com.state.service.IDeclareService;
 
@@ -36,9 +37,10 @@ public class DeclareController {
 	 * @return
 	 */
 	@RequestMapping(value = "/init")
-	public String init(HttpServletRequest request,HttpServletResponse response) {
+	public String init(Model model) {
 		log.info("@ init declare ");
-		
+		TypePo timeType=declareService.getTimeType();
+		model.addAttribute("timeType", timeType);
 		return "declare";
 	}
 

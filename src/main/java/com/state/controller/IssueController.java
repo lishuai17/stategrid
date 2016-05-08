@@ -8,17 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.state.po.DeclareDataPo;
-import com.state.po.DeclarePo;
 import com.state.po.ResultPo;
 import com.state.po.UserPo;
 import com.state.service.IssueService;
+import com.state.vo.ResultNameVo;
 
 @Controller
 @RequestMapping("/issue")
@@ -30,29 +26,41 @@ public class IssueController {
 	private IssueService issueService;
 	
 	/**
-	 * 跳转申报页面
+	 * 跳转发布页面
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value = "/init")
 	public String init(HttpServletRequest request,HttpServletResponse response) {
-		log.info("@ init declare ");
+		log.info("@ init issue ");
 		
 		return "issue";
 	}
 
 	/**
-	 * 获取申报单子列表
+	 * 获取发布单列表
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value = "/getDeclareList", method = RequestMethod.POST)
-	public List<ResultPo> getDeclare(HttpServletRequest request,HttpServletResponse response,String date){
+	@RequestMapping(value = "/getResultList", method = RequestMethod.POST)
+	public List<ResultNameVo> getResultList(HttpServletRequest request,HttpServletResponse response){
 		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
 		
-		return issueService.selectResultByParam(user.getArea(),(StringUtils.hasText(date) ? date : null),null,null);
+		return issueService.getResultNameList(user.getArea());
+	}
+	
+	/**
+	 * 根据申报单号、类型查找发布单
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/getResult", method = RequestMethod.POST)
+	public ResultPo getResult(String dsheet,String dtype){
+		
+		return issueService.getResultBySheetId(dsheet,dtype);
 	}
 	
 	

@@ -1,16 +1,15 @@
 package com.state.service.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.state.dao.IDeclareDataDao;
+import com.state.dao.IPathResultDao;
+import com.state.dao.IssueDao;
 import com.state.dao.MatchDao;
-import com.state.po.DeclareDataPo;
-import com.state.po.DeclarePo;
+import com.state.po.PathResultPo;
 import com.state.service.MatchService;
 import com.state.util.DateUtil;
 
@@ -22,43 +21,28 @@ public class MatchServiceImpl implements MatchService{
 	private MatchDao matchDao;
 	
 	@Autowired
-	private IDeclareDataDao declareDataDao;
+	private IPathResultDao pathResultDao;
 
-	public void saveDeclare(DeclarePo declare) {
-		
-		matchDao.insertDeclare(declare);
-		
-//		List<DeclareDataPo> declareDatas = declare.getDeclareDatas();
-//		for (DeclareDataPo declareDataPo : declareDatas) {
-//			declareDataPo.set(declare.getId());
-//			declareDataDao.insertDeclData(declareDataPo);
-//		}
+	@Autowired
+	private IssueDao issueDao;
+
+	/**
+	 * 根据通道名、类型查询通道结果
+	 * @param mpath
+	 * @param dtype
+	 * @return
+	 */
+	public PathResultPo getPathResult(String mpath, String dtype){
+		Date tomorrow=new Date((new Date()).getTime()+1000*60*60*24);
+		return pathResultDao.getPathResult(DateUtil.format(tomorrow, "yyyyMMdd"), mpath, dtype);
 	}
-
-	public boolean existsDeclare(Integer id) {
-
-		return matchDao.countDeclareById(id) > 0;
+	
+	/**
+	 * 一键发布
+	 */
+	public void issue(){
+		Date tomorrow=new Date((new Date()).getTime()+1000*60*60*24);
+		pathResultDao.updatePrint(DateUtil.format(tomorrow, "yyyyMMdd"),"1");
+		issueDao.updatePrint(DateUtil.format(tomorrow, "yyyyMMdd"),"1");
 	}
-
-	public void deleteDeclare(Integer id) {
-		
-//		declareDataDao.deleteDeclareData(id);
-		
-		matchDao.deleteDeclare(id);
-	}
-
-	public List<DeclarePo> getDeclares(String area,String date) {
-		if(null == date){
-			Date today = new Date();
-			date = DateUtil.format(new Date(today.getTime()+1000*60*60*24), "yyyyMMdd");
-		}
-		return matchDao.selectDeclareByParam(area, date, null);
-	}
-
-	public DeclareDataPo getDeclareData(Integer id, String dtype) {
-		// TODO Auto-generated method stub
-//		declareDataDao.getDeclDataById(param)
-		return null;
-	}
-
 }
