@@ -8,6 +8,9 @@
 	<title>用户管理</title>
 	<link Rel="StyleSheet" Href="${pageContext.request.contextPath }/css/style.css" Type="Text/Css">
 	<script type="text/javascript">
+	$(function(){
+		$('.menu').find('a[name=用户管理]').attr('class', 'menufocus');
+	});
 	//注册按钮事件
 	function approve(user){
 		var pd=confirm("您确定要对用户："+user+"审批吗？");
