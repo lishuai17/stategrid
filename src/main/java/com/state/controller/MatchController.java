@@ -8,19 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.state.po.DeclareDataPo;
-import com.state.po.DeclarePo;
-import com.state.po.UserPo;
+import com.state.po.PathDefinePo;
+import com.state.po.PathResultPo;
+import com.state.service.IPathService;
 import com.state.service.MatchService;
 
 /**
  * 撮合
+ * 
  * @author 帅
  *
  */
@@ -32,102 +30,77 @@ public class MatchController {
 
 	@Autowired
 	private MatchService matchService;
-	
+
+	@Autowired
+	private IPathService pathService;
+
 	/**
-	 * 跳转申报页面
+	 * 跳转撮合页面
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value = "/init")
-	public String init(HttpServletRequest request,HttpServletResponse response) {
-		log.info("@ init declare ");
-		
-		return "declare";
+	public String init(HttpServletRequest request, HttpServletResponse response) {
+		log.info("@ init match ");
+
+		return "match";
 	}
 
 	/**
-	 * 获取申报单子列表
+	 * 查询所有的通道
+	 * 
 	 * @param request
 	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/getDeclareList", method = RequestMethod.POST)
-	public List<DeclarePo> getDeclare(HttpServletRequest request,HttpServletResponse response,String date){
-		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
-		
-		return matchService.getDeclares(user.getArea(),(StringUtils.hasText(date) ? date : null));
-	}
-	
-	/**
-	 * 获取申报数据
-	 * @param request
-	 * @param response
-	 * @param id 单子id
-	 * @param type 申报类型 全天，高峰，低谷
-	 * @return
-	 */
-	@RequestMapping(value = "/getDeclareData", method = RequestMethod.POST)
-	public DeclareDataPo getDeclareData(HttpServletRequest request,HttpServletResponse response,Integer id,String type){
-		
-		
-		return matchService.getDeclareData(id, type);
-	}
-	
-	/**
-	 * 增加申报
-	 * @param declare
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addDeclare( DeclarePo declare) {
-		log.info("@ add declare ");
-		if(null == declare){
-			return "申报单为空";
-		}
-		try {
-			matchService.saveDeclare(declare);
-		} catch (Exception e) {
-			log.error("add declare fail !",e);
-			return "fail";
-		}
-		return "success";
-	}
-	
-	/**
-	 * 删除申报
-	 * @param classCode
-	 * @param model
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String deleteDeclare(Integer id) {
-		if(!matchService.existsDeclare(id)){
-			return "申报单不存在";
-		}
-		try {
-			matchService.deleteDeclare(id);
-		} catch (Exception e) {
-			log.error("delete declare fail !",e);
-			return "fail";
-		}
-		return "success";
-	}
-	
-	/**
-	 * 更改申报
-	 * @param classCode
-	 * @param model
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updateDeclare(String classCode, Model model, HttpServletRequest request,
+	@RequestMapping(value = "/getAllPath")
+	public List<PathDefinePo> getAllPath(HttpServletRequest request,
 			HttpServletResponse response) {
-		return "";
+		log.info("@getAllPath ");
+
+		return pathService.getAllPath();
 	}
+
+	/**
+	 * 按通道名、类型查询通道结果
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getPathResult")
+	public PathResultPo getPathResult(String mpath, String dtype) {
+		log.info("@ getPathResult ");
+
+		return matchService.getPathResult(mpath, dtype);
+	}
+
+	/**
+	 * 撮合
+	 * 
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/matchData")
+	public String match() {
+
+		return "success";
+	}
+
+	/**
+	 * 发布
+	 * 
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/issue")
+	public String issue() {
+		matchService.issue();
+		return "success";
+	}
+
 }

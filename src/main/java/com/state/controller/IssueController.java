@@ -3,21 +3,19 @@ package com.state.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.state.po.DeclareDataPo;
+import com.alibaba.fastjson.JSON;
 import com.state.po.DeclarePo;
 import com.state.po.ResultPo;
 import com.state.po.UserPo;
+import com.state.service.AreaService;
 import com.state.service.IssueService;
 
 @Controller
@@ -28,31 +26,49 @@ public class IssueController {
 
 	@Autowired
 	private IssueService issueService;
+
+	@Autowired
+	private AreaService areaService;
 	
 	/**
-	 * 跳转申报页面
+	 * 跳转发布页面
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value = "/init")
-	public String init(HttpServletRequest request,HttpServletResponse response) {
-		log.info("@ init declare ");
-		
+	public String init(Model model) {
+		log.info("@ init issue ");
+		model.addAttribute("areaList", JSON.toJSON(areaService.getAllArea()).toString());
 		return "issue";
 	}
 
 	/**
-	 * 获取申报单子列表
+	 * 获取发布单列表
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value = "/getDeclareList", method = RequestMethod.POST)
-	public List<ResultPo> getDeclare(HttpServletRequest request,HttpServletResponse response,String date){
-		UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
+	@RequestMapping(value = "/getResultList", method = RequestMethod.POST)
+	public List<DeclarePo> getResultList(HttpServletRequest request,String area){
 		
-		return issueService.selectResultByParam(user.getArea(),(StringUtils.hasText(date) ? date : null),null,null);
+		if(area==null||"".equals(area)){
+			UserPo user = (UserPo)request.getSession().getAttribute("userInfo");
+			area=user.getArea();
+		}
+		return issueService.getResultNameList(area);
+	}
+	
+	/**
+	 * 根据申报单号、类型查找发布单
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/getResult", method = RequestMethod.POST)
+	public ResultPo getResult(String dsheet,String dtype){
+		ResultPo r=issueService.getResultBySheetId(dsheet,dtype);
+		return r;
 	}
 	
 	

@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.state.dao.IDeclareDao;
 import com.state.dao.IDeclareDataDao;
+import com.state.dao.TypeDao;
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
+import com.state.po.TypePo;
 import com.state.po.UserPo;
 import com.state.service.IDeclareService;
 import com.state.util.DateUtil;
@@ -25,13 +27,15 @@ public class DeclareServiceImpl implements IDeclareService{
 	@Autowired
 	private IDeclareDataDao declareDataDao;
 	
+	@Autowired
+	private TypeDao typeDao;
+	
 	/**
 	 * 新增申报单及数据
 	 * @param user 用户
 	 */
 	public void createNewDeclare(UserPo user){
-		Date today = new Date();
-		Date tomorrow=new Date(today.getTime()+1000*60*60*24);
+		Date tomorrow=new Date((new Date()).getTime()+1000*60*60*24);
 		DeclarePo declare=new DeclarePo();
 		declare.setSheetName("未命名");
 		declare.setMdate(DateUtil.format(tomorrow, "yyyyMMdd"));
@@ -69,12 +73,10 @@ public class DeclareServiceImpl implements IDeclareService{
 		declareDao.deleteDeclare(id);
 	}
 
-	public List<DeclarePo> getDeclares(String area,String date) {
-		if(null == date){
-			Date today = new Date();
-			date = DateUtil.format(new Date(today.getTime()+1000*60*60*24), "yyyyMMdd");
-		}
-		return declareDao.selectDeclareByParam(area, date, null);
+	public List<DeclarePo> getDeclares(String area) {
+		
+		Date tomrrow = new Date((new Date()).getTime()+1000*60*60*24);
+		return declareDao.selectDeclareByParam(area, DateUtil.format(tomrrow, "yyyyMMdd"), null);
 	}
 
 	public DeclareDataPo getDeclareData(Long id, String dtype) {
@@ -94,5 +96,12 @@ public class DeclareServiceImpl implements IDeclareService{
 			declareDataDao.updateDeclData(declareDataPo);
 		}
 	}
-
+	
+	/**
+	 * 查询时段类型
+	 * @return
+	 */
+	public TypePo getTimeType(){
+		return typeDao.getType().get(0);
+	}
 }

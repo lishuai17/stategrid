@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
+import com.state.po.TypePo;
 import com.state.po.UserPo;
 
 
@@ -20,7 +21,7 @@ public interface IDeclareService {
 	 * @param area
 	 * @return
 	 */
-	public List<DeclarePo> getDeclares(String area,String date);
+	public List<DeclarePo> getDeclares(String area);
 	
 	/**
 	 * 查询申报数据
@@ -55,5 +56,11 @@ public interface IDeclareService {
 	 * @return
 	 */
 	public void updateDeclare (DeclarePo declarePo);
+
+	/**
+	 * 查询时段类型
+	 * @return
+	 */
+	public TypePo getTimeType();
 
 }

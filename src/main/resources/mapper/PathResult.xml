@@ -26,6 +26,13 @@
 		where mdate=#{mdate} and mpath=#{mpath} and dtype=#{dtype}
 	</update>
 	
+	<update id="updatePrint">
+		update CBPM_PATH_RESULET
+		<set>
+			dprint=#{dprint} 
+		</set>
+		where mdate=#{mdate} 
+	</update>
 	
 	<select id="getPathResult" resultType="PathResultPo">
 		select * from CBPM_PATH_RESULET where  mdate=#{mdate} and mpath=#{mpath} and dtype=#{dtype}

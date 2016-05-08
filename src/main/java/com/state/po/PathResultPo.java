@@ -22,6 +22,11 @@ public class PathResultPo extends BasePo {
 	 * 通道类型
 	 */
 	private String dtype;
+	
+	/**
+	 * 发布标志
+	 */
+	private String dprint;
 
 	private double h01;
 
@@ -1005,6 +1010,14 @@ public class PathResultPo extends BasePo {
 
 	public void setDtype(String dtype) {
 		this.dtype = dtype;
+	}
+
+	public String getDprint() {
+		return dprint;
+	}
+
+	public void setDprint(String dprint) {
+		this.dprint = dprint;
 	}
 
 }

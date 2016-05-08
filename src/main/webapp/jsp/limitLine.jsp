@@ -7,18 +7,17 @@
 	<Link Rel="StyleSheet" Href="${pageContext.request.contextPath }/css/declare.css" Type="Text/Css">
 	<script src="${pageContext.request.contextPath }/js/charts/highcharts.js"></script>
 	<script src="${pageContext.request.contextPath }/js/charts/modules/exporting.js"></script>
-	<script src="${pageContext.request.contextPath }/js/state/declare.js"></script>
+	<script src="${pageContext.request.contextPath }/js/state/limitLine.js"></script>
 	<script type="text/javascript">
-		var declare = new Declare();
+		var limitLine = new LimitLine();
 		$(function(){
-			declare.getDeclare();
-			declare.loadTimeType(${timeType});
-			$("#declareMenu li").live('click', function(){declare.getDeclareData($(this), '1a');});
-			$("#declareMenu li").live('dblclick', function(){declare.changeDeclareName();});
-			$("#declareMenu li").live('blur', function(){declare.finishChangeDeclareName();});
-			$("#declareDataDiv input").live("keydown", function(e){declare.copyTableValue($(this), e);});
-			$("#declareDataDiv input").live("click", function(e){declare.changeData();});
-			$(".bz").live("click", function(){$('#comment').focus();});
+			limitLine.getLimitLine();
+			$("#limitLineMenu li").live('click', function(){limitLine.getLimitLineData($(this), '正向限额');});
+			$("#limitLineMenu li").live('dblclick', function(){limitLine.changeLimitLineName();});
+			$("#limitLineMenu li").live('blur', function(){limitLine.finishChangeLimitLineName();});
+			$("#limitLineDataDiv input").live("keydown", function(e){limitLine.copyTableValue($(this), e);});
+			$("#limitLineDataDiv input").live("click", function(e){limitLine.changeData();});
+			
 		})
 	</script>
 </state:override>
@@ -27,22 +26,22 @@
 	<div>
 		<div class="mid">
 			<div class="contop">
-				<div class="fl"><span class="xmenu">数据申报单</span><span class="count">0条</span></div>
-				<div class="rl"><span><a class="btn1" href="#" onclick="declare.addDeclare();">+添加</a></span><span><a class="btn1" href="#" onclick="declare.deleteDeclare();">-删除</a></span></div>
+				<div class="fl"><span class="xmenu">限额管理</span><span class="count">0条</span></div>
+				<div class="rl"><span></span></div>
 				<div class="cl"></div>
 			</div>
 			<div>
 				<div class="lmenu">
-					<ul id="declareMenu">
+					<ul id="limitLineMenu">
 						
 					</ul>
 				</div>
-				<div id="declareDataDiv" class="fl bd1" style="display:none;">
+				<div id="limitLineDataDiv" class="fl bd1" style="display:none;">
 					<div class="conrightt1">
-						<div class="fl mne"><a href="#" name="1a" onclick="declare.getDeclareDataByDeclareType('1a');">全天</a></div>
-						<div class="fl mne"><a href="#" name="2a" onclick="declare.getDeclareDataByDeclareType('2a');">高峰</a></div>
-						<div class="fl mne"><a href="#" name="3a" onclick="declare.getDeclareDataByDeclareType('3a');">低谷</a></div>
-						<div class="rl"><a class="btnh2" href="#" onclick="declare.updateDeclare();">保存</a></div>
+						<div class="fl mne"><a href="#" name="1a" onclick="limitLine.getLimitLineDataByLimitLineType('正向限额');">正向限额</a></div>
+						<div class="fl mne"><a href="#" name="2a" onclick="limitLine.getLimitLineDataByLimitLineType('反向限额');">反向限额</a></div>
+						<div class="fl mne"><a href="#" name="3a" onclick="limitLine.getLimitLineDataByLimitLineType('计划值');">计划值</a></div>
+						<div class="rl"><a class="btnh2" href="#" onclick="limitLine.updateLimitLine();">保存</a></div>
 					</div>
 					<div class="cl"></div>
 					<div class="fl conrightt2"><span>总值:</span><span name="sumValue" class="avenum">0</span>|<span class="pdl30">平均值:</span><span name="avgValue" class="avenun">0</span></div>
@@ -50,22 +49,22 @@
 					<div class="fl pdl10">
 						<table width="968" height="302" cellpadding="0" cellspacing="0">
 							<thead>
-								<th width="16%" class="cgr">时间</th>
-								<th width="7%" class="cgr">0</th>
-								<th width="7%" class="cgr">1</th>
-								<th width="7%" class="cgr">2</th>
-								<th width="7%" class="cgr">3</th>
-								<th width="7%" class="cgr">4</th>
-								<th width="7%" class="cgr">5</th>
-								<th width="7%" class="cgr">6</th>
-								<th width="7%" class="cgr">7</th>
-								<th width="7%" class="cgr">8</th>
-								<th width="7%" class="cgr">9</th>
-								<th width="7%" class="cgr">10</th>
-								<th width="7%" class="cgr">11</th>
+								<th width="16%">时间</th>
+								<th width="7%">0</th>
+								<th width="7%">1</th>
+								<th width="7%">2</th>
+								<th width="7%">3</th>
+								<th width="7%">4</th>
+								<th width="7%">5</th>
+								<th width="7%">6</th>
+								<th width="7%">7</th>
+								<th width="7%">8</th>
+								<th width="7%">9</th>
+								<th width="7%">10</th>
+								<th width="7%">11</th>
 							</thead>
 							<tr>
-								<td width="16%" class="cgr">00:00</td>
+								<td width="16%">00:00</td>
 								<td width="7%"><input name="h01"></td>
 								<td width="7%"><input name="h02"></td>
 								<td width="7%"><input name="h03"></td>
@@ -80,7 +79,7 @@
 								<td width="7%"><input name="h12"></td>
 							</tr>
 							<tr class="bgh">
-								<td width="16%" class="cgr">00:15</td>
+								<td width="16%">00:15</td>
 								<td width="7%"><input name="h13"></td>
 								<td width="7%"><input name="h14"></td>
 								<td width="7%"><input name="h15"></td>
@@ -95,7 +94,7 @@
 								<td width="7%"><input name="h24"></td>
 							</tr>
 							<tr>
-								<td width="16%" class="cgr">00:30</td>
+								<td width="16%">00:30</td>
 								<td width="7%"><input name="h25"></td>
 								<td width="7%"><input name="h26"></td>
 								<td width="7%"><input name="h27"></td>
@@ -110,7 +109,7 @@
 								<td width="7%"><input name="h36"></td>
 							</tr>
 							<tr class="bgh">
-								<td width="16%" class="cgr">00:45</td>
+								<td width="16%">00:45</td>
 								<td width="7%"><input name="h37"></td>
 								<td width="7%"><input name="h38"></td>
 								<td width="7%"><input name="h39"></td>
@@ -125,22 +124,22 @@
 								<td width="7%"><input name="h48"></td>
 							</tr>
 							<tr>
-								<td width="16%" class="cgr">时间</td>
-								<td width="7%" class="cgr">12</td>
-								<td width="7%" class="cgr">13</td>
-								<td width="7%" class="cgr">14</td>
-								<td width="7%" class="cgr">15</td>
-								<td width="7%" class="cgr">16</td>
-								<td width="7%" class="cgr">17</td>
-								<td width="7%" class="cgr">18</td>
-								<td width="7%" class="cgr">19</td>
-								<td width="7%" class="cgr">20</td>
-								<td width="7%" class="cgr">21</td>
-								<td width="7%" class="cgr">22</td>
-								<td width="7%" class="cgr">23</td>
+								<td width="16%">时间</td>
+								<td width="7%">12</td>
+								<td width="7%">13</td>
+								<td width="7%">14</td>
+								<td width="7%">15</td>
+								<td width="7%">16</td>
+								<td width="7%">17</td>
+								<td width="7%">18</td>
+								<td width="7%">19</td>
+								<td width="7%">20</td>
+								<td width="7%">21</td>
+								<td width="7%">22</td>
+								<td width="7%">23</td>
 							</tr>
 							<tr class="bgh">
-								<td width="16%" class="cgr">00:00</td>
+								<td width="16%">00:00</td>
 								<td width="7%"><input name="h49"></td>
 								<td width="7%"><input name="h50"></td>
 								<td width="7%"><input name="h51"></td>
@@ -155,7 +154,7 @@
 								<td width="7%"><input name="h60"></td>
 							</tr>
 							<tr>
-								<td width="16%" class="cgr">00:15</td>
+								<td width="16%">00:15</td>
 								<td width="7%"><input name="h61"></td>
 								<td width="7%"><input name="h62"></td>
 								<td width="7%"><input name="h63"></td>
@@ -170,7 +169,7 @@
 								<td width="7%"><input name="h72"></td>
 							</tr>
 							<tr class="bgh">
-								<td width="16%" class="cgr">00:30</td>
+								<td width="16%">00:30</td>
 								<td width="7%"><input name="h73"></td>
 								<td width="7%"><input name="h74"></td>
 								<td width="7%"><input name="h75"></td>
@@ -185,7 +184,7 @@
 								<td width="7%"><input name="h84"></td>
 							</tr>
 							<tr>
-								<td width="16%" class="cgr">00:45</td>
+								<td width="16%">00:45</td>
 								<td width="7%"><input name="h85"></td>
 								<td width="7%"><input name="h86"></td>
 								<td width="7%"><input name="h87"></td>
@@ -203,7 +202,6 @@
 					</div>
 					<div class="cl"></div>
 					<div class="cchart"></div>
-					<div class="bz"><textarea id="comment" onfocus="declare.changeData();"></textarea></div>
 				</div>
 			</div>
 		</div>

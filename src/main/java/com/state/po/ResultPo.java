@@ -34,9 +34,14 @@ public class ResultPo extends BasePo {
 	private String drloe;
 
 	/**
-	 * 申报单号
+	 * 申报单ID
 	 */
 	private String dsheet;
+	
+	/**
+	 * 发布标志
+	 */
+	private String dprint;
 
 	/**
 	 * 成交数据类型
@@ -1083,6 +1088,14 @@ public class ResultPo extends BasePo {
 
 	public void setH96(Double h96) {
 		this.h96 = h96;
+	}
+
+	public String getDprint() {
+		return dprint;
+	}
+
+	public void setDprint(String dprint) {
+		this.dprint = dprint;
 	}
 
 }

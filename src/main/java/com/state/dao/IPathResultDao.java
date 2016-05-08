@@ -48,6 +48,13 @@ public interface IPathResultDao {
 	 * @param String 
 	 */
 	public void deletePathResultByDate(String mdate);
+
+	/**
+	 * 按照日期更新通道结果发布标志位
+	 * @param mdate
+	 * @param dprint
+	 */
+	public void updatePrint(@Param("mdate")String mdate, @Param("dprint")String dprint);
 	
 	
 }
