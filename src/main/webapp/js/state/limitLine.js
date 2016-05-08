@@ -4,6 +4,10 @@ function LimitLine() {
 	var changed = true;
 	var unchanged = false;
 	
+	this.mcorhr;
+	this.mdate;
+	this.dtype;
+	
 	this.selectedDalare;
 	this.limitLineType;	
 	
@@ -33,8 +37,6 @@ function LimitLine() {
 				myLimitLine.initChangeData();
 				return changed;
 			} else {
-				myLimitLine.selectedDalare.find('input').val(myLimitLine.selectedDalare.attr('limitLineName'));
-				
 				myLimitLine.initChangeData();
 				return unchanged;
 			}
@@ -55,7 +57,7 @@ function LimitLine() {
 	// 修改申报单数据
 	this.updateLimitLine = function() {
 		$.ajax({
-			url : 'update',
+			url : 'updateLineLimit',
 			type : 'POST',
 			dataType : 'json',
 			data : {
@@ -129,9 +131,11 @@ function LimitLine() {
 				},
 				success : function(result) {
 					if (result) {
+						myLimitLine.mcorhr=result.mcorhr;
+						myLimitLine.mdate=result.mdate;
+						myLimitLine.dtype=result.dtype;
 						myLimitLine.inputValueToTable(result);
 						myLimitLine.makeDataToChart(result);
-						
 						myLimitLine.showLimitLineDataDiv();
 					} else {
 						alert("获取失败!");
@@ -146,8 +150,7 @@ function LimitLine() {
 	
 	// 刷新申报单类型数据
 	this.refreshLimitLineData = function() {
-		myLimitLine.selectedDalare.attr('limitLineName', myLimitLine.selectedDalare.find('input').val());
-		myLimitLine.selectedDalare.attr('limitLineComment', $('#comment').text());
+		
 		$.ajax({
 			url : 'getLineLimit',
 			type : 'POST',
@@ -158,6 +161,9 @@ function LimitLine() {
 			},
 			success : function(result) {
 				if (result) {
+					myLimitLine.mcorhr=result.mcorhr;
+					myLimitLine.mdate=result.mdate;
+					myLimitLine.dtype=result.dtype;
 					myLimitLine.inputValueToTable(result);
 					myLimitLine.makeDataToChart(result);
 					
@@ -179,15 +185,18 @@ function LimitLine() {
 			myLimitLine.limitLineType = type;
 			limitLineType = type;
 			$.ajax({
-				url : 'getLimitLineData',
+				url : 'getLineLimit',
 				type : 'POST',
 				dataType : 'json',
 				data : {
-					id : myLimitLine.selectedDalare.attr('limitLineId'),
-					type : type
+					mcorhr : myLimitLine.selectedDalare.attr('limitLineId'),
+					dtype : type
 				},
 				success : function(result) {
 					if (result) {
+						myLimitLine.mcorhr=result.mcorhr;
+						myLimitLine.mdate=result.mdate;
+						myLimitLine.dtype=result.dtype;
 						myLimitLine.inputValueToTable(result);
 						myLimitLine.makeDataToChart(result);
 					} else {
@@ -289,13 +298,14 @@ function LimitLine() {
 	this.makeLimitLineData = function() {
 		var limitLine = {};
 		var limitLineId = myLimitLine.selectedDalare.attr('limitLineId');
-		var limitLineName = myLimitLine.selectedDalare.find('input').val();
-		var comment = $('#comment').text();
+		
 		var limitLineType = myLimitLine.limitLineType;
 		var limitLineTypeData = myLimitLine.makeDataByTable();
-		limitLine['id'] = limitLineId;
-		limitLine['sheetName'] = limitLineName;
-		limitLine['descr'] = comment;
+		limitLine['mcorhr'] = limitLineId;
+		limitLine['mdate'] = myLimitLine.mdate;
+		alert( myLimitLine.dtype);
+
+		limitLine['dtype'] = myLimitLine.dtype;
 		limitLine['limitLineDatas'] = [limitLineTypeData];
 		return JSON.stringify(limitLine);
 	}
