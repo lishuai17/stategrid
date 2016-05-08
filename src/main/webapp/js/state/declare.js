@@ -268,6 +268,15 @@ function Declare() {
 		if (data) {
 			for (var key in data) {
 				if (/^h[0-9]{2}$/.test(key)) {
+					if (myDeclare.dalareType == '1a') {
+						$('#declareDataDiv input[name=' + key + ']').attr('disabled', false);
+					} else if (myDeclare.dalareType == '2a' && myDeclare.timeType[key] == '峰') {
+						$('#declareDataDiv input[name=' + key + ']').attr('disabled', false);
+					} else if (myDeclare.dalareType == '3a' && myDeclare.timeType[key] == '谷') {
+						$('#declareDataDiv input[name=' + key + ']').attr('disabled', false);
+					} else {
+						$('#declareDataDiv input[name=' + key + ']').attr('disabled', true);
+					}
 					$('#declareDataDiv input[name=' + key + ']').val(data[key]);
 				}
 			}
@@ -382,7 +391,7 @@ function Declare() {
 				sum += Number(declareTypeDataInput.value);
 			}
 		}
-		var avg = sum / 96;
+		var avg = sum / myDeclare.timeType['count' + myDeclare.dalareType];
 		declareTypeData['id'] = myDeclare.selectedDalare.attr('declareId');
 		declareTypeData['dtype'] = myDeclare.dalareType;
 		declareTypeData['sumQ'] = sum;
@@ -434,6 +443,6 @@ function Declare() {
 	// 完成修改申报单名称
 	this.finishChangeDeclareName = function() {
 		myDeclare.selectedDalare.find('input').attr('class', 'bghh');
-		myDeclare.selectedDalare.find('input').attr('readonly', 'readonly');
+		myDeclare.selectedDalare.find('input').attr('readonly', true);
 	}
 }

@@ -12,7 +12,7 @@
 		var declare = new Declare();
 		$(function(){
 			declare.getDeclare();
-			declare.loadTimeType("${timeType}");
+			declare.loadTimeType(${timeType});
 			$("#declareMenu li").live('click', function(){declare.getDeclareData($(this), '1a');});
 			$("#declareMenu li").live('dblclick', function(){declare.changeDeclareName();});
 			$("#declareMenu li").live('blur', function(){declare.finishChangeDeclareName();});
