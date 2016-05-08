@@ -18,9 +18,10 @@
 				<div class="fl pdt10"><img src="${pageContext.request.contextPath }/img/logo.png"></div>
 				<div class="menu">
 					<ul>
-					<c:forEach var="b" items="${bill}">
-						<li class="fl"><a href="${b.url}">${b.mname}</a></li>
-					</c:forEach>
+						<c:forEach var="b" items="${bill}">
+							<li class="fl"><a href="${pageContext.request.contextPath }${b.url}">${b.mname}</a></li>
+						</c:forEach>
+					</ul>
 				</div>
 				<div class="rl ureg">
 					<span>${userInfo.mname}</span>
