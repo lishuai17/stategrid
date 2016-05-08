@@ -16,7 +16,7 @@
 			$("#declareMenu li").live('dbclick', function(){declare.getDeclareData($(this), '1a');});
 			$("#declareDataDiv input").live("keydown", function(e){declare.copyTableValue($(this), e);});
 			$("#declareDataDiv input").live("click", function(e){declare.changeData();});
-			$("#comment").live("click", function(e){declare.changeData();});
+			$(".bz").live("click", function(){$('#comment').focus();});
 		})
 	</script>
 </state:override>
@@ -37,10 +37,10 @@
 				</div>
 				<div id="declareDataDiv" class="fl bd1" style="display:none;">
 					<div class="conrightt1">
-						<div class="fl mne"><a href="#" onclick="declare.getDeclareDataByDeclareType('1a');">全天</a></div>
-						<div class="fl mne"><a href="#" onclick="declare.getDeclareDataByDeclareType('2a');">高峰</a></div>
-						<div class="fl mne"><a href="#" onclick="declare.getDeclareDataByDeclareType('3a');">低谷</a></div>
-						<div class="rl"><a class="btn2" href="#" onclick="declare.updateDeclare();">保存</a></div>
+						<div class="fl mne"><a href="#" name="1a" onclick="declare.getDeclareDataByDeclareType('1a');">全天</a></div>
+						<div class="fl mne"><a href="#" name="2a" onclick="declare.getDeclareDataByDeclareType('2a');">高峰</a></div>
+						<div class="fl mne"><a href="#" name="3a" onclick="declare.getDeclareDataByDeclareType('3a');">低谷</a></div>
+						<div class="rl"><a class="btnh2" href="#" onclick="declare.updateDeclare();">保存</a></div>
 					</div>
 					<div class="cl"></div>
 					<div class="fl conrightt2"><span>总值:</span><span name="sumValue" class="avenum">0</span>|<span class="pdl30">平均值:</span><span name="avgValue" class="avenun">0</span></div>
@@ -201,7 +201,7 @@
 					</div>
 					<div class="cl"></div>
 					<div class="cchart"></div>
-					<div class="bz"><textarea id="comment"></textarea></div>
+					<div class="bz"><textarea id="comment" onfocus="declare.changeData();"></textarea></div>
 				</div>
 			</div>
 		</div>

@@ -140,7 +140,10 @@ function Declare() {
 						} else {
 							typeCls = 'bgi';
 						}
-						$('#declareMenu').append('<li declareId="' + declareId + '" declareComment="' + declareComment + '"><div class="fl ' + typeCls + '">' + result[i].sheetName + '</div><div class="cl"></div></li>');
+						$('#declareMenu').append('<li declareId="' + declareId + '" declareComment="' + declareComment + '">'
+								+ '<div class="fl ' + typeCls + '"><input value="'
+								+ result[i].sheetName
+								+ '"></div><div class="cl"></div></li>');
 						myDeclare.hideDeclareDataDiv()
 					}
 					$('.count').text(result.length + '条');
@@ -157,6 +160,11 @@ function Declare() {
 	// 获取申报单类型数据
 	this.getDeclareData = function(selectedDalare, type) {
 		if ((!myDeclare.selectedDalare || myDeclare.selectedDalare.attr('declareId') != selectedDalare.attr('declareId')) && !myDeclare.checkDataChanged()) {
+			if (myDeclare.selectedDalare) {
+				myDeclare.selectedDalare.attr('class', '');
+			}
+			selectedDalare.attr('class', 'bghh');
+			myDeclare.changeDeclareTypeStyle(type);
 			myDeclare.selectedDalare = selectedDalare;
 			myDeclare.dalareType = type;
 			$.ajax({
@@ -198,7 +206,7 @@ function Declare() {
 				if (result) {
 					myDeclare.inputValueToTable(result);
 					myDeclare.makeDataToChart(result);
-					myDeclare.inputValueToArea(selectedDalare.attr('declareComment'));
+					myDeclare.inputValueToArea(myDeclare.selectedDalare.attr('declareComment'));
 					myDeclare.showDeclareDataDiv();
 				} else {
 					alert("获取失败!");
@@ -213,6 +221,7 @@ function Declare() {
 	// 根据申报单类型获取申报单类型数据
 	this.getDeclareDataByDeclareType = function(type) {
 		if (!myDeclare.checkDataChanged()) {
+			myDeclare.changeDeclareTypeStyle(type);
 			myDeclare.dalareType = type;
 			declareType = type;
 			$.ajax({
@@ -246,10 +255,10 @@ function Declare() {
 					$('#declareDataDiv input[name=' + key + ']').val(data[key]);
 				}
 			}
-			if (data.sumQ == 'null') {
+			if (!data.sumQ || data.sumQ == 'null') {
 				data.sumQ = 0;
 			}
-			if (data.aveP == 'null') {
+			if (!data.aveP || data.aveP == 'null') {
 				data.aveP = 0;
 			}
 			$('#declareDataDiv span[name=sumValue]').text(data.sumQ);
@@ -334,7 +343,7 @@ function Declare() {
 	this.makeDeclareData = function() {
 		var declare = {};
 		var declareId = myDeclare.selectedDalare.attr('declareId');
-		var declareName = myDeclare.selectedDalare.find('div').html();
+		var declareName = myDeclare.selectedDalare.find('input').val();
 		var comment = $('#comment').text();
 		var declareType = myDeclare.dalareType;
 		var declareTypeData = myDeclare.makeDataByTable();
@@ -380,6 +389,21 @@ function Declare() {
 					key = 'h' + i;
 				}
 				$('#declareDataDiv input[name=' + key + ']').val(value);
+			}
+		}
+	}
+	
+	// 修改申报单类型样式
+	this.changeDeclareTypeStyle = function(type) {
+		var declareTypes = $('#declareDataDiv .conrightt1 a');
+		for (var i = 0; i < 3 ; i++) {
+			var declareType = declareTypes[i];
+			if (declareType.name == type) {
+				declareType.style.color = '#D1B664';
+				declareType.style.fontWeight = 'bold';
+			} else {
+				declareType.style.color = '#7F7F7F';
+				declareType.style.fontWeight = '';
 			}
 		}
 	}
