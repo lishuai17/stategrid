@@ -51,7 +51,7 @@ function Path(){
 						+(getTD(result[i].corhr3 == null ? "" : result[i].corhr3))
 						+(getTD(result[i].corhr4 == null ? "" : result[i].corhr4))
 						+(getTD(result[i].corhr5 == null ? "" : result[i].corhr5))
-						+(getTD('<a class="btn3" href="javascript:void(0);" onclick="deletePath('+result[i].mpath+')">删除</a>'))
+						+(getTD('<a class="btn3" href="javascript:void(0);" onclick="path.deletePath(\''+result[i].mpath+'\')">删除</a>'))
 						+('</tr>');
 						tableNode.append(tr);
 					}
@@ -72,6 +72,7 @@ function Path(){
 			success : function(result) {
 				if (result) {
 					alert("删除成功");
+					mypath.getAllPath('pathTable','pathCount');
 				};
 			},
 			error : function(xhr, status) {
@@ -105,7 +106,7 @@ function Path(){
 						+(getTD(result[i].mcorhr == null ? "" : result[i].mcorhr))
 						+(getTD(result[i].startArea == null ? "" : result[i].startArea))
 						+(getTD(result[i].endArea == null ? "" : result[i].endArea))
-						+(getTD('<a class="btn3" href="javascript:void(0);" onclick="deleteLine('+result[i].mcorhr+')">删除</a>'))
+						+(getTD('<a class="btn3" href="javascript:void(0);" onclick="path.deleteLine(\''+result[i].mcorhr+'\')">删除</a>'))
 						+('</tr>');
 						tableNode.append(tr);
 						
@@ -133,6 +134,7 @@ function Path(){
 			success : function(result) {
 				if (result) {
 					alert("删除成功");
+					mypath.getAllLine('lineTable', 'lineCount','lineSelect1');
 				};
 			},
 			error : function(xhr, status) {
@@ -146,26 +148,38 @@ function Path(){
 		var start = $("#"+startId).val();
 		var end = $("#"+endId).val();
 		var lines = new Array();
-		lines.push();
+		for (var i = 0; i < linesNum; i++) {
+			var mdirection = $("#lineSelectOR"+(i+1)).val();
+			var corhr = $("#lineSelect"+(i+1)).val();
+			var line = {'mdirection':mdirection,'corhr':corhr};
+			lines.push(line);
+		}
 		
 		var path = {'mpath':name,'startArea':start,'endArea':end};
 		var mdirection = "";
 		for (var i = 0; i < lines.length; i++) {
-			mdirection += lines.mdirection;
-			path['corhr1'+(i+1)] = lines.corhr;
+			mdirection += lines[i].mdirection;
+			path['corhr'+(i+1)] = lines[i].corhr;
 		}
 		path['mdirection'] = mdirection;
 		path['mnum'] = lines.length;
 		$.ajax({
 			url : 'addPath',
 			type : 'POST',
-			data :'pathDefine='+path,
+			data :'pathDefine='+JSON.stringify(path),
 			dataType:'json',
 			success : function(result) {
-				if (result) {
+				if ("success"==result) {
 					mypath.displayAddPanel('tk');
 //					alert("添加成功");
 					mypath.getAllPath('pathTable','pathCount');
+					$("#"+nameId).val("");
+					document.getElementById(startId).options[0].selected = true;
+					document.getElementById(endId).options[0].selected = true;
+					document.getElementById("lineSelect1").options[0].selected = true;
+					document.getElementById("lineSelectOR1").options[0].selected = true;
+				}else{
+					alert(result);
 				};
 			},
 			error : function(xhr, status) {
@@ -183,13 +197,16 @@ function Path(){
 		$.ajax({
 			url : 'addLine',
 			type : 'POST',
-			data :'lineDefine='+line,
+			data :'lineDefine='+JSON.stringify(line),
 			dataType:'json',
 			success : function(result) {
 				if (result) {
 					mypath.displayAddLinePanel('tk_line');
 //					alert("添加成功");
-					mypath.getAllPath('pathTable','pathCount');
+					mypath.getAllLine('lineTable', 'lineCount','lineSelect1');
+					$("#"+nameId).val("");
+					document.getElementById(startId).options[0].selected = true;
+					document.getElementById(endId).options[0].selected = true;
 				};
 			},
 			error : function(xhr, status) {
@@ -205,15 +222,15 @@ function Path(){
 		linesNum += 1;
 		$("#lineSelectDiv .addPath").remove();
 		var lineSelectDiv = '<div class="fl pdt20 linePanel" >成员'+linesNum+'&nbsp;&nbsp;<select id="lineSelect'+linesNum+'"></select>'
-				+ '<span>成员方向&nbsp;&nbsp;</span><select>'
-				+ ' <option value ="+">正</option>'
-				+ '<option value ="-">反</option>' + '</select>'
+				+ '<span>成员方向&nbsp;&nbsp;</span><select id="lineSelectOR'+linesNum+'">'
+				+ ' <option value ="1">正</option>'
+				+ '<option value ="2">反</option>' + '</select>'
 				+ '<a class="btn3 addPath" href="javascript:void(0);" onclick="path.addLineSelect()">+</a></div><div class="cl"></div>' ;
 		if(linesNum >= maxNum){
 			lineSelectDiv = '<div class="fl pdt20 linePanel" >成员'+linesNum+'&nbsp;&nbsp;<select id="lineSelect'+linesNum+'"></select>'
-			+ '<span>成员方向&nbsp;&nbsp;</span><select>'
-			+ ' <option value ="+">正</option>'
-			+ '<option value ="-">反</option>' + '</select></div><div class="cl"></div>';
+			+ '<span>成员方向&nbsp;&nbsp;</span><select id="lineSelectOR'+linesNum+'">'
+			+ ' <option value ="1">正</option>'
+			+ '<option value ="2">反</option>' + '</select></div><div class="cl"></div>';
 		}
 		$("#lineSelectDiv").append(lineSelectDiv);
 		this.getSelectLine();

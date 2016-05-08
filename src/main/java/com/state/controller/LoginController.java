@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.state.po.AreaPo;
 import com.state.po.UserPo;
+import com.state.service.AreaService;
 import com.state.service.ILoginService;
 
 @Controller
@@ -29,6 +31,9 @@ public class LoginController {
 	
 	@Autowired
 	private ILoginService loginService;
+	
+	@Autowired
+	private AreaService areaService;
 
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request, HttpServletResponse response) {
@@ -37,8 +42,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/register")
-	public String register(HttpServletRequest request, HttpServletResponse response) {
+	public String register(HttpServletRequest request, HttpServletResponse response,Model model) {
 		log.info("跳转到注册页面");
+		List<AreaPo> allArea =areaService.getAllArea();
+		model.addAttribute("allArea",allArea);
 		return "register";
 	}
 	

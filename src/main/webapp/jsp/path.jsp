@@ -10,7 +10,6 @@
 		$(function(){
 			$('.menu').find('a[name=通道联络线管理]').attr('class', 'menufocus');
 		});
-	
 		var path = new Path();
 		$(function(){
 			path.getAllPath('pathTable','pathCount');
@@ -92,9 +91,9 @@
 							     
 						         </select>
 							
-							<span>成员方向&nbsp;&nbsp;</span><select>
-							     <option value ="+">正</option>
-	                             <option value ="-">反</option>
+							<span>成员方向&nbsp;&nbsp;</span><select id="lineSelectOR1">
+							     <option value ="1">正</option>
+	                             <option value ="2">反</option>
 						         </select>
 							<a class="btn3 addPath" href="javascript:void(0);" onclick="path.addLineSelect()">+</a>
 						</div>
