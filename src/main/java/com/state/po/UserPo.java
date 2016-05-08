@@ -52,6 +52,11 @@ public class UserPo extends BasePo {
 	 * 是否允许登录
 	 */
 	private String islogin;
+	
+	/**
+	 * 交易日期
+	 */
+	private String matchDate;
 
 	public String getMname() {
 		return mname;
@@ -123,6 +128,14 @@ public class UserPo extends BasePo {
 
 	public void setDrole(String drole) {
 		this.drole = drole;
+	}
+
+	public String getMatchDate() {
+		return matchDate;
+	}
+
+	public void setMatchDate(String matchDate) {
+		this.matchDate = matchDate;
 	}
 	
 	

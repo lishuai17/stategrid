@@ -1,7 +1,7 @@
 package com.state.controller;
 
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,12 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.state.po.AreaPo;
 import com.state.po.UserPo;
 import com.state.service.AreaService;
 import com.state.service.ILoginService;
+import com.state.util.DateUtil;
 
 @Controller
 @RequestMapping("/login")
@@ -64,6 +64,9 @@ public class LoginController {
 		UserPo pd=loginService.judgeUser(user, password);
 		if(pd!=null){
 			List<Map<String,String>> bill = loginService.selectBill(pd.getMname());
+			Date tomorrow=new Date((new Date()).getTime()+1000*60*60*24);
+			String matchDate=DateUtil.format(tomorrow, "yyyy年MM月dd日");
+			pd.setMatchDate(matchDate);
 			if("1".equals(pd.getIslogin())){
 				request.getSession().setAttribute("userInfo", pd);
 				request.getSession().setAttribute("bill", bill);
