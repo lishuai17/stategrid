@@ -159,7 +159,7 @@ public class EvaluatServiceImpl implements IEvaluateService {
 			if(effectiveAmountSale>=effectiveAllBuySum){
 				saleVolumeTotal=effectiveAllBuySum;//卖方总成交量
 				for(Vector<String> vec:everyBillSBofSaleVector){//卖方每个当子成交量
-					double everySbOfSale = Double.parseDouble(vec.get(i+3));//每个单子每个点申报量
+					double everySbOfSale = Double.parseDouble((vec.get(i+3)==null||vec.get(i+3).equals("null"))?"0.0":vec.get(i+3));//每个单子每个点申报量
 					double saleSumValue = saleSumVector.get(i);//卖方所有子单和
 					double newVlaue =everySbOfSale*saleVolumeTotal/saleSumValue;
 					vec.set(i+3, decimalFormat.format(newVlaue));
@@ -168,7 +168,7 @@ public class EvaluatServiceImpl implements IEvaluateService {
 				
 				for(Vector<String> vec:everyProviceBillBuyOfProviceVector){
 					String area = vec.get(2);
-					double everySbOfBuy = Double.parseDouble(vec.get(i+3));//每个子单申报量
+					double everySbOfBuy = Double.parseDouble((vec.get(i+3)==null||vec.get(i+3).equals("null"))?"0.0":vec.get(i+3));//每个子单申报量
 					double areaeffectiveAmountTotal = effectiveAmountBuyMap.get(area).get(i);//买方总有效量
 					double areaSbTotal = buyMap.get(area).get(i);//地区总申报
 					double newValue = everySbOfBuy*areaeffectiveAmountTotal/areaSbTotal;
@@ -181,7 +181,7 @@ public class EvaluatServiceImpl implements IEvaluateService {
 			}else if(effectiveAmountSale<effectiveAllBuySum){
 				saleVolumeTotal = effectiveAmountSale;//卖方总成交量
 				for(Vector<String> vec:everyBillSBofSaleVector){//卖方每个当子成交量
-					double everySbOfSale = Double.parseDouble(vec.get(i+3));//每个单子每个点申报量
+					double everySbOfSale = Double.parseDouble((vec.get(i+3)==null||vec.get(i+3).equals("null"))?"0.0":vec.get(i+3));//每个单子每个点申报量
 					double saleSumValue = saleSumVector.get(i);//卖方所有子单和
 					double newVlaue =everySbOfSale*saleVolumeTotal/saleSumValue;
 					vec.set(i+3, decimalFormat.format(newVlaue));
@@ -190,7 +190,7 @@ public class EvaluatServiceImpl implements IEvaluateService {
 				buyVolumeTotal = effectiveAmountSale;//SV
 				for(Vector<String> vec:everyProviceBillBuyOfProviceVector){
 					String area = vec.get(2);
-					double everySbOfBuy = Double.parseDouble(vec.get(i+3));//每个子单申报量
+					double everySbOfBuy = Double.parseDouble((vec.get(i+3)==null||vec.get(i+3).equals("null"))?"0.0":vec.get(i+3));//每个子单申报量
 					double areaEffectiveAmountTotal = effectiveAmountBuyMap.get(area).get(i);//地区总有效量 BVi
 					double areaSbTotal = buyMap.get(area).get(i);//地区总申报
 					double newValue = everySbOfBuy*(areaEffectiveAmountTotal*buyVolumeTotal/effectiveAllBuySum)/areaSbTotal;
@@ -201,7 +201,7 @@ public class EvaluatServiceImpl implements IEvaluateService {
 				
 			}
 		}
-		
+		issueDao.deleteResultByDate(date);//先清空计算日所有单子成交量
 		insertToDatabase(everyBillSBofSaleVector);
 		insertToDatabase(everyProviceBillBuyOfProviceVector);
 		getPathResultByDeclResult();//交易功率
@@ -410,6 +410,7 @@ public class EvaluatServiceImpl implements IEvaluateService {
 	}
 	
 	private void getPathResultByDeclResult(){
+		pathResultDao.deletePathResultByDate(date);
 		List<PathDefinePo> pathList = evaluateDao.getPathList();
 		for(PathDefinePo po:pathList){
 			String mend = po.getEndArea();
