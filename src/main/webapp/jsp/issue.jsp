@@ -14,6 +14,8 @@
 			$('.menu').find('a[name=发布]').attr('class', 'menufocus');
 			
 			issue.getIssue();
+			issue.loadElData(${areaList});
+			issue.showArea("${userInfo.area}");
 			$("#IssueMenu li").live('click', function(){issue.getIssueData($(this), '1a');});
 			$("#IssueMenu li").live('dbclick', function(){issue.getIssueData($(this), '1a');});
 		})	
@@ -24,7 +26,7 @@
 	<div>
 		<div class="mid">
 			<div class="contop">
-				<div class="fl"><span class="xmenu">发布</span><span class="count">0条</span></div>
+				<div class="fl"><span class="xmenu">发布</span><span class="count">0条</span><span class="posty rl"><img src="${pageContext.request.contextPath }/img/pxy.png"/>｜<select id="area" onchange="issue.changeArea()"><option value=""></option></select></span></div>
 				<div class="rl"></div>
 				<div class="cl"></div>
 			</div>

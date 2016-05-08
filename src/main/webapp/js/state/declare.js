@@ -76,6 +76,7 @@ function Declare() {
 		$('#declareDataDiv').hide();
 	}
 	
+	// 切换区域
 	this.changeArea = function() {
 		myDeclare.getDeclare();
 	}
