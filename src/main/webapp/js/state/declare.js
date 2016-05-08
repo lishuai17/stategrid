@@ -1,10 +1,11 @@
 function Declare() {
 	var myDeclare = this;
+	
 	var changed = true;
 	var unchanged = false;
 	
-	this.declareId;
-	this.declareDataId;
+	this.selectedDalare;
+	this.dalareType;
 	
 	// 申报单中数据变动flag(变动为true,未变动为false)
 	this.dataFlag = unchanged;
@@ -48,48 +49,39 @@ function Declare() {
 		$('#declareDataDiv').hide();
 	}
 	
-	// 打开新建申报单窗口
-	this.showAddWin = function() {
-		alert('弹窗');
+	// 新增申报单
+	this.addDeclare = function() {
 		if (!myDeclare.checkDataChanged()) {
-			
-		}
-	}
-	
-	// 保存申报单数据
-	this.saveDeclare = function() {
-		$.ajax({
-			url : '${pageContext.request.contextPath}/declare/add',
-			type : 'POST',
-			data : {
-				
-			},
-			success : function(result) {
-				if ("success" == result) {
-					alert("保存成功!");
-				} else {
-					alert("保存失败!");
+			$.ajax({
+				url : 'add',
+				type : 'POST',
+				dataType : 'json',
+				success : function(result) {
+					if (result) {
+						myDeclare.getDeclare();
+					} else {
+						alert("新增失败!");
+					}
+				},
+				error : function(xhr, status) {
+					alert("系统错误!");
 				}
-			},
-			error : function(xhr, status) {
-				alert("系统错误!");
-			}
-		});
+			});
+		}
 	}
 	
 	// 删除申报单数据(包含申报类型数据)
 	this.deleteDeclare = function() {
-		alert('删除');
-		if (myDeclare.declareId && !myDeclare.checkDataChanged()) {
+		if (myDeclare.selectedDalare && !myDeclare.checkDataChanged()) {
 			$.ajax({
 				url : 'delete',
 				type : 'POST',
 				dataType : 'json',
 				data : {
-					id : myDeclare.declareId
+					id : myDeclare.selectedDalare.attr('declareId')
 				},
 				success : function(result) {
-					if ("success" == result) {
+					if (result) {
 						alert("删除成功!");
 						myDeclare.getDeclare();
 					} else {
@@ -105,26 +97,25 @@ function Declare() {
 	
 	// 修改申报单数据
 	this.updateDeclare = function() {
-		if (!myDeclare.checkDataChanged()) {
-			$.ajax({
-				url : '${pageContext.request.contextPath}/declare/update',
-				type : 'POST',
-				data : {
-					
-				},
-				success : function(result) {
-					if ("success" == result) {
-						myDeclare.initChangeData();
-						alert("修改成功!");
-					} else {
-						alert("修改失败!");
-					}
-				},
-				error : function(xhr, status) {
-					alert("系统错误!");
+		myDeclare.makeDeclareData();
+		$.ajax({
+			url : 'update',
+			type : 'POST',
+			dataType : 'json',
+			data : myDeclare.makeDeclareData(),
+			success : function(result) {
+				if ("success" == result) {
+					myDeclare.initChangeData();
+					myDeclare.getDeclareData(myDeclare.selectedDalare, myDeclare.dalareType);
+					alert("修改成功!");
+				} else {
+					alert("修改失败!");
 				}
-			});
-		}
+			},
+			error : function(xhr, status) {
+				alert("系统错误!");
+			}
+		});
 	}
 	
 	// 获取申报单数据
@@ -162,22 +153,23 @@ function Declare() {
 	}
 	
 	// 获取申报单类型数据
-	this.getDeclareData = function(declareId, type, declareComment) {
-		if ((!myDeclare.declareId || myDeclare.declareId != declareId) && !myDeclare.checkDataChanged()) {
-			myDeclare.declareId = declareId;
+	this.getDeclareData = function(selectedDalare, type) {
+		if ((!selectedDalare || myDeclare.selectedDalare != selectedDalare) && !myDeclare.checkDataChanged()) {
+			myDeclare.selectedDalare = selectedDalare;
+			myDeclare.dalareType = type;
 			$.ajax({
 				url : 'getDeclareData',
 				type : 'POST',
 				dataType : 'json',
 				data : {
-					id : declareId,
+					id : selectedDalare.attr('declareId'),
 					type : type
 				},
 				success : function(result) {
 					if (result) {
 						myDeclare.inputValueToTable(result);
 						myDeclare.makeDataToChart(result);
-						myDeclare.inputValueToArea(declareComment);
+						myDeclare.inputValueToArea(selectedDalare.attr('declareComment'));
 						myDeclare.showDeclareDataDiv();
 					} else {
 						alert("获取失败!");
@@ -193,12 +185,14 @@ function Declare() {
 	// 根据申报单类型获取申报单类型数据
 	this.getDeclareDataByDeclareType = function(type) {
 		if (!myDeclare.checkDataChanged()) {
+			myDeclare.dalareType = type;
+			declareType = type;
 			$.ajax({
 				url : 'getDeclareData',
 				type : 'POST',
 				dataType : 'json',
 				data : {
-					id : myDeclare.declareId,
+					id : myDeclare.selectedDalare.attr('declareId'),
 					type : type
 				},
 				success : function(result) {
@@ -297,5 +291,40 @@ function Declare() {
 	// 将申报单类型说明插入文本域中
 	this.inputValueToArea = function(data) {
 		$('.bz').text(data);
+	}
+	
+	// 整理需要修改的申报单数据
+	this.makeDeclareData = function() {
+		var declare = {};
+		var declareId = myDeclare.selectedDalare.attr('declareId');
+		var declareName = myDeclare.selectedDalare.find('div').html();
+		var comment = $('.bz').text();
+		var declareType = myDeclare.dalareType;
+		var declareTypeData = myDeclare.makeDataByTable();
+		declare['id'] = declareId;
+		declare['sheetName'] = declareName;
+		declare['descr'] = comment;
+		declare['declareDatas'] = [declareTypeData];
+		return declare;
+	}
+	
+	// 根据表格整理申报单类型数据
+	this.makeDataByTable = function() {
+		var declareTypeDataInputs = $('#declareDataDiv').find('table input');
+		var declareTypeData = {};
+		var sum = 0;
+		for (var index in declareTypeDataInputs) {
+			var declareTypeDataInput = declareTypeDataInputs[index];
+			declareTypeData[declareTypeDataInput.name] = declareTypeDataInput.value;
+			if (declareTypeDataInput.value) {
+				sum += Number(declareTypeDataInput.value);
+			}
+		}
+		var avg = sum / 96;
+		declareTypeData['id'] = myDeclare.selectedDalare.attr('declareId');
+		declareTypeData['dtype'] = myDeclare.dalareType;
+		declareTypeData['sumQ'] = sum;
+		declareTypeData['aveP'] = avg.toFixed(2);
+		return declareTypeData;
 	}
 }

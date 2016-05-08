@@ -12,8 +12,8 @@
 		var declare = new Declare();
 		$(function(){
 			declare.getDeclare();
-			$("#declareMenu li").live('click', function(){declare.getDeclareData($(this).attr('declareId'), '1a', $(this).attr('declareComment'));});
-			$("#declareMenu li").live('dbclick', function(){declare.getDeclareData($(this).attr('declareId'), '1a', $(this).attr('declareComment'));});
+			$("#declareMenu li").live('click', function(){declare.getDeclareData($(this), '1a');});
+			$("#declareMenu li").live('dbclick', function(){declare.getDeclareData($(this), '1a');});
 			$("#declareDataDiv input").live('change', function(){declare.changeData();});
 		})
 	</script>
@@ -24,7 +24,7 @@
 		<div class="mid">
 			<div class="contop">
 				<div class="fl"><span class="xmenu">数据申报单</span><span class="count">0条</span></div>
-				<div class="rl"><span><a class="btn1" href="#" onclick="declare.showAddWin();">+添加</a></span><span><a class="btn1" href="#" onclick="declare.deleteDeclare();">-删除</a></span></div>
+				<div class="rl"><span><a class="btn1" href="#" onclick="declare.addDeclare();">+添加</a></span><span><a class="btn1" href="#" onclick="declare.deleteDeclare();">-删除</a></span></div>
 				<div class="cl"></div>
 			</div>
 			<div>
@@ -38,7 +38,7 @@
 						<div class="fl mne"><a href="#" onclick="declare.getDeclareDataByDeclareType('1a');">全天</a></div>
 						<div class="fl mne"><a href="#" onclick="declare.getDeclareDataByDeclareType('2a');">高峰</a></div>
 						<div class="fl mne"><a href="#" onclick="declare.getDeclareDataByDeclareType('3a');">低谷</a></div>
-						<div class="rl"><a class="btn2" href="#">保存</a></div>
+						<div class="rl"><a class="btn2" href="#" onclick="declare.updateDeclare();">保存</a></div>
 					</div>
 					<div class="cl"></div>
 					<div class="fl conrightt2"><span>总值:</span><span name="sumValue" class="avenum">0</span>|<span class="pdl30">平均值:</span><span name="avgValue" class="avenun">0</span></div>
