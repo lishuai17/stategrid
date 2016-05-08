@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.state.po.PathDefinePo;
 import com.state.po.PathResultPo;
+import com.state.po.UserPo;
+import com.state.service.IEvaluateService;
 import com.state.service.IPathService;
 import com.state.service.MatchService;
 
@@ -33,6 +35,9 @@ public class MatchController {
 
 	@Autowired
 	private IPathService pathService;
+	
+	@Autowired
+	private IEvaluateService evaluateService;
 
 	/**
 	 * 跳转撮合页面
@@ -86,8 +91,9 @@ public class MatchController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/matchData")
-	public String match() {
-
+	public String match(HttpServletRequest request, HttpServletResponse response) {
+		UserPo po = (UserPo)request.getSession().getAttribute("userInfo");
+		evaluateService.computeFunticon(po.getMname());
 		return "success";
 	}
 

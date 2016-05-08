@@ -212,6 +212,8 @@ public class DeclareDataPo extends BasePo {
 	private Double h95;
 	//
 	private Double h96;
+	
+	private String area;
 
 	public long getId() {
 		return id;
@@ -1012,6 +1014,14 @@ public class DeclareDataPo extends BasePo {
 
 	public void setH07(Double h07) {
 		this.h07 = h07;
+	}
+	
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 }

@@ -1,5 +1,10 @@
 package com.state.po;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 @SuppressWarnings("serial")
@@ -994,6 +999,109 @@ public class LineLimitPo extends BasePo {
 
 	public void setH96(double h96) {
 		this.h96 = h96;
+	}
+
+	public static PathResultPo compareLittle(List<LineLimitPo> lines){
+		if(null == lines || lines.isEmpty()){
+			return null;
+		}
+		PathResultPo po = new PathResultPo();
+		if(lines.size()==1){
+			LineLimitPo firstPo = lines.get(0);
+			Field[] fields = PathResultPo.class.getDeclaredFields();
+			for (Field field : fields) {
+				if(field.getName().startsWith("h")){
+					field.setAccessible(true);
+					try {
+
+						Field lineField1 = firstPo.getClass().getDeclaredField(field.getName());
+						lineField1.setAccessible(true);
+						double h = (Double)lineField1.get(firstPo);
+						String setAttributeMethodName = "set"
+								+ Character.toUpperCase(field.getName().charAt(0))
+								+ field.getName().substring(1);
+						Method setAttributeMethod = PathResultPo.class.getDeclaredMethod(
+								setAttributeMethodName, double.class);
+						setAttributeMethod.invoke(po,h);
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchFieldException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		
+			
+		}else if(lines.size()>1){
+			LineLimitPo firstPo = lines.get(0);
+			Field[] fields = PathResultPo.class.getDeclaredFields();
+			for (Field field : fields) {
+				if(field.getName().startsWith("h")){
+					field.setAccessible(true);
+					try {
+
+						Field lineField1 = firstPo.getClass().getDeclaredField(field.getName());
+						lineField1.setAccessible(true);
+						double h = (Double)lineField1.get(firstPo);
+						for (int i=0;i<lines.size();i++) {
+							LineLimitPo lineLimitPo = lines.get(i);
+							Field lineField = lineLimitPo.getClass().getDeclaredField(field.getName());
+							lineField.setAccessible(true);
+							Double hh = (Double)lineField.get(lineLimitPo);
+							if(h<hh){
+								double temp = hh;
+								hh = h;
+								h = temp;
+								
+							}
+							if(hh < h){
+								String setAttributeMethodName = "set"
+										+ Character.toUpperCase(field.getName().charAt(0))
+										+ field.getName().substring(1);
+								Method setAttributeMethod = PathResultPo.class.getDeclaredMethod(
+										setAttributeMethodName, double.class);
+								setAttributeMethod.invoke(po,hh);
+							}
+						}
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchFieldException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		
+		
+		return po;
 	}
 
 }
