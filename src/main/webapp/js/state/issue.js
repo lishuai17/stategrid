@@ -1,8 +1,14 @@
 function Issue() {
 	var myIssue = this;
 	
+	this.areaList;
 	this.selectedissue;
 	this.issueType;
+	
+	// 加载EL数据
+	this.loadElData = function(areaList) {
+		myIssue.areaList = areaList;
+	}
 	 
 	// 显示发布单数据DIV
 	this.showIssueDataDiv = function() {
@@ -14,6 +20,25 @@ function Issue() {
 		$('#IssueDataDiv').hide();
 	}
 	
+	// 显示区域
+	this.showArea = function(userArea) {
+		for (var i = 0; i < myIssue.areaList.length; i++) {
+			var area = myIssue.areaList[i].area;
+			if (area != '国调') {
+				$('#area').append('<option value="' + area + '">' + area + '</option>');
+			}
+		}
+		if (userArea == '国调') {
+			$('.posty').css('display', 'block');
+		} else {
+			$('.posty').css('display', 'none');
+		}
+	}
+	
+	// 切换区域
+	this.changeArea = function() {
+		myIssue.getIssue();
+	}
 	
 	// 获取发布单列表
 	this.getIssue = function() {
@@ -21,6 +46,9 @@ function Issue() {
 			url : 'getResultList',
 			type : 'POST',
 			dataType : 'json',
+			data : {
+				area : $('#area').val()
+			},
 			success : function(result) {
 				if (result) {
 					$('#IssueMenu').text('');

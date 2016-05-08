@@ -76,6 +76,7 @@ function Declare() {
 		$('#declareDataDiv').hide();
 	}
 	
+	// 切换区域
 	this.changeArea = function() {
 		myDeclare.getDeclare();
 	}
@@ -177,8 +178,8 @@ function Declare() {
 								+ '<div class="fl ' + typeCls + '"><input value="'
 								+ result[i].sheetName
 								+ '" readonly="readonly"></div><div class="cl"></div></li>');
-						myDeclare.hideDeclareDataDiv()
 					}
+					myDeclare.hideDeclareDataDiv();
 					$('.count').text(result.length + '条');
 				} else {
 					alert("获取失败!");
