@@ -28,7 +28,7 @@
 	</update>
 	
 	<delete id="deletePathDefine" parameterType="String">
-		delte from CBPM_PATH_DEFINE where mpath=#{mpath}
+		delete from CBPM_PATH_DEFINE where mpath=#{mpath}
 	</delete>
 	
 	<insert id ="insertPathDefine" parameterType="PathDefinePo">

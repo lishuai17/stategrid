@@ -21,7 +21,7 @@
 		insert into CBPM_LINE_DEFINE
 			(mcorhr,start_area,end_area)
 		values
-			(mcorhr,startArea,endArea)
+			(#{mcorhr},#{startArea},#{endArea})
 	</insert>
 	
 	<delete id="deleteLineDefine" parameterType="String">

@@ -87,6 +87,8 @@ public class PathController {
 		log.info(" add path");
 		JSONObject bean = com.alibaba.fastjson.JSONObject.parseObject(pathDefine);
 		PathDefinePo javaObject = JSONObject.toJavaObject(bean, PathDefinePo.class);
+		javaObject.setMdirection(javaObject.getMdirection().replaceAll("1", "+").replaceAll("2", "-"));
+		System.out.println("aaaaaaaaaaa"+javaObject.getMdirection());
 		if(pathService.existsPath(javaObject.getMpath())){
 			return "通道已经存在";
 		}
