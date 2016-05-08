@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.state.dao.IPathResultDao">
+<mapper namespace="com.state.dao.IPathDefineDao">
 	<sql id="pathDefineInfo">
 		mpath,morder,start_area as startArea,end_area as endArea,mnum,mdirection,corhr1,corhr2,corhr3,corhr4,corhr5,corhr6,corhr7,corhr8,corhr9,corhr10
 	</sql>
