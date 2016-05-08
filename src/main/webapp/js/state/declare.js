@@ -29,7 +29,7 @@ function Declare() {
 	this.checkDataChanged = function() {
 		if (myDeclare.dataFlag) {
 			if (confirm("数据变动,是否保存?")) {
-				myDeclare.saveDeclareData();
+				myDeclare.updateDeclare();
 				myDeclare.initChangeData();
 				return changed;
 			} else {
@@ -107,7 +107,7 @@ function Declare() {
 			success : function(result) {
 				if (result) {
 					myDeclare.initChangeData();
-					myDeclare.getDeclareData(myDeclare.selectedDalare, myDeclare.dalareType);
+					myDeclare.refreshDeclareData();
 					alert("修改成功!");
 				} else {
 					alert("修改失败!");
@@ -183,6 +183,32 @@ function Declare() {
 		}
 	}
 	
+	// 刷新申报单类型数据
+	this.refreshDeclareData = function() {
+		$.ajax({
+			url : 'getDeclareData',
+			type : 'POST',
+			dataType : 'json',
+			data : {
+				id : myDeclare.selectedDalare.attr('declareId'),
+				type : myDeclare.dalareType
+			},
+			success : function(result) {
+				if (result) {
+					myDeclare.inputValueToTable(result);
+					myDeclare.makeDataToChart(result);
+					myDeclare.inputValueToArea(selectedDalare.attr('declareComment'));
+					myDeclare.showDeclareDataDiv();
+				} else {
+					alert("获取失败!");
+				}
+			},
+			error : function(xhr, status) {
+				alert("系统错误!");
+			}
+		});
+	}
+	
 	// 根据申报单类型获取申报单类型数据
 	this.getDeclareDataByDeclareType = function(type) {
 		if (!myDeclare.checkDataChanged()) {
@@ -219,12 +245,14 @@ function Declare() {
 					$('#declareDataDiv input[name=' + key + ']').val(data[key]);
 				}
 			}
-			if (data.sumQ) {
-				$('#declareDataDiv span[name=sumValue]').text(data.sumQ);
+			if (data.sumQ == 'null') {
+				data.sumQ = 0;
 			}
-			if (data.aveP) {
-				$('#declareDataDiv span[name=avgValue]').text(data.aveP);
+			if (data.aveP == 'null') {
+				data.aveP = 0;
 			}
+			$('#declareDataDiv span[name=sumValue]').text(data.sumQ);
+			$('#declareDataDiv span[name=avgValue]').text(data.aveP);
 		}
 	}
 	
@@ -295,9 +323,10 @@ function Declare() {
 	
 	// 将申报单类型说明插入文本域中
 	this.inputValueToArea = function(data) {
-		if (data != 'null') {
-			$('.bz').text(data);
+		if (data == 'null') {
+			data = '';
 		}
+		$('#comment').text(data);
 	}
 	
 	// 整理需要修改的申报单数据
@@ -305,7 +334,7 @@ function Declare() {
 		var declare = {};
 		var declareId = myDeclare.selectedDalare.attr('declareId');
 		var declareName = myDeclare.selectedDalare.find('div').html();
-		var comment = $('.bz').text();
+		var comment = $('#comment').text();
 		var declareType = myDeclare.dalareType;
 		var declareTypeData = myDeclare.makeDataByTable();
 		declare['id'] = declareId;
@@ -333,5 +362,24 @@ function Declare() {
 		declareTypeData['sumQ'] = sum;
 		declareTypeData['aveP'] = avg.toFixed(2);
 		return declareTypeData;
+	}
+	
+	// 申报单类型数据修改后按回车修改所有单元格数据
+	this.copyTableValue = function(thisInput, e) {
+		// 兼容FF和IE和Opera
+		var theEvent = e || window.event;
+		var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+		if (thisInput.focus() && code == 13) {
+			var value = thisInput.val();
+			for (var i = 1; i <= 96 ; i++) {
+				var key;
+				if (i < 10) {
+					key = 'h0' + i;
+				} else {
+					key = 'h' + i;
+				}
+				$('#declareDataDiv input[name=' + key + ']').val(value);
+			}
+		}
 	}
 }

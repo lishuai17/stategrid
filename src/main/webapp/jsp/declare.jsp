@@ -14,7 +14,7 @@
 			declare.getDeclare();
 			$("#declareMenu li").live('click', function(){declare.getDeclareData($(this), '1a');});
 			$("#declareMenu li").live('dbclick', function(){declare.getDeclareData($(this), '1a');});
-			$("#declareDataDiv input").live('change', function(){declare.changeData();});
+			$("#declareDataDiv input").live("keydown", function(e){declare.copyTableValue($(this), e);});
 		})
 	</script>
 </state:override>
@@ -199,7 +199,7 @@
 					</div>
 					<div class="cl"></div>
 					<div class="cchart"></div>
-					<div class="bz"></div>
+					<div class="bz"><textarea id="comment"></textarea></div>
 				</div>
 			</div>
 		</div>
