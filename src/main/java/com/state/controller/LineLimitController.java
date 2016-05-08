@@ -8,11 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.state.po.LineDefinePo;
 import com.state.po.LineLimitPo;
+import com.state.po.TypePo;
+import com.state.service.IDeclareService;
 import com.state.service.ILineService;
 import com.state.service.LineLimitService;
 
@@ -25,7 +29,9 @@ public class LineLimitController {
 	@Autowired
 	private LineLimitService lineLimitService;
 	
-
+	@Autowired
+	private IDeclareService declareService;
+	
 	@Autowired
 	private ILineService lineService;
 	
@@ -36,9 +42,11 @@ public class LineLimitController {
 	 * @return
 	 */
 	@RequestMapping(value = "/init")
-	public String init(HttpServletRequest request,HttpServletResponse response) {
-		log.info("@ init limitLine ");
-		
+	public String init(Model model) {
+		log.info("@ init limitLineR ");
+		TypePo timeType=declareService.getTimeType();
+		timeType.countType();
+		model.addAttribute("timeType", JSON.toJSON(timeType).toString());
 		return "limitLine";
 	}
 	

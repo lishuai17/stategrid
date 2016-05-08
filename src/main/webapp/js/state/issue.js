@@ -141,7 +141,7 @@ function Issue() {
 		if (data) {
 			var charts = {
 					title : {
-						text : '电量图',
+						text : '',
 						x : -50 //center
 					},
 					xAxis : {
@@ -180,7 +180,7 @@ function Issue() {
 						borderWidth : 0
 					},
 					series : [{
-						name : '电量',
+						name : '电力',
 						data : [
 					        data.h01, data.h02, data.h03, data.h04, data.h05, data.h06, data.h07, data.h08,
 					        data.h09, data.h10, data.h11, data.h12, data.h13, data.h14, data.h15, data.h16,

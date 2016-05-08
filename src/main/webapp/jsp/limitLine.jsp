@@ -7,14 +7,18 @@
 	<Link Rel="StyleSheet" Href="${pageContext.request.contextPath }/css/declare.css" Type="Text/Css">
 	<script src="${pageContext.request.contextPath }/js/charts/highcharts.js"></script>
 	<script src="${pageContext.request.contextPath }/js/charts/modules/exporting.js"></script>
-	<script src="${pageContext.request.contextPath }/js/state/limitLine.js?date=new Date()"></script>
+	<script src="${pageContext.request.contextPath }/js/state/limitLine.js"></script>
 	<script type="text/javascript">
 		var limitLine = new LimitLine();
 		$(function(){
 			limitLine.getLimitLine();
-			$("#LimitLineMenu li").live('click', function(){limitLine.getLimitLineData($(this), '1a');});
-			$("#LimitLineMenu li").live('dbclick', function(){limitLine.getLimitLineData($(this), '1a');});
-		})	
+			$("#limitLineMenu li").live('click', function(){limitLine.getLimitLineData($(this), '正向限额');});
+			$("#limitLineMenu li").live('dblclick', function(){limitLine.changeLimitLineName();});
+			$("#limitLineMenu li").live('blur', function(){limitLine.finishChangeLimitLineName();});
+			$("#limitLineDataDiv input").live("keydown", function(e){limitLine.copyTableValue($(this), e);});
+			$("#limitLineDataDiv input").live("click", function(e){limitLine.changeData();});
+			
+		})
 	</script>
 </state:override>
 <state:override name="content">
@@ -23,21 +27,21 @@
 		<div class="mid">
 			<div class="contop">
 				<div class="fl"><span class="xmenu">限额管理</span><span class="count">0条</span></div>
-				<div class="rl"></div>
+				<div class="rl"><span></span></div>
 				<div class="cl"></div>
 			</div>
 			<div>
 				<div class="lmenu">
-					<ul id="LimitLineMenu">
+					<ul id="limitLineMenu">
 						
 					</ul>
 				</div>
-				<div id="LimitLineDataDiv" class="fl bd1" style="display:none;">
+				<div id="limitLineDataDiv" class="fl bd1" style="display:none;">
 					<div class="conrightt1">
-						<div class="fl mne"><a href="#" name="1a" onclick="limitLine.getLimitLineDataByLimitLineType('1a');">全天</a></div>
-						<div class="fl mne"><a href="#" name="2a" onclick="limitLine.getLimitLineDataByLimitLineType('2a');">高峰</a></div>
-						<div class="fl mne"><a href="#" name="3a" onclick="limitLine.getLimitLineDataByLimitLineType('3a');">低谷</a></div>
-						
+						<div class="fl mne"><a href="#" name="1a" onclick="limitLine.getLimitLineDataByLimitLineType('正向限额');">正向限额</a></div>
+						<div class="fl mne"><a href="#" name="2a" onclick="limitLine.getLimitLineDataByLimitLineType('反向限额');">反向限额</a></div>
+						<div class="fl mne"><a href="#" name="3a" onclick="limitLine.getLimitLineDataByLimitLineType('计划值');">计划值</a></div>
+						<div class="rl"><a class="btnh2" href="#" onclick="limitLine.updateLimitLine();">保存</a></div>
 					</div>
 					<div class="cl"></div>
 					<div class="fl conrightt2"><span>总值:</span><span name="sumValue" class="avenum">0</span>|<span class="pdl30">平均值:</span><span name="avgValue" class="avenun">0</span></div>
@@ -198,12 +202,10 @@
 					</div>
 					<div class="cl"></div>
 					<div class="cchart"></div>
-					<div class="bz" id='commentDiv'></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 </state:override>
 
 <%@ include file="/common/block/block.jsp" %>

@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +19,7 @@ import com.state.po.DeclareDataPo;
 import com.state.po.DeclarePo;
 import com.state.po.TypePo;
 import com.state.po.UserPo;
+import com.state.service.AreaService;
 import com.state.service.IDeclareService;
 
 @Controller
@@ -30,6 +30,9 @@ public class DeclareController {
 
 	@Autowired
 	private IDeclareService declareService;
+	
+	@Autowired
+	private AreaService areaService;
 	
 	/**
 	 * 跳转申报页面
@@ -43,6 +46,7 @@ public class DeclareController {
 		TypePo timeType=declareService.getTimeType();
 		timeType.countType();
 		model.addAttribute("timeType", JSON.toJSON(timeType).toString());
+		model.addAttribute("areaList", JSON.toJSON(areaService.getAllArea()).toString());
 		return "declare";
 	}
 

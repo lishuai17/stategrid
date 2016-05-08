@@ -1,21 +1,82 @@
 function LimitLine() {
 	var myLimitLine = this;
 	
-	this.selectedlimitLine;
-	this.limitLineType;
-	 
-	// 显示发布单数据DIV
+	var changed = true;
+	var unchanged = false;
+	
+	this.selectedDalare;
+	this.limitLineType;	
+	
+	// 申报单中数据变动flag(变动为true,未变动为false)
+	this.dataFlag = unchanged;
+	
+	// 修改数据变动flag状态
+	this.changeDataFlag = function(dataFlag) {
+		myLimitLine.dataFlag = dataFlag;
+	}
+	
+	// 数据被修改
+	this.changeData = function() {
+		myLimitLine.changeDataFlag(changed);
+	}
+	
+	// 重置数据修改状态
+	this.initChangeData = function() {
+		myLimitLine.changeDataFlag(unchanged);
+	}
+	
+	// 校验数据是否有变动(变动返回true,未变动返回false)
+	this.checkDataChanged = function() {
+		if (myLimitLine.dataFlag) {
+			if (confirm("数据变动,是否保存?")) {
+				myLimitLine.updateLimitLine();
+				myLimitLine.initChangeData();
+				return changed;
+			} else {
+				myLimitLine.selectedDalare.find('input').val(myLimitLine.selectedDalare.attr('limitLineName'));
+				
+				myLimitLine.initChangeData();
+				return unchanged;
+			}
+		}
+		return unchanged;
+	}
+	
+	// 显示申报单类型DIV
 	this.showLimitLineDataDiv = function() {
-		$('#LimitLineDataDiv').show();
+		$('#limitLineDataDiv').show();
 	}
 	
-	// 隐藏发布单数据DIV
+	// 隐藏申报单类型DIV
 	this.hideLimitLineDataDiv = function() {
-		$('#LimitLineDataDiv').hide();
+		$('#limitLineDataDiv').hide();
 	}
 	
+	// 修改申报单数据
+	this.updateLimitLine = function() {
+		$.ajax({
+			url : 'update',
+			type : 'POST',
+			dataType : 'json',
+			data : {
+				limitLinePo : myLimitLine.makeLimitLineData(),
+			},
+			success : function(result) {
+				if (result) {
+					myLimitLine.initChangeData();
+					myLimitLine.refreshLimitLineData();
+					alert("保存成功!");
+				} else {
+					alert("保存失败!");
+				}
+			},
+			error : function(xhr, status) {
+				alert("系统错误!");
+			}
+		});
+	}
 	
-	// 获取发布单列表
+	// 获取申报单数据
 	this.getLimitLine = function() {
 		$.ajax({
 			url : 'getAllLine',
@@ -23,23 +84,14 @@ function LimitLine() {
 			dataType : 'json',
 			success : function(result) {
 				if (result) {
-					$('#LimitLineMenu').text('');
+					$('#limitLineMenu').text('');
 					for (var i = 0; i < result.length; i++) {
-						var LimitLineId = result[i].id;
-						var LimitLineName = result[i].sheetName;
-						var type = result[i].drloe;
-						var LimitLineComment = result[i].descr;
-						var typeCls;
-						if ('buy' == type) {
-							typeCls = 'bgy';
-						} else {
-							typeCls = 'bgi';
-						}
-						$('#LimitLineMenu').append('<li LimitLineId="' + LimitLineId + '" LimitLineName="' + result[i].sheetName + '" LimitLineComment="' + LimitLineComment + '">'
-								+ '<div class="fl ' + typeCls + '">'
-								+ result[i].sheetName
-								+ '</div><div class="cl"></div></li>');
-						myLimitLine.hideLimitLineDataDiv()
+						var limitLineId = result[i].mcorhr;
+						
+						$('#limitLineMenu').append('<li limitLineId="' + limitLineId + '" >'
+								+ limitLineId
+								+ '<div class="cl"></div></li>');
+						myLimitLine.hideLimitLineDataDiv();
 					}
 					$('.count').text(result.length + '条');
 				} else {
@@ -52,30 +104,34 @@ function LimitLine() {
 		});
 	}
 	
-	// 获取发布单详细数据
-	this.getLimitLineData = function(selectedlimitLine, type) {
-		if ((!myLimitLine.selectedlimitLine || myLimitLine.selectedlimitLine.attr('LimitLineId') != selectedlimitLine.attr('LimitLineId')) ) {
-			if (myLimitLine.selectedlimitLine) {
-				myLimitLine.selectedlimitLine.attr('class', '');
+	// 获取申报单类型数据
+	this.getLimitLineData = function(selectedDalare, type) {
+		if ((!myLimitLine.selectedDalare || myLimitLine.selectedDalare.attr('limitLineId') != selectedDalare.attr('limitLineId')) && !myLimitLine.checkDataChanged()) {
+			
+			if (myLimitLine.selectedDalare) {
+				myLimitLine.selectedDalare.attr('class', '');
+				myLimitLine.selectedDalare.find('input').attr('class', '');
+				myLimitLine.selectedDalare.find('input').attr('readonly', 'readonly');
 			}
-			selectedlimitLine.attr('class', 'bghh');
+			selectedDalare.attr('class', 'bghh');
+			selectedDalare.find('input').attr('class', 'bghh');
+			
 			myLimitLine.changeLimitLineTypeStyle(type);
-			myLimitLine.selectedlimitLine = selectedlimitLine;
+			myLimitLine.selectedDalare = selectedDalare;
 			myLimitLine.limitLineType = type;
-
 			$.ajax({
-				url : 'getResult',
+				url : 'getLineLimit',
 				type : 'POST',
 				dataType : 'json',
 				data : {
-					dsheet : selectedlimitLine.attr('LimitLineId'),
+					mcorhr : selectedDalare.attr('limitLineId'),
 					dtype : type
 				},
 				success : function(result) {
 					if (result) {
 						myLimitLine.inputValueToTable(result);
 						myLimitLine.makeDataToChart(result);
-						myLimitLine.inputValueToArea(selectedlimitLine.attr('LimitLineComment'));
+						
 						myLimitLine.showLimitLineDataDiv();
 					} else {
 						alert("获取失败!");
@@ -88,24 +144,24 @@ function LimitLine() {
 		}
 	}
 	
-	
-	// 根据发布单类型获取发布单类型数据
-	this.getLimitLineDataByLimitLineType = function(type) {
-		myLimitLine.changeLimitLineTypeStyle(type);
-		myLimitLine.limitLineType = type;
-		LimitLineType = type;
+	// 刷新申报单类型数据
+	this.refreshLimitLineData = function() {
+		myLimitLine.selectedDalare.attr('limitLineName', myLimitLine.selectedDalare.find('input').val());
+		myLimitLine.selectedDalare.attr('limitLineComment', $('#comment').text());
 		$.ajax({
-			url : 'getResult',
+			url : 'getLineLimit',
 			type : 'POST',
 			dataType : 'json',
 			data : {
-				dsheet : myLimitLine.selectedlimitLine.attr('LimitLineId'),
-				dtype : type
+				mcorhr : myLimitLine.selectedDalare.attr('limitLineId'),
+				dtype : myLimitLine.limitLineType
 			},
 			success : function(result) {
 				if (result) {
 					myLimitLine.inputValueToTable(result);
 					myLimitLine.makeDataToChart(result);
+					
+					myLimitLine.showLimitLineDataDiv();
 				} else {
 					alert("获取失败!");
 				}
@@ -114,15 +170,43 @@ function LimitLine() {
 				alert("系统错误!");
 			}
 		});
-		
 	}
 	
-	// 将发布单类型数据插入表格中
+	// 根据申报单类型获取申报单类型数据
+	this.getLimitLineDataByLimitLineType = function(type) {
+		if (!myLimitLine.checkDataChanged()) {
+			myLimitLine.changeLimitLineTypeStyle(type);
+			myLimitLine.limitLineType = type;
+			limitLineType = type;
+			$.ajax({
+				url : 'getLimitLineData',
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					id : myLimitLine.selectedDalare.attr('limitLineId'),
+					type : type
+				},
+				success : function(result) {
+					if (result) {
+						myLimitLine.inputValueToTable(result);
+						myLimitLine.makeDataToChart(result);
+					} else {
+						alert("获取失败!");
+					}
+				},
+				error : function(xhr, status) {
+					alert("系统错误!");
+				}
+			});
+		}
+	}
+	
+	// 将申报单类型数据插入表格中
 	this.inputValueToTable = function(data) {
 		if (data) {
 			for (var key in data) {
 				if (/^h[0-9]{2}$/.test(key)) {
-					$('#LimitLineDataDiv input[name=' + key + ']').val(data[key]);
+					$('#limitLineDataDiv input[name=' + key + ']').val(data[key]);
 				}
 			}
 			if (!data.sumQ || data.sumQ == 'null') {
@@ -131,17 +215,17 @@ function LimitLine() {
 			if (!data.aveP || data.aveP == 'null') {
 				data.aveP = 0;
 			}
-			$('#LimitLineDataDiv span[name=sumValue]').text(data.sumQ);
-			$('#LimitLineDataDiv span[name=avgValue]').text(data.aveP);
+			$('#limitLineDataDiv span[name=sumValue]').text(data.sumQ);
+			$('#limitLineDataDiv span[name=avgValue]').text(data.aveP);
 		}
 	}
 	
-	// 将发布单类型数据插入曲线图中
+	// 将申报单类型数据插入曲线图中
 	this.makeDataToChart = function(data) {
 		if (data) {
 			var charts = {
 					title : {
-						text : '电量图',
+						text : '',
 						x : -50 //center
 					},
 					xAxis : {
@@ -162,7 +246,7 @@ function LimitLine() {
 					},
 					yAxis : {
 						title : {
-							text : '单位：条'
+							text : '单位：MW'
 						},
 						plotLines : [{
 							value : 0,
@@ -171,7 +255,7 @@ function LimitLine() {
 						}]
 					},
 					tooltip : {
-						valueSuffix : '条'
+						valueSuffix : 'MW'
 					},
 					legend : {
 						layout : 'vertical',
@@ -180,7 +264,7 @@ function LimitLine() {
 						borderWidth : 0
 					},
 					series : [{
-						name : '电量',
+						name : '电力',
 						data : [
 					        data.h01, data.h02, data.h03, data.h04, data.h05, data.h06, data.h07, data.h08,
 					        data.h09, data.h10, data.h11, data.h12, data.h13, data.h14, data.h15, data.h16,
@@ -201,62 +285,85 @@ function LimitLine() {
 		}
 	}
 	
-	// 将发布单类型说明插入文本域中
-	this.inputValueToArea = function(data) {
-		if (data == 'null') {
-			data = '';
-		}
-		$('#commentDiv').append(data);
-	}
-	
-	// 整理需要修改的发布单数据
+	// 整理需要修改的申报单数据
 	this.makeLimitLineData = function() {
-		var LimitLine = {};
-		var LimitLineId = myLimitLine.selectedlimitLine.attr('LimitLineId');
-		var LimitLineName = myLimitLine.selectedlimitLine.find('input').val();
+		var limitLine = {};
+		var limitLineId = myLimitLine.selectedDalare.attr('limitLineId');
+		var limitLineName = myLimitLine.selectedDalare.find('input').val();
 		var comment = $('#comment').text();
-		var LimitLineType = myLimitLine.limitLineType;
-		var LimitLineTypeData = myLimitLine.makeDataByTable();
-		LimitLine['id'] = LimitLineId;
-		LimitLine['sheetName'] = LimitLineName;
-		LimitLine['descr'] = comment;
-		LimitLine['LimitLineDatas'] = [LimitLineTypeData];
-		return JSON.stringify(LimitLine);
+		var limitLineType = myLimitLine.limitLineType;
+		var limitLineTypeData = myLimitLine.makeDataByTable();
+		limitLine['id'] = limitLineId;
+		limitLine['sheetName'] = limitLineName;
+		limitLine['descr'] = comment;
+		limitLine['limitLineDatas'] = [limitLineTypeData];
+		return JSON.stringify(limitLine);
 	}
 	
-	// 根据表格整理发布单类型数据
+	// 根据表格整理申报单类型数据
 	this.makeDataByTable = function() {
-		var LimitLineTypeDataInputs = $('#LimitLineDataDiv').find('table input');
-		var LimitLineTypeData = {};
+		var limitLineTypeDataInputs = $('#limitLineDataDiv').find('table input');
+		var limitLineTypeData = {};
 		var sum = 0;
-		for (var index in LimitLineTypeDataInputs) {
-			var LimitLineTypeDataInput = LimitLineTypeDataInputs[index];
-			LimitLineTypeData[LimitLineTypeDataInput.name] = LimitLineTypeDataInput.value;
-			if (LimitLineTypeDataInput.value) {
-				sum += Number(LimitLineTypeDataInput.value);
+		for (var index in limitLineTypeDataInputs) {
+			var limitLineTypeDataInput = limitLineTypeDataInputs[index];
+			limitLineTypeData[limitLineTypeDataInput.name] = limitLineTypeDataInput.value;
+			if (limitLineTypeDataInput.value) {
+				sum += Number(limitLineTypeDataInput.value);
 			}
 		}
 		var avg = sum / 96;
-		LimitLineTypeData['id'] = myLimitLine.selectedlimitLine.attr('LimitLineId');
-		LimitLineTypeData['dtype'] = myLimitLine.limitLineType;
-		LimitLineTypeData['sumQ'] = sum;
-		LimitLineTypeData['aveP'] = avg.toFixed(2);
-		return LimitLineTypeData;
+		limitLineTypeData['id'] = myLimitLine.selectedDalare.attr('limitLineId');
+		limitLineTypeData['dtype'] = myLimitLine.limitLineType;
+		limitLineTypeData['sumQ'] = sum;
+		limitLineTypeData['aveP'] = avg.toFixed(2);
+		return limitLineTypeData;
 	}
 	
-	
-	// 修改发布单类型样式
-	this.changeLimitLineTypeStyle = function(type) {
-		var LimitLineTypes = $('#LimitLineDataDiv .conrightt1 a');
-		for (var i = 0; i < 3 ; i++) {
-			var LimitLineType = LimitLineTypes[i];
-			if (LimitLineType.name == type) {
-				LimitLineType.style.color = '#D1B664';
-				LimitLineType.style.fontWeight = 'bold';
-			} else {
-				LimitLineType.style.color = '#7F7F7F';
-				LimitLineType.style.fontWeight = '';
+	// 申报单类型数据修改后按回车修改所有单元格数据
+	this.copyTableValue = function(thisInput, e) {
+		// 兼容FF和IE和Opera
+		var theEvent = e || window.event;
+		var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+		if (thisInput.focus() && code == 13) {
+			var value = thisInput.val();
+			for (var i = 1; i <= 96 ; i++) {
+				var key;
+				if (i < 10) {
+					key = 'h0' + i;
+				} else {
+					key = 'h' + i;
+				}
+				$('#limitLineDataDiv input[name=' + key + ']').val(value);
 			}
 		}
+	}
+	
+	// 修改申报单类型样式
+	this.changeLimitLineTypeStyle = function(type) {
+		var limitLineTypes = $('#limitLineDataDiv .conrightt1 a');
+		for (var i = 0; i < 3 ; i++) {
+			var limitLineType = limitLineTypes[i];
+			if (limitLineType.name == type) {
+				limitLineType.style.color = '#D1B664';
+				limitLineType.style.fontWeight = 'bold';
+			} else {
+				limitLineType.style.color = '#7F7F7F';
+				limitLineType.style.fontWeight = '';
+			}
+		}
+	}
+	
+	// 修改申报单名称
+	this.changeLimitLineName = function() {
+		myLimitLine.selectedDalare.find('input').attr('class', '');
+		myLimitLine.selectedDalare.find('input').attr('readonly', false);
+		limitLine.changeData();
+	}
+	
+	// 完成修改申报单名称
+	this.finishChangeLimitLineName = function() {
+		myLimitLine.selectedDalare.find('input').attr('class', 'bghh');
+		myLimitLine.selectedDalare.find('input').attr('readonly', true);
 	}
 }
