@@ -30,13 +30,7 @@
 	<div>
 		<div class="mid">
 			<div class="contop">
-				<div class="fl"><span class="xmenu">数据申报单</span><span class="count">0条</span>
-					<span class="posty">
-						<img src="${pageContext.request.contextPath }/img/pxy.png"/>｜
-						<select id="area" onchange="declare.changeArea()">
-							<option value=""></option>
-						</select>
-					</span>
+				<div class="fl"><span class="xmenu">数据申报单</span><span class="count">0条</span><span class="posty rl"><img src="${pageContext.request.contextPath }/img/pxy.png"/>｜<select id="area" onchange="declare.changeArea()"><option value=""></option></select></span>
 				</div>
 				<div class="rl"><span><a class="btn1" href="#" onclick="declare.addDeclare();">+添加</a></span><span><a class="btn1" href="#" onclick="declare.deleteDeclare();">-删除</a></span></div>
 				<div class="cl"></div>
