@@ -10,12 +10,32 @@
 		select u.*,u.is_login islogin from CBPM_USER u where mname=#{user}
 	</select>
 	
+	<select id="selectNopass" resultType="UserPo">
+		select u.*,u.is_login islogin from CBPM_USER u where u.is_login='0' order by mname 
+	</select>
+
+	<select id="selectPass" resultType="UserPo">
+		select u.*,u.is_login islogin from CBPM_USER u where u.is_login='1' and u.mname not in ('国调') order by mname 
+	</select>
+	
 	<select id="selectBill" resultType="Map">
 		select b.mname,b.url from CBPM_BILL_USER a inner join CBPM_BILL b on a.bill_id=b.id where a.mname=#{user};
 	</select>
 	
 	<insert id="saveUser">
 		insert into CBPM_USER (mname,area,mkey,dtype,is_login,drole) values
-		(#{user},#{area},#{password},'省','0',#{drole})
+		(#{user},#{area},#{password},'省','0',#{sf})
+	</insert>
+	
+	<update id="approve">
+		update CBPM_USER
+		<set> 
+			is_login='1'
+		</set> 
+		where mname=#{user}
+	</update>
+	
+	<insert id="allotBill">
+		insert into CBPM_BILL_USER (mname,bill_id) values (#{user},#{num})
 	</insert>
 </mapper>
