@@ -10,6 +10,10 @@
 		select u.*,u.is_login islogin from CBPM_USER u where mname=#{user}
 	</select>
 	
+	<select id="selectBill" resultType="Map">
+		select b.mname,b.url from CBPM_BILL_USER a inner join CBPM_BILL b on a.bill_id=b.id where a.mname=#{user};
+	</select>
+	
 	<insert id="saveUser">
 		insert into CBPM_USER (mname,area,mkey,dtype,is_login,drole) values
 		(#{user},#{area},#{password},'省','0',#{drole})
