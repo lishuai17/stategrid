@@ -275,6 +275,7 @@ function Issue() {
 	
 	// 修改发布单类型样式
 	this.changeIssueTypeStyle = function(type) {
+		
 		var IssueTypes = $('#IssueDataDiv .conrightt1 a');
 		for (var i = 0; i < 3 ; i++) {
 			var IssueType = IssueTypes[i];

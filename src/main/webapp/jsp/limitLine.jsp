@@ -40,9 +40,9 @@
 				</div>
 				<div id="limitLineDataDiv" class="fl bd1" style="display:none;">
 					<div class="conrightt1">
-						<div class="fl mne"><a href="#" name="1a" onclick="limitLine.getLimitLineDataByLimitLineType('正向限额');">正向限额</a></div>
-						<div class="fl mne"><a href="#" name="2a" onclick="limitLine.getLimitLineDataByLimitLineType('反向限额');">反向限额</a></div>
-						<div class="fl mne"><a href="#" name="3a" onclick="limitLine.getLimitLineDataByLimitLineType('计划值');">计划值</a></div>
+						<div class="fl mne"><a href="#" name="正向限额" onclick="limitLine.getLimitLineDataByLimitLineType('正向限额');">正向限额</a></div>
+						<div class="fl mne"><a href="#" name="反向限额" onclick="limitLine.getLimitLineDataByLimitLineType('反向限额');">反向限额</a></div>
+						<div class="fl mne"><a href="#" name="计划值" onclick="limitLine.getLimitLineDataByLimitLineType('计划值');">计划值</a></div>
 						<div class="rl"><a class="btnh2" href="#" onclick="limitLine.updateLimitLine();">保存</a></div>
 					</div>
 					<div class="cl"></div>

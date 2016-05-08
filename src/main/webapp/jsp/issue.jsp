@@ -49,22 +49,22 @@
 					<div class="fl pdl10">
 						<table width="968" height="302" cellpadding="0" cellspacing="0">
 							<thead>
-								<th width="16%">时间</th>
-								<th width="7%">0</th>
-								<th width="7%">1</th>
-								<th width="7%">2</th>
-								<th width="7%">3</th>
-								<th width="7%">4</th>
-								<th width="7%">5</th>
-								<th width="7%">6</th>
-								<th width="7%">7</th>
-								<th width="7%">8</th>
-								<th width="7%">9</th>
-								<th width="7%">10</th>
-								<th width="7%">11</th>
+								<th width="16%" class="cgr">时间</th>
+								<th width="7%" class="cgr">0</th>
+								<th width="7%" class="cgr">1</th>
+								<th width="7%" class="cgr">2</th>
+								<th width="7%" class="cgr">3</th>
+								<th width="7%" class="cgr">4</th>
+								<th width="7%" class="cgr">5</th>
+								<th width="7%" class="cgr">6</th>
+								<th width="7%" class="cgr">7</th>
+								<th width="7%" class="cgr">8</th>
+								<th width="7%" class="cgr">9</th>
+								<th width="7%" class="cgr">10</th>
+								<th width="7%" class="cgr">11</th>
 							</thead>
 							<tr>
-								<td width="16%">00:00</td>
+								<td width="16%" class="cgr">00:00</td>
 								<td width="7%"><input readonly="readonly" name="h01"></td>
 								<td width="7%"><input readonly="readonly" name="h02"></td>
 								<td width="7%"><input readonly="readonly" name="h03"></td>
@@ -79,7 +79,7 @@
 								<td width="7%"><input readonly="readonly" name="h12"></td>
 							</tr>
 							<tr class="bgh">
-								<td width="16%">00:15</td>
+								<td width="16%" class="cgr">00:15</td>
 								<td width="7%"><input readonly="readonly" name="h13"></td>
 								<td width="7%"><input readonly="readonly" name="h14"></td>
 								<td width="7%"><input readonly="readonly" name="h15"></td>
@@ -94,7 +94,7 @@
 								<td width="7%"><input readonly="readonly" name="h24"></td>
 							</tr>
 							<tr>
-								<td width="16%">00:30</td>
+								<td width="16%" class="cgr">00:30</td>
 								<td width="7%"><input readonly="readonly" name="h25"></td>
 								<td width="7%"><input readonly="readonly" name="h26"></td>
 								<td width="7%"><input readonly="readonly" name="h27"></td>
@@ -109,7 +109,7 @@
 								<td width="7%"><input readonly="readonly" name="h36"></td>
 							</tr>
 							<tr class="bgh">
-								<td width="16%">00:45</td>
+								<td width="16%" class="cgr">00:45</td>
 								<td width="7%"><input readonly="readonly" name="h37"></td>
 								<td width="7%"><input readonly="readonly" name="h38"></td>
 								<td width="7%"><input readonly="readonly" name="h39"></td>
@@ -124,22 +124,22 @@
 								<td width="7%"><input readonly="readonly" name="h48"></td>
 							</tr>
 							<tr>
-								<td width="16%">时间</td>
-								<td width="7%">12</td>
-								<td width="7%">13</td>
-								<td width="7%">14</td>
-								<td width="7%">15</td>
-								<td width="7%">16</td>
-								<td width="7%">17</td>
-								<td width="7%">18</td>
-								<td width="7%">19</td>
-								<td width="7%">20</td>
-								<td width="7%">21</td>
-								<td width="7%">22</td>
-								<td width="7%">23</td>
+								<td width="16%" class="cgr">时间</td>
+								<td width="7%" class="cgr">12</td>
+								<td width="7%" class="cgr">13</td>
+								<td width="7%" class="cgr">14</td>
+								<td width="7%" class="cgr">15</td>
+								<td width="7%" class="cgr">16</td>
+								<td width="7%" class="cgr">17</td>
+								<td width="7%" class="cgr">18</td>
+								<td width="7%" class="cgr">19</td>
+								<td width="7%" class="cgr">20</td>
+								<td width="7%" class="cgr">21</td>
+								<td width="7%" class="cgr">22</td>
+								<td width="7%" class="cgr">23</td>
 							</tr>
 							<tr class="bgh">
-								<td width="16%">00:00</td>
+								<td width="16%" class="cgr">00:00</td>
 								<td width="7%"><input readonly="readonly" name="h49"></td>
 								<td width="7%"><input readonly="readonly" name="h50"></td>
 								<td width="7%"><input readonly="readonly" name="h51"></td>
@@ -154,7 +154,7 @@
 								<td width="7%"><input readonly="readonly" name="h60"></td>
 							</tr>
 							<tr>
-								<td width="16%">00:15</td>
+								<td width="16%" class="cgr">00:15</td>
 								<td width="7%"><input readonly="readonly" name="h61"></td>
 								<td width="7%"><input readonly="readonly" name="h62"></td>
 								<td width="7%"><input readonly="readonly" name="h63"></td>
@@ -169,7 +169,7 @@
 								<td width="7%"><input readonly="readonly" name="h72"></td>
 							</tr>
 							<tr class="bgh">
-								<td width="16%">00:30</td>
+								<td width="16%" class="cgr">00:30</td>
 								<td width="7%"><input readonly="readonly" name="h73"></td>
 								<td width="7%"><input readonly="readonly" name="h74"></td>
 								<td width="7%"><input readonly="readonly" name="h75"></td>
@@ -184,7 +184,7 @@
 								<td width="7%"><input readonly="readonly" name="h84"></td>
 							</tr>
 							<tr>
-								<td width="16%">00:45</td>
+								<td width="16%" class="cgr">00:45</td>
 								<td width="7%"><input readonly="readonly" name="h85"></td>
 								<td width="7%"><input readonly="readonly" name="h86"></td>
 								<td width="7%"><input readonly="readonly" name="h87"></td>
