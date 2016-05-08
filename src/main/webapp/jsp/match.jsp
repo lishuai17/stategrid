@@ -22,6 +22,7 @@
 		<div class="mid">
 			<div class="contop">
 				<div class="fl"><span class="xmenu">撮合</span><span class="count">0条</span></div>
+				<div class="rl"><span><a class="btn1" href="#" onclick="match.matchData();">撮合</a></span><span><a class="btn1" href="#" onclick="match.issueData();">发布</a></span></div>
 				<div class="cl"></div>
 			</div>
 			<div>

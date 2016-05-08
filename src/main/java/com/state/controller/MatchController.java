@@ -18,6 +18,7 @@ import com.state.service.MatchService;
 
 /**
  * 撮合
+ * 
  * @author 帅
  *
  */
@@ -29,69 +30,77 @@ public class MatchController {
 
 	@Autowired
 	private MatchService matchService;
-	
+
 	@Autowired
 	private IPathService pathService;
-	
+
 	/**
 	 * 跳转撮合页面
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value = "/init")
-	public String init(HttpServletRequest request,HttpServletResponse response) {
+	public String init(HttpServletRequest request, HttpServletResponse response) {
 		log.info("@ init match ");
-		
+
 		return "match";
 	}
 
 	/**
 	 * 查询所有的通道
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getAllPath")
-	public List<PathDefinePo> getAllPath(HttpServletRequest request,HttpServletResponse response) {
+	public List<PathDefinePo> getAllPath(HttpServletRequest request,
+			HttpServletResponse response) {
 		log.info("@getAllPath ");
-		
+
 		return pathService.getAllPath();
 	}
-	
+
 	/**
 	 * 按通道名、类型查询通道结果
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/getPathResult")
-	public PathResultPo getPathResult(String mpath,String dtype) {
+	public PathResultPo getPathResult(String mpath, String dtype) {
 		log.info("@ getPathResult ");
-		
-		return matchService.getPathResult(mpath,dtype);
+
+		return matchService.getPathResult(mpath, dtype);
 	}
-	
+
 	/**
 	 * 撮合
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/match")
+	@ResponseBody
+	@RequestMapping(value = "/matchData")
 	public String match() {
-		
+
 		return "success";
 	}
-	
+
 	/**
 	 * 发布
+	 * 
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "/issue")
 	public String issue() {
 		matchService.issue();
 		return "success";
 	}
-	
+
 }

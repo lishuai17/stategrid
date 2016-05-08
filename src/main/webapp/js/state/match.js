@@ -91,6 +91,36 @@ function Match() {
 		});
 	}
 	
+	// 撮合数据
+	this.matchData = function() {
+		$.ajax({
+			url : 'matchData',
+			type : 'POST',
+			dataType : 'json',
+			success : function(result) {
+				alert("撮合成功!");
+			},
+			error : function(xhr, status) {
+				alert("系统错误!");
+			}
+		});
+	}
+	
+	// 发布数据
+	this.issueData = function() {
+		$.ajax({
+			url : 'issue',
+			type : 'POST',
+			dataType : 'json',
+			success : function(result) {
+				alert("发布成功!");
+			},
+			error : function(xhr, status) {
+				alert("系统错误!");
+			}
+		});
+	}
+	
 	// 将撮合类型数据插入表格中
 	this.inputValueToTable = function(data) {
 		for (var i = 1; i <= 96 ; i++) {
