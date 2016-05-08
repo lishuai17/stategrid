@@ -67,63 +67,63 @@
 							</thead>
 							<tr>
 								<td width="16%" class="cgr">00:00</td>
-								<td width="7%"><input readonly="true" name="h01"></td>
-								<td width="7%"><input readonly="true" name="h05"></td>
-								<td width="7%"><input readonly="true" name="h09"></td>
-								<td width="7%"><input readonly="true" name="h13"></td>
-								<td width="7%"><input readonly="true" name="h17"></td>
-								<td width="7%"><input readonly="true" name="h21"></td>
-								<td width="7%"><input readonly="true" name="h25"></td>
-								<td width="7%"><input readonly="true" name="h29"></td>
-								<td width="7%"><input readonly="true" name="h33"></td>
-								<td width="7%"><input readonly="true" name="h37"></td>
-								<td width="7%"><input readonly="true" name="h41"></td>
-								<td width="7%"><input readonly="true" name="h45"></td>
+								<td width="7%"><input name="h01"></td>
+								<td width="7%"><input name="h05"></td>
+								<td width="7%"><input name="h09"></td>
+								<td width="7%"><input name="h13"></td>
+								<td width="7%"><input name="h17"></td>
+								<td width="7%"><input name="h21"></td>
+								<td width="7%"><input name="h25"></td>
+								<td width="7%"><input name="h29"></td>
+								<td width="7%"><input name="h33"></td>
+								<td width="7%"><input name="h37"></td>
+								<td width="7%"><input name="h41"></td>
+								<td width="7%"><input name="h45"></td>
 							</tr>
 							<tr class="bgh">
 								<td width="16%" class="cgr">00:15</td>
-								<td width="7%"><input readonly="true" name="h02"></td>
-								<td width="7%"><input readonly="true" name="h06"></td>
-								<td width="7%"><input readonly="true" name="h10"></td>
-								<td width="7%"><input readonly="true" name="h14"></td>
-								<td width="7%"><input readonly="true" name="h18"></td>
-								<td width="7%"><input readonly="true" name="h22"></td>
-								<td width="7%"><input readonly="true" name="h26"></td>
-								<td width="7%"><input readonly="true" name="h30"></td>
-								<td width="7%"><input readonly="true" name="h34"></td>
-								<td width="7%"><input readonly="true" name="h38"></td>
-								<td width="7%"><input readonly="true" name="h42"></td>
-								<td width="7%"><input readonly="true" name="h46"></td>
+								<td width="7%"><input name="h02"></td>
+								<td width="7%"><input name="h06"></td>
+								<td width="7%"><input name="h10"></td>
+								<td width="7%"><input name="h14"></td>
+								<td width="7%"><input name="h18"></td>
+								<td width="7%"><input name="h22"></td>
+								<td width="7%"><input name="h26"></td>
+								<td width="7%"><input name="h30"></td>
+								<td width="7%"><input name="h34"></td>
+								<td width="7%"><input name="h38"></td>
+								<td width="7%"><input name="h42"></td>
+								<td width="7%"><input name="h46"></td>
 							</tr>
 							<tr>
 								<td width="16%" class="cgr">00:30</td>
-								<td width="7%"><input readonly="true" name="h03"></td>
-								<td width="7%"><input readonly="true" name="h07"></td>
-								<td width="7%"><input readonly="true" name="h11"></td>
-								<td width="7%"><input readonly="true" name="h15"></td>
-								<td width="7%"><input readonly="true" name="h19"></td>
-								<td width="7%"><input readonly="true" name="h23"></td>
-								<td width="7%"><input readonly="true" name="h27"></td>
-								<td width="7%"><input readonly="true" name="h31"></td>
-								<td width="7%"><input readonly="true" name="h35"></td>
-								<td width="7%"><input readonly="true" name="h39"></td>
-								<td width="7%"><input readonly="true" name="h43"></td>
-								<td width="7%"><input readonly="true" name="h47"></td>
+								<td width="7%"><input name="h03"></td>
+								<td width="7%"><input name="h07"></td>
+								<td width="7%"><input name="h11"></td>
+								<td width="7%"><input name="h15"></td>
+								<td width="7%"><input name="h19"></td>
+								<td width="7%"><input name="h23"></td>
+								<td width="7%"><input name="h27"></td>
+								<td width="7%"><input name="h31"></td>
+								<td width="7%"><input name="h35"></td>
+								<td width="7%"><input name="h39"></td>
+								<td width="7%"><input name="h43"></td>
+								<td width="7%"><input name="h47"></td>
 							</tr>
 							<tr class="bgh">
 								<td width="16%" class="cgr">00:45</td>
-								<td width="7%"><input readonly="true" name="h04"></td>
-								<td width="7%"><input readonly="true" name="h08"></td>
-								<td width="7%"><input readonly="true" name="h12"></td>
-								<td width="7%"><input readonly="true" name="h16"></td>
-								<td width="7%"><input readonly="true" name="h20"></td>
-								<td width="7%"><input readonly="true" name="h24"></td>
-								<td width="7%"><input readonly="true" name="h28"></td>
-								<td width="7%"><input readonly="true" name="h32"></td>
-								<td width="7%"><input readonly="true" name="h36"></td>
-								<td width="7%"><input readonly="true" name="h40"></td>
-								<td width="7%"><input readonly="true" name="h44"></td>
-								<td width="7%"><input readonly="true" name="h48"></td>
+								<td width="7%"><input name="h04"></td>
+								<td width="7%"><input name="h08"></td>
+								<td width="7%"><input name="h12"></td>
+								<td width="7%"><input name="h16"></td>
+								<td width="7%"><input name="h20"></td>
+								<td width="7%"><input name="h24"></td>
+								<td width="7%"><input name="h28"></td>
+								<td width="7%"><input name="h32"></td>
+								<td width="7%"><input name="h36"></td>
+								<td width="7%"><input name="h40"></td>
+								<td width="7%"><input name="h44"></td>
+								<td width="7%"><input name="h48"></td>
 							</tr>
 							<tr>
 								<td width="16%" class="cgr">时间</td>
@@ -142,63 +142,63 @@
 							</tr>
 							<tr class="bgh">
 								<td width="16%" class="cgr">00:00</td>
-								<td width="7%"><input readonly="true" name="h49"></td>
-								<td width="7%"><input readonly="true" name="h53"></td>
-								<td width="7%"><input readonly="true" name="h57"></td>
-								<td width="7%"><input readonly="true" name="h61"></td>
-								<td width="7%"><input readonly="true" name="h65"></td>
-								<td width="7%"><input readonly="true" name="h69"></td>
-								<td width="7%"><input readonly="true" name="h73"></td>
-								<td width="7%"><input readonly="true" name="h77"></td>
-								<td width="7%"><input readonly="true" name="h81"></td>
-								<td width="7%"><input readonly="true" name="h85"></td>
-								<td width="7%"><input readonly="true" name="h89"></td>
-								<td width="7%"><input readonly="true" name="h93"></td>
+								<td width="7%"><input name="h49"></td>
+								<td width="7%"><input name="h53"></td>
+								<td width="7%"><input name="h57"></td>
+								<td width="7%"><input name="h61"></td>
+								<td width="7%"><input name="h65"></td>
+								<td width="7%"><input name="h69"></td>
+								<td width="7%"><input name="h73"></td>
+								<td width="7%"><input name="h77"></td>
+								<td width="7%"><input name="h81"></td>
+								<td width="7%"><input name="h85"></td>
+								<td width="7%"><input name="h89"></td>
+								<td width="7%"><input name="h93"></td>
 							</tr>
 							<tr>
 								<td width="16%" class="cgr">00:15</td>
-								<td width="7%"><input readonly="true" name="h50"></td>
-								<td width="7%"><input readonly="true" name="h54"></td>
-								<td width="7%"><input readonly="true" name="h58"></td>
-								<td width="7%"><input readonly="true" name="h62"></td>
-								<td width="7%"><input readonly="true" name="h66"></td>
-								<td width="7%"><input readonly="true" name="h70"></td>
-								<td width="7%"><input readonly="true" name="h74"></td>
-								<td width="7%"><input readonly="true" name="h78"></td>
-								<td width="7%"><input readonly="true" name="h82"></td>
-								<td width="7%"><input readonly="true" name="h86"></td>
-								<td width="7%"><input readonly="true" name="h90"></td>
-								<td width="7%"><input readonly="true" name="h94"></td>
+								<td width="7%"><input name="h50"></td>
+								<td width="7%"><input name="h54"></td>
+								<td width="7%"><input name="h58"></td>
+								<td width="7%"><input name="h62"></td>
+								<td width="7%"><input name="h66"></td>
+								<td width="7%"><input name="h70"></td>
+								<td width="7%"><input name="h74"></td>
+								<td width="7%"><input name="h78"></td>
+								<td width="7%"><input name="h82"></td>
+								<td width="7%"><input name="h86"></td>
+								<td width="7%"><input name="h90"></td>
+								<td width="7%"><input name="h94"></td>
 							</tr>
 							<tr class="bgh">
 								<td width="16%" class="cgr">00:30</td>
-								<td width="7%"><input readonly="true" name="h51"></td>
-								<td width="7%"><input readonly="true" name="h55"></td>
-								<td width="7%"><input readonly="true" name="h59"></td>
-								<td width="7%"><input readonly="true" name="h63"></td>
-								<td width="7%"><input readonly="true" name="h67"></td>
-								<td width="7%"><input readonly="true" name="h71"></td>
-								<td width="7%"><input readonly="true" name="h75"></td>
-								<td width="7%"><input readonly="true" name="h79"></td>
-								<td width="7%"><input readonly="true" name="h83"></td>
-								<td width="7%"><input readonly="true" name="h87"></td>
-								<td width="7%"><input readonly="true" name="h91"></td>
-								<td width="7%"><input readonly="true" name="h95"></td>
+								<td width="7%"><input name="h51"></td>
+								<td width="7%"><input name="h55"></td>
+								<td width="7%"><input name="h59"></td>
+								<td width="7%"><input name="h63"></td>
+								<td width="7%"><input name="h67"></td>
+								<td width="7%"><input name="h71"></td>
+								<td width="7%"><input name="h75"></td>
+								<td width="7%"><input name="h79"></td>
+								<td width="7%"><input name="h83"></td>
+								<td width="7%"><input name="h87"></td>
+								<td width="7%"><input name="h91"></td>
+								<td width="7%"><input name="h95"></td>
 							</tr>
 							<tr>
 								<td width="16%" class="cgr">00:45</td>
-								<td width="7%"><input readonly="true" name="h52"></td>
-								<td width="7%"><input readonly="true" name="h56"></td>
-								<td width="7%"><input readonly="true" name="h60"></td>
-								<td width="7%"><input readonly="true" name="h64"></td>
-								<td width="7%"><input readonly="true" name="h68"></td>
-								<td width="7%"><input readonly="true" name="h72"></td>
-								<td width="7%"><input readonly="true" name="h76"></td>
-								<td width="7%"><input readonly="true" name="h80"></td>
-								<td width="7%"><input readonly="true" name="h84"></td>
-								<td width="7%"><input readonly="true" name="h88"></td>
-								<td width="7%"><input readonly="true" name="h92"></td>
-								<td width="7%"><input readonly="true" name="h96"></td>
+								<td width="7%"><input name="h52"></td>
+								<td width="7%"><input name="h56"></td>
+								<td width="7%"><input name="h60"></td>
+								<td width="7%"><input name="h64"></td>
+								<td width="7%"><input name="h68"></td>
+								<td width="7%"><input name="h72"></td>
+								<td width="7%"><input name="h76"></td>
+								<td width="7%"><input name="h80"></td>
+								<td width="7%"><input name="h84"></td>
+								<td width="7%"><input name="h88"></td>
+								<td width="7%"><input name="h92"></td>
+								<td width="7%"><input name="h96"></td>
 							</tr>
 						</table>
 					</div>
